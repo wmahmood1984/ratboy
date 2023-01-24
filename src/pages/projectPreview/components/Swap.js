@@ -34,7 +34,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
   const [amount,setAmount] = useState()
   const [open,setOpen] = useState()
 
-  const myContract = getContract(library, account,data._address);
+  const myContract =data &&  getContract(library, account,data._address);
   useEffect(()=>{
     const abc = async()=>{
         const _nBal = await web3.eth.getBalance(account)
@@ -44,7 +44,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
         setTbalance(formatEther(_tbal))
     }
     abc()
-  },[toggle,data])
+  },[toggle])
 
 
   const _Swap = async ()=>{

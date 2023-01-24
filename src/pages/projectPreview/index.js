@@ -45,24 +45,25 @@ const ProjectPreview = () => {
   console.log("sub data",sub_data)
   return (
     <Layout>
-     {_data && sub_data && 
-          <main className="px-4 pb-10 pt-28 grid grid-cols-1 gap-y-4">
-          <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ProjectOverView data={_data && _data} sub_data={sub_data && sub_data}/>
-            <div className=" flex flex-col">
-              <div className="flex-1">
-                <Swap data={_data && _data} toggle={toggle} sub_data={sub_data && sub_data} setToggle={setToggle}/>
-              </div>
-              <div className="mt-6">
-                <TokenMetrix data={_data && _data} sub_data={sub_data && sub_data}/>
-              </div>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-            <Ownerzone data={_data && _data} sub_data={sub_data && sub_data}/>
-            <Information data={_data && _data} sub_data={sub_data && sub_data}/>
-          </div>
-        </main>
+     {
+     _data && sub_data && 
+           <main className="px-4 pb-10 pt-28 grid grid-cols-1 gap-y-4">
+             <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
+             <ProjectOverView data={_data && _data} sub_data={sub_data && sub_data}/>
+             <div className=" flex flex-col">
+               <div className="flex-1">
+                 <Swap data={_data && _data} toggle={toggle} sub_data={sub_data && sub_data} setToggle={setToggle}/>
+               </div>
+               <div className="mt-6">
+                 <TokenMetrix dataA={_data && _data} sub_data={sub_data && sub_data}/>
+               </div> 
+             </div>
+           </div>
+           <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+             <Ownerzone data={_data && _data} sub_data={sub_data && sub_data}/>
+             <Information data={_data && _data} sub_data={sub_data && sub_data}/>
+           </div>  
+         </main>
      }  
 
 
