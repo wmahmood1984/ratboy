@@ -3,6 +3,7 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaTimes } from "react-icons/fa";
 // import Logo from "../../assets/logo.png";
 import BSC from "../../assets/BSC.png";
+import ETH from "../../assets/icon/eth.svg"
 import "./style.css";
 import OutsideClickHandler from "react-outside-click-handler";
 import Web3 from "web3"
@@ -110,7 +111,7 @@ const Header = ({ show, setShow }) => {
           setOpenA(true);
         }}
         className="grid grid-flow-col gap-x-2 h-full items-center justify-center font-medium uppercase bg-primary-400 border border-primary-400 bg-opacity-50 p-2 px-4 rounded-md ">
-          <img src={BSC} alt="" />
+          <img src={window.ethereum?.networkVersion == 97 ? BSC : ETH} alt="" />
           <p className="hidden sm:block">{window.ethereum?.networkVersion == 97 ? "BSC Testnet" : "Goerli"}</p>
         </button>
         <button 

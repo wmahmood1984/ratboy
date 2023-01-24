@@ -92,11 +92,11 @@ const menuList = [
     icon: <AiOutlineUnlock />,
     link: "/lockToken",
   },
-  {
-    text: "Bulk Airdrops",
-    icon: <GiAirBalloon />,
-    link: "/",
-  },
+  // {
+  //   text: "Bulk Airdrops",
+  //   icon: <GiAirBalloon />,
+  //   link: "/",
+  // },
   {
     text: "KYC & Audit",
     icon: <HiOutlineDocumentSearch />,
