@@ -72,10 +72,10 @@ const CreateToken = () => {
   const [liquidityLock,setLiquidityLock]= useState()
 
 
-  const [website,setWebsite] = useState("ratboy.com")
-  const [facebook,setFacebook] = useState("ratboy@facebook.com")
-  const [github,setGithub] = useState("github.com/ratboy")
-  const [instagram,setInstagram] = useState("ratboy@insta.com")
+  const [website,setWebsite] = useState()
+  const [facebook,setFacebook] = useState()
+  const [github,setGithub] = useState()
+  const [instagram,setInstagram] = useState()
   const [discord,setDiscord] = useState("ratboy@discord")
   const [redit,setRedit] = useState("ratboy@redit")
 
