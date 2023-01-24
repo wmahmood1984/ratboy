@@ -25,7 +25,7 @@ const Home = () => {
   const { account,library, chainId} = useWeb3React();
   const [Data,setData] = useState()
   const [subData,setSubtData] = useState()
-  const web3 = new Web3(Web3.givenProvider)
+  const web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
 
 
   const myContract = chainId ?  new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chainId}`])
