@@ -1,0 +1,18 @@
+.custom-date-picker .MuiOutlinedInput-root {
+  color: white;
+  background-color: rgb(17 23 33);
+}
+.custom-date-picker .MuiSvgIcon-root {
+  color: white;
+  fill: white;
+}
+
+.custom-date-picker .MuiOutlinedInput-notchedOutline {
+  border-color: #3c4555;
+  /* background-color: rgb(17 23 33); */
+}
+.custom-date-picker
+  .MuiOutlinedInput-root:hover
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #3c4555;
+}
