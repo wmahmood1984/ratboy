@@ -166,7 +166,7 @@ const Step2 = ({ increaseStep, decreaseStep,
 
 export default Step2;
 
-const CustomInput = ({ placeholder, ...props }) => {
+const CustomInput = ({ placeholder, value,setValue,...props }) => {
   return (
     <div
       className="bg-dark-500 border border-lightDark rounded-md"
@@ -176,8 +176,8 @@ const CustomInput = ({ placeholder, ...props }) => {
         placeholder={placeholder}
        // key={key}
         {...props}
-
- //       onChange={(e)=>{setValue(e.target.value)}}
+        value={value}
+        onChange={(e)=>{setValue(e.target.value)}}
         type="text"
         className=" bg-transparent w-full h-full text-gray-500 p-2"
       />

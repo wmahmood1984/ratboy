@@ -4,7 +4,7 @@ import { Contract } from "ethers";
 import { parseEther, parseUnits } from "ethers/lib/utils";
 import React, { useState } from "react";
 import Layout from "../../components/layout";
-import { IERC20, tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
+import { IERC20, tokenLockLauncherAbi, tokenLocklauncherAdd, tokenObj } from "../../config";
 import ResponsiveDialog from "../../Spinner";
 import CustomDatePicker from "../createToken/components/CustomDatepicker";
 import Web3 from "web3";
@@ -21,7 +21,7 @@ const LockToken = () => {
   const { account,library, chainId} = useWeb3React();
   const contract = getLockContract(library,account,tokenLocklauncherAdd[`${chainId}`],tokenLockLauncherAbi)
   const web3 = new Web3(Web3.givenProvider)
-  const [token,setToken] = useState("0xf8c6E2d3148C218add6ecBeF409e7830103D1D49")
+  const [token,setToken] = useState(tokenObj[`${chainId}`])
   const [title,setTitle] = useState("marketing")
   const [amount,setAmount] = useState(100)
   const [date, setDate] = useState();

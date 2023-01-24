@@ -4,7 +4,7 @@ import { useWeb3React } from "@web3-react/core";
 import React, { useEffect, useState } from "react";
 import { Layout } from "../../components";
 import CustomStepper from "../../components/stepper";
-import { BUSD, IERC20, LaunchPadABI, LaunchPadAdd } from "../../config";
+import { BUSD, IERC20, LaunchPadABI, LaunchPadAdd, tokenObj } from "../../config";
 // import Step1 from "./steps/Step1";
 import { Step1, Step2, Step3 } from "./steps";
 import Step4 from "./steps/Step4";
@@ -36,40 +36,40 @@ const CreateToken = () => {
   const { account,library, chainId} = useWeb3React();
   const [open, setOpen] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-  const [title,setTitle] = useState("Ratboy")
-  const [token,setToken] = useState("0xf8c6E2d3148C218add6ecBeF409e7830103D1D49")
-  const [owner,setOwner] = useState(account)
-  const [noOfToken,setNoOFTokens] = useState(1000000)
-  const [price,setPrice] = useState(0.1)
+  const [title,setTitle] = useState()
+  const [token,setToken] = useState()
+  const [owner,setOwner] = useState()
+  const [noOfToken,setNoOFTokens] = useState()
+  const [price,setPrice] = useState()
   const [hash,setHash] = useState()
-  const [twitter,setTwitter] = useState("ratboy@twitter.com")
-  const [medium,setMedium] = useState("ratboy@medium.com")
-  const [telegram,setTelegram] = useState("ratboy@telegram.com")
-  const [telegramGroup,setTeleGramGroup] = useState("ratboy@telegramGroup.com")
-  const [Max,setMax] = useState(1000)
-  const [Min,setMin] = useState(1)
+  const [twitter,setTwitter] = useState()
+  const [medium,setMedium] = useState()
+  const [telegram,setTelegram] = useState()
+  const [telegramGroup,setTeleGramGroup] = useState()
+  const [Max,setMax] = useState()
+  const [Min,setMin] = useState()
   const [vesting,setVesting] = useState()
   const [IDOstart,setIDOStart] = useState()
   const [IDOEnd,setIDOEnd] = useState()
   const [currency,setCurrency] = useState(BUSD[`${chainId}`])
-  const [vestingMonths,setVestingMonths] = useState(5)
-  const [symbol,setSymbol] = useState("rt")
+  const [vestingMonths,setVestingMonths] = useState()
+  const [symbol,setSymbol] = useState(0)
   const web3 = new Web3(Web3.givenProvider)
   const navigate = useNavigate()
   const [csv,setCSV] = useState(["0xfef5f69FA76f35638Aa3ed77a0644Fa79d31A554"])
-  const [team,setTeam] = useState("Greg")
-  const [description,setDescription] = useState("Some description")
-  const [Allocaiton1,setAllocation1] = useState(5)
-  const [Allocaiton2,setAllocation2] = useState(5)
-  const [Allocaiton3,setAllocation3] = useState(5)
-  const [ListingRate,setListingRate] = useState(0.1)
-  const [SoftCap,setSoftCap] = useState(1000)
-  const [hardCap,setHardCap] = useState(1000000)
-  const [refund,setRefund] = useState("public")
-  const [decimals,setDecimals] = useState(18)
-  const [router,setRouter] = useState("0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3")
-  const [liquidity,setLiquidity]= useState(5)
-  const [liquidityLock,setLiquidityLock]= useState(15)
+  const [team,setTeam] = useState()
+  const [description,setDescription] = useState()
+  const [Allocaiton1,setAllocation1] = useState()
+  const [Allocaiton2,setAllocation2] = useState()
+  const [Allocaiton3,setAllocation3] = useState()
+  const [ListingRate,setListingRate] = useState()
+  const [SoftCap,setSoftCap] = useState()
+  const [hardCap,setHardCap] = useState()
+  const [refund,setRefund] = useState()
+  const [decimals,setDecimals] = useState()
+  const [router,setRouter] = useState()
+  const [liquidity,setLiquidity]= useState()
+  const [liquidityLock,setLiquidityLock]= useState()
 
 
   const [website,setWebsite] = useState("ratboy.com")

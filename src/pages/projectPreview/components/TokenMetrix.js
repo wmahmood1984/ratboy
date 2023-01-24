@@ -38,14 +38,14 @@ const TokenMetrix = ({data}) => {
   },[])
 
   function myFunc(total, num) {
-    return total - num;
+    return total + num;
   }
 
 
   const allocationAmounts = allocations && allocations.map((v,e)=>{
     console.log((formatUnits(v.Amount,decimals)/ totalSupply).toLocaleString('fullwide', {useGrouping:false}))
     return (
-    {label:v.Title,value:(formatUnits(v.Amount,decimals)/ totalSupply).toLocaleString('fullwide', {useGrouping:false}),isEmpty:false}
+    {label:v.Title,value:Number(formatUnits(v.Amount,decimals)/ totalSupply)}
   )})
 
   const amountsOnly = allocations && allocations.map((v,e)=>Number(formatEther(v.Amount)*(10**decimals)/1000000000000000000))
@@ -54,10 +54,12 @@ const TokenMetrix = ({data}) => {
 
 
 
-  allocations && allocationAmounts.push({label:"UnLocked",value:((totalSupply-locked)/totalSupply),isEmpty:true})
+  allocations && allocationAmounts.push({label:"UnLocked",value:Number((totalSupply-locked)/totalSupply)})
 
 
-  console.log("allocations",allocationAmounts)
+  console.log("allocations",allocationAmounts,locked)
+
+  const allocationAmounts2 =[{label:"A",value:20},{label:"A",value:20},{label:"A",value:20},{label:"A",value:20}]
 
   return (
     <div className="bg-dark-400 border border-lightDark rounded-md shadow-xl">
