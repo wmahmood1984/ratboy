@@ -21,7 +21,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <ToastContainer/>
+        
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
@@ -30,6 +30,7 @@ function App() {
           <Route path="lockToken" element={<Locktoken />} />
         </Routes>
       </BrowserRouter>
+
     </ThemeProvider>
   );
 }

@@ -100,6 +100,42 @@ const ProjectOverView = ({data}) => {
     return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`
   }
 
+
+  const SocialIcons = [
+    {
+      icon: <FaGlobe />,
+      link: data[3][6]?data[3][6]:undefined,
+    },
+    {
+      icon: <RiTelegramLine />,
+      link: data[3][4]?data[3][4]:undefined,
+    },
+    {
+      icon: <FaDiscord />,
+      link: data[3][7]?data[3][7]:undefined,
+    },
+    {
+      icon: <FiFacebook />,
+      link: data[3][8]?data[3][8]:undefined,
+    },
+    {
+      icon: <FaInstagram />,
+      link: data[3][9]?data[3][9]:undefined,
+    },
+    {
+      icon: <ImReddit />,
+      link: data[3][11]?data[3][11]:undefined,
+    },
+    {
+      icon: <RiGithubLine />,
+      link: data[3][10]?data[3][10]:undefined,
+    },
+    {
+      icon: <FiTwitter />,
+      link: data[3][2]?data[3][2]:undefined,
+    },
+  ];
+
   return (
     <div className="bg-dark-400 border border-lightDark p-4 sm:p-6 rounded-md shadow-xl">
       <div className="flex justify-between items-center">
@@ -125,13 +161,20 @@ const ProjectOverView = ({data}) => {
         </p>
 
         <ul className=" flex justify-between items-center my-6">
-          {SocialIcons.map((val, i) => (
-            <li key={i}>
-              <a href={val.link} className=" text-primary-400 text-2xl ">
-                {val.icon}
-              </a>
-            </li>
-          ))}
+          {SocialIcons.map((val, i) => {
+            if(val.link){
+              return(
+                <li key={i}>
+                  <a href={val.link} className=" text-primary-400 text-2xl ">
+                    {val.icon}
+                  </a>
+                </li>
+              )
+            }
+          }
+            
+            
+          )}
         </ul>
         <div>
           <p className="mt-10 border-b border-lightDark  pb-2 font-semibold">

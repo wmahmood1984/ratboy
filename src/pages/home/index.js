@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
 import Launchpad from "./Launchpad";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {Contract, ethers, providers, utils} from "ethers"
 import { LaunchPadABI, LaunchPadAdd } from "../../config";
 import { useWeb3React } from "@web3-react/core";
 import Web3 from "web3"
 import { ToastContainer, toast } from 'react-toastify';
+import { Box } from "@mui/system";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 
 
@@ -26,7 +28,9 @@ const Home = () => {
   const [Data,setData] = useState()
   const [subData,setSubtData] = useState()
   const web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
-
+  const navigate = useNavigate()
+  const [filter,setFilter] = useState()
+  const [sort,setSort] = useState()
 
   const myContract = chainId ?  new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chainId}`])
   : new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`5`])
@@ -46,24 +50,14 @@ const Home = () => {
     abc()
 }, [account])
 
+const filterArray = ["upComing","InProgress","Filled","Cancelled"]
+const sortArray = ["HardCap","softCap","LPPercent","StartTime"]
+
 
 
 
   return (
     <Layout>
-            <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"/>
-
-
       <main className="px-4 pb-10 pt-20">
         <h1 className="text-center mt-10 font-medium text-3xl">
           Current Presale
@@ -83,14 +77,20 @@ const Home = () => {
                 <SearchBox />
               </div>
               <div className="grid grid-cols-2 md:grid-flow-col gap-2 items-center ">
-                <CustomSelect text="Filter By" />
-                <CustomSelect text="Sort By" />
-                <Link
-                  to={account ? "/createToken" : "#"}
+                <BasicSelect value={filter} setValue={setFilter} label={"Filter by"} array={filterArray}/>
+                <BasicSelect value={sort} setValue={setSort} label={"Sort by"} array={sortArray}/>
+                <button
+                  onClick={()=>{
+                    if(account){
+                      navigate("/preview")                      
+                    }else{
+                      window.alert("Please connect your wallet") 
+                    }
+                  }}
                   className="col-span-2  md:col-span-auto uppercase block text-center bg-primary-400 p-4 py-2 h-max rounded-md"
                 >
                   Create
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -104,7 +104,8 @@ const Home = () => {
           ))}
         </div>
       </main>
-
+      
+      
     </Layout>
   );
 };
@@ -132,3 +133,37 @@ const SearchBox = () => (
     </span>
   </div>
 );
+
+
+function BasicSelect({label,array,value,setValue}) {
+
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  return (
+    <Box 
+    
+    sx={{marginBottom:"25px",maxHeight:"20px", minWidth: 120,color:"white",border:"grey" }}>
+      <FormControl 
+      
+      fullWidth>
+        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={value}
+          label="Age"
+          onChange={handleChange}
+        >
+          {array.map((v,e)=>
+          <MenuItem value={e}>{v}</MenuItem>
+          )}
+          
+ 
+        </Select>
+      </FormControl>
+    </Box>
+  );
+}

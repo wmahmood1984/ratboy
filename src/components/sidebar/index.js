@@ -25,7 +25,7 @@ const {account} = useWeb3React()
         className=" border-b border-lightDark flex justify-center items-center sidebar-logo"
         style={{ minHeight: "75px" }}
       >
-        <img src={Logo} alt="" className="mx-auto" />
+        <img width={"200px"} src={Logo} alt="" className="mx-auto" />
       </div>
       <div className="flex flex-col justify-between flex-1 px-6 py-4">
         <ul className="">

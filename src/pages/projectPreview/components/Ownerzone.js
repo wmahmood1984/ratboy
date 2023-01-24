@@ -16,7 +16,7 @@ const Ownerzone = () => {
           <img src={Rocket} alt="" className="w-40" />
         </div>
         <div className="flex flex-col justify-between">
-          <div className="">
+          {/* <div className="">
             <label id="demo-row-radio-buttons-group-label">Sell type</label>
             <RadioGroup
               row
@@ -39,7 +39,7 @@ const Ownerzone = () => {
                 label="Public Anti-Bot"
               />
             </RadioGroup>
-          </div>
+          </div> */}
           <div className="mt-4 sm:mt-0">
             <p className="mb-1">Pool Action</p>
 

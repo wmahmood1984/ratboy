@@ -87,22 +87,22 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
          setOpen(false)
        }
     }else if(amount==0 || amount == undefined){
-      toast("Please enter valid amount", {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        })
+      // toast("Please enter valid amount", {
+      //   position: "bottom-center",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      //   })
     
-   
+      window.alert("please enter valid amount")
     } else{
-      toast("Please connect your wallet", {
+      // toast("Please connect your wallet", {
     
-        })
+      //   })
     }
   }
 

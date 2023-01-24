@@ -76,8 +76,8 @@ const CreateToken = () => {
   const [facebook,setFacebook] = useState()
   const [github,setGithub] = useState()
   const [instagram,setInstagram] = useState()
-  const [discord,setDiscord] = useState("ratboy@discord")
-  const [redit,setRedit] = useState("ratboy@redit")
+  const [discord,setDiscord] = useState()
+  const [redit,setRedit] = useState()
 
 
 
@@ -115,7 +115,7 @@ const CreateToken = () => {
     var counter = 0 
     setOpen(true)
     console.log("data",[      [token,owner,account,currency],
-    [title,symbol,twitter,medium,telegram,telegramGroup],
+    [title,symbol,twitter,medium,telegram,telegramGroup,website,discord,facebook,instagram,github,redit],
     [web3.utils.toWei(noOfToken.toString(),"ether"),
     web3.utils.toWei(price.toString(),"ether"),
     web3.utils.toWei(Max.toString(),"ether"),
@@ -228,17 +228,7 @@ function  updateData(result) {
 console.log("data",Date.parse(IDOstart) )
   return (
     <Layout>
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"/>
+
       <div className="text-white mt-28 px-4">
         <div className="my-20 text-white">
           <div className=" hidden md:block">
