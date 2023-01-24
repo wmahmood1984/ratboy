@@ -5,6 +5,7 @@ import ProjectPreview from "./pages/projectPreview";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
+import Locktoken from "./pages/LockToken";
 
 function App() {
   const theme = createTheme({
@@ -26,6 +27,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="createToken" element={<CreateToken />} />
           <Route path="preview" element={<ProjectPreview />} />
+          <Route path="lockToken" element={<Locktoken />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -5,6 +5,177 @@ import polygon from "./Img/polygon.png"
 
 export const LaunchPadABI = [
 	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "IDOArray",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "ind",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_hash",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "investedBUSD",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "investedTokens",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "IDOIndex",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "IDOMapping",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "TokenIDO",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "TokenIDOLocked",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "TokenLockContracts",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "Title",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "Contract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Time",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address[]",
@@ -38,18 +209,41 @@ export const LaunchPadABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [],
-		"name": "admin",
-		"outputs": [
+		"inputs": [
 			{
 				"internalType": "address",
-				"name": "",
+				"name": "_token",
 				"type": "address"
+			}
+		],
+		"name": "getLockContract",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "Title",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "Contract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Time",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct LaundhPadMaking.tokenLockStruct[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -140,72 +334,34 @@ export const LaunchPadABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "IDOArray",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "ind",
-				"type": "uint256"
-			},
-			{
 				"internalType": "address",
-				"name": "_address",
+				"name": "_token",
 				"type": "address"
 			},
 			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
 				"internalType": "string",
-				"name": "_hash",
+				"name": "_title",
 				"type": "string"
 			},
 			{
 				"internalType": "uint256",
-				"name": "investedBUSD",
+				"name": "_time",
 				"type": "uint256"
 			},
 			{
-				"internalType": "uint256",
-				"name": "investedTokens",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "IDOIndex",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
-				"name": "",
+				"name": "_contract",
 				"type": "address"
 			}
 		],
-		"name": "IDOMapping",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
+		"name": "setLockContract",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]
@@ -962,6 +1118,174 @@ export const IERC20 = [
 	}
 ]
 
+export const tokenLockLauncherAbi = [
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_launcher",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_title",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_time",
+				"type": "uint256"
+			}
+		],
+		"name": "lockToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+
+export const tokenLockAbi = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_Title",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_Amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_Token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_Owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_Time",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "Amount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Time",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Title",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Token",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+
+export const tokenLocklauncherAdd =  {
+	"43113" : "0x5ACfc74319Cc6d738140f684964481aF7865a4b0",//"0xb70F71cdCAd4Db7da3d171c62Abf8382c01b8f32",
+		"97" : "0xe99227298F536e8CB341A8a6c0d2e0121a5E0F6c",//"0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
+		"5" : "0xE05c6ab429Fc58F7EE490a01d5dB7CB4c6Af0762",
+		"80001" : "0xf4e9Bb60792d5BdF356F142cD7dF37238A305502"
+}
+
 export const tokenObj = {
 	"43113" : "0x5ACfc74319Cc6d738140f684964481aF7865a4b0",//"0xb70F71cdCAd4Db7da3d171c62Abf8382c01b8f32",
 		"97" : "0xe99227298F536e8CB341A8a6c0d2e0121a5E0F6c",//"0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
@@ -979,7 +1303,7 @@ export const tempAdmin = "0xfef5f69FA76f35638Aa3ed77a0644Fa79d31A554"//"0xF85ee8
 export const LaunchPadAdd = {
 	"43113" : "0xa522CF9B39CdA62650c060b692684b38286ce3a8",
 		"97" : "0x0550175b6531a1195670150160a0cFABe95833b7",
-		"5" : "0x967D6c5b3a3dB6241a3A130d133C60a7Cf094627",
+		"5" : "0xc0eB6c24Cc5aE8E8958e7086Fd3903D17B4d5446",
 		"80001" : "0x4e4cefab704e4579bf28d32230ddecf0117ae9c1"
 }
 

@@ -136,7 +136,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
             <div>
               <CustomInput
                 title="Recieve(Estimated)"
-                balance={tBalance}
+                balance={Number(tBalance).toFixed(2)}
                 icon={data[5]}
                 coin={data[3][1]}
                 disabled = {true}

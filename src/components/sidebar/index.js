@@ -12,22 +12,9 @@ import {
 import { FaTelegramPlane, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Logo from "../../Img/RatboyLogo.png";
+import { useWeb3React } from "@web3-react/core";
 const Sidebar = ({ show, setShow }) => {
-  // const menuRef = useRef(null);
-  // useEffect(() => {
-  //   const handler = (e) => {
-  //     console.log(menuRef.current.contains(e.target));
-  //     if (!menuRef.current.contains(e.target)) {
-  //       setShow(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handler);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", handler);
-  //   };
-  // }, [setShow]);
+const {account} = useWeb3React()
   return (
     <div
       className={`sidebar ${
@@ -46,7 +33,7 @@ const Sidebar = ({ show, setShow }) => {
             <React.Fragment key={i}>
               <li>
                 <Link
-                  to="/"
+                  to={account? `${val.link}` : "#"}
                   className="grid grid-flow-col text-sm justify-start gap-x-2 items-center py-2 px-2 hover:bg-primary-400 rounded-lg my-1"
                 >
                   <span className="text-lg">{val.icon}</span>{" "}
@@ -103,7 +90,7 @@ const menuList = [
   {
     text: "Token Lock",
     icon: <AiOutlineUnlock />,
-    link: "/",
+    link: "/lockToken",
   },
   {
     text: "Bulk Airdrops",
