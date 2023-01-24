@@ -68,11 +68,11 @@ const TokenMetrix = ({data}) => {
         <p>Token Metrix</p>
       </div>
       <div className="py-4 flex justify-center  px-4">
-     <DonutChart
+     {/* <DonutChart
 
            
           data={allocations &&  allocationAmounts}
-        />;
+        />; */}
       </div> 
     </div>
   );
