@@ -164,7 +164,7 @@ const ProjectOverView = ({data}) => {
           {SocialIcons.map((val, i) => {
             if(val.link){
               return(
-                <li key={i}>
+                <li >
                   <a href={val.link} className=" text-primary-400 text-2xl ">
                     {val.icon}
                   </a>

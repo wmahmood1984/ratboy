@@ -26,10 +26,11 @@ const TokenMetrix = ({data}) => {
     const _alloc = await Contract.getLockContract(data[2][0])
       setAllocaitons(_alloc)
 
-    const tSupply = await TokenContract.totalSupply()
-    const tdecimals = await TokenContract.decimals()
-     setTotalSupply(tSupply / (10**tdecimals))
-     setDecimals(tdecimals)
+     const tSupply = await TokenContract.totalSupply()
+     const tdecimals = await TokenContract.decimals()
+      setTotalSupply(tSupply / (10**tdecimals))
+      
+      setDecimals(tdecimals)
     
     }
     abc()
@@ -43,9 +44,9 @@ const TokenMetrix = ({data}) => {
 
 
   const allocationAmounts = allocations && allocations.map((v,e)=>{
-    console.log((formatUnits(v.Amount,decimals)/ totalSupply).toLocaleString('fullwide', {useGrouping:false}))
+    console.log((formatUnits(v.Amount,decimals)))
     return (
-    {label:v.Title,value:Number(formatUnits(v.Amount,decimals)/ totalSupply)}
+    {label:v.Title,value:Number(formatUnits(v.Amount,decimals)/ totalSupply*100)}
   )})
 
   const amountsOnly = allocations && allocations.map((v,e)=>Number(formatEther(v.Amount)*(10**decimals)/1000000000000000000))
@@ -54,27 +55,25 @@ const TokenMetrix = ({data}) => {
 
 
 
-  allocations && allocationAmounts.push({label:"UnLocked",value:Number((totalSupply-locked)/totalSupply)})
+  allocations && allocationAmounts.push({label:"UnLocked",value:Number((totalSupply-locked)/totalSupply*100)})
 
 
-  console.log("allocations",allocationAmounts,locked)
+  console.log("allocations",allocationAmounts)
 
-  const allocationAmounts2 =[{label:"A",value:20},{label:"A",value:20},{label:"A",value:20},{label:"A",value:20}]
+
 
   return (
     <div className="bg-dark-400 border border-lightDark rounded-md shadow-xl">
-      <div className=" border-b  border-lightDark px-4 py-4">
+       <div className=" border-b  border-lightDark px-4 py-4">
         <p>Token Metrix</p>
       </div>
       <div className="py-4 flex justify-center  px-4">
-      <DonutChart
-          colors={
-            ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722', '#795548', '#607d8b' ]
-          }
+     <DonutChart
+
            
           data={allocations &&  allocationAmounts}
         />;
-      </div>
+      </div> 
     </div>
   );
 };
