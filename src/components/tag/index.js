@@ -1,6 +1,8 @@
 import React from "react";
 
 const Tag = ({ upcoming , end  }) => {
+  console.log("key",upcoming,end)
+
   const color = upcoming
     ? "text-yellow-400  bg-yellow-400"
     : end

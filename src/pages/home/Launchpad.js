@@ -6,10 +6,10 @@ import UserImage from "../../assets/user.png";
 import DailyTimer from "../../components/DailyTimer";
 import Tag from "../../components/tag";
 const Launchpad = ({data,keyA,subData }) => {
-  console.log("key",keyA)
+  
 
   var now = new Date().getTime()/1000
- 
+  
   return (
     <div className=" bg-dark-400 border border-lightDark p-4 sm:p-6 rounded-md shadow-xl">
       <div className="flex justify-between items-center border-b border-lightDark pb-4 ">
@@ -20,7 +20,7 @@ const Launchpad = ({data,keyA,subData }) => {
             </div>
             <div className="sm:hidden">
               {" "}
-              <Tag upcoming={now < data[4][6]} end={now > data[4][7]} />
+              <Tag upcoming={data[4][5] >now} end={ data[4][6] < now } />
             </div>
           </div>
           <div className="mt-4 sm:mt-0">

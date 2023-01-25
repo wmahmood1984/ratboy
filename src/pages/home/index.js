@@ -30,7 +30,7 @@ const Home = () => {
   const web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
   const navigate = useNavigate()
   const [filter,setFilter] = useState()
-  const [sort,setSort] = useState()
+  const [sort,setSort] = useState((a,b)=>a-b)
 
   const myContract = chainId ?  new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chainId}`])
   : new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`5`])
@@ -50,12 +50,45 @@ const Home = () => {
     abc()
 }, [account])
 
+
+
 const filterArray = ["upComing","InProgress","Filled","Cancelled"]
-const sortArray = ["HardCap","softCap","LPPercent","StartTime"]
+const sortArray = ["HardCap","SoftCap","LPPercent","Start Time"]
 
 
 
+const now = new Date().getTime()/1000
 
+const originalData = Data && [...Data]
+const originalDataS = subData && [...subData]
+
+
+
+const live = Data && Data.filter((item)=>item._noOfTokens_price_max_min_vesting_month_start_end[6]<now && item._noOfTokens_price_max_min_vesting_month_start_end[7]>now)
+const UpComing = Data && Data.filter((item)=>item._noOfTokens_price_max_min_vesting_month_start_end[6]>now)
+const _end = Data && Data.filter((item)=>item._noOfTokens_price_max_min_vesting_month_start_end[7]<now)
+const cancelled = []
+
+
+
+const filterFunction = (ind)=>{
+
+  setFilter(ind)
+
+
+}
+
+
+const setSortFun = (crit)=>{
+  setSort(crit)
+    var arraytemp = [...Data]
+    var sortedArray = crit==0? arraytemp.sort((a,b)=>a[4][2]-b[4][2]) : crit ==1 ? 
+                               arraytemp.sort((a,b)=>a[4][3]-b[4][3]) : crit==2 ? arraytemp.sort((a,b)=>a[4][11]-b[4][11]):  
+    crit==3? arraytemp.sort((a,b)=>a[4][5]-b[4][5]): []
+    setData(sortedArray)
+}
+
+console.log("live",Data)
   return (
     <Layout>
       <main className="px-4 pb-10 pt-20">
@@ -77,8 +110,8 @@ const sortArray = ["HardCap","softCap","LPPercent","StartTime"]
                 <SearchBox />
               </div>
               <div className="grid grid-cols-2 md:grid-flow-col gap-2 items-center ">
-                <BasicSelect value={filter} setValue={setFilter} label={"Filter by"} array={filterArray}/>
-                <BasicSelect value={sort} setValue={setSort} label={"Sort by"} array={sortArray}/>
+                <BasicSelect value={filter} setValue={filterFunction} label={"Filter by"} array={filterArray}/>
+                <BasicSelect value={sort} setValue={setSortFun} label={"Sort by"} array={sortArray}/>
                 <button
                   onClick={()=>{
                     if(account){
@@ -97,11 +130,18 @@ const sortArray = ["HardCap","softCap","LPPercent","StartTime"]
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mt-10">
-          {Data && subData &&  Data.map((val, i) => (
+          
+          {Data && subData &&  Data.filter(
+            item=> filter==null || (filter == 1 && item._noOfTokens_price_max_min_vesting_month_start_end[5]<now && item._noOfTokens_price_max_min_vesting_month_start_end[6]>now)
+                                     || (filter ==0 && item._noOfTokens_price_max_min_vesting_month_start_end[5]>now)
+                                     ||  (filter ==2 &&  item._noOfTokens_price_max_min_vesting_month_start_end[6]<now)
+           
+          ).map((val, i) => (
             <React.Fragment key={i}>
               <Launchpad keyA={i} data={val} subData={subData[i]}/>
             </React.Fragment>
-          ))}
+          ))
+          }
         </div>
       </main>
       
@@ -139,6 +179,7 @@ function BasicSelect({label,array,value,setValue}) {
 
 
   const handleChange = (e) => {
+
     setValue(e.target.value);
   };
 
