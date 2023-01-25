@@ -8,7 +8,7 @@ import Information from "./components/Information";
 import { useLocation } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
 import {Contract, ethers, providers, utils} from "ethers"
-import { chainIdSelected, IGOAbi, LaunchPadABI, LaunchPadAdd } from "../../config";
+import { chainIdSelected, IERC20, IGOAbi, LaunchPadABI, LaunchPadAdd } from "../../config";
 import Web3 from "web3";
 
 
@@ -27,6 +27,9 @@ const ProjectPreview = () => {
   const[_data,set_Data] = useState()
   const[sub_data,set_SubData] = useState()
   const[toggle,setToggle] = useState(false)
+    const [allocations,setAllocaitons] = useState()
+  const [totalSupply,setTotalSupply] = useState()
+  const [decimals,setDecimals] = useState()
 
 
 
@@ -36,13 +39,21 @@ const ProjectPreview = () => {
       set_Data(data[0][Index])
       set_SubData(data[1][Index])
 
+      const TokenContract = new web3.eth.Contract(IERC20,data[0][Index][2][0]) 
+      const _alloc = await myContract.methods.getLockContract(data[0][Index][2][0]).call()
+      setAllocaitons(_alloc)
+
+    const tSupply = await TokenContract.methods.totalSupply().call()
+    const tdecimals = await TokenContract.methods.decimals().call()
+     setTotalSupply(tSupply / (10**tdecimals))
+     setDecimals(tdecimals)
+
      }
     abc()
   },[toggle])
 
 
-  console.log("data",_data)
-  console.log("sub data",sub_data)
+
   return (
     <Layout>
      {
@@ -55,7 +66,7 @@ const ProjectPreview = () => {
                  <Swap data={_data && _data} toggle={toggle} sub_data={sub_data && sub_data} setToggle={setToggle}/>
                </div>
                <div className="mt-6">
-                 <TokenMetrix dataA={_data && _data} sub_data={sub_data && sub_data}/>
+                 <TokenMetrix allocations={allocations} decimals={decimals} totalSupply={totalSupply} dataA={_data && _data} sub_data={sub_data && sub_data}/>
                </div> 
              </div>
            </div>
