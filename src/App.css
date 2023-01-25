@@ -4,5 +4,28 @@ body {
 }
 
 body .MuiRadio-root {
-  color: #fff;
+  color: rgb(124, 124, 124, 0.5);
 }
+.custom-select .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(124, 124, 124, 0.5) !important;
+  color: rgb(124, 124, 124, 0.5) !important;
+}
+.custom-select .MuiSvgIcon-root {
+  color: rgb(124, 124, 124, 0.5) !important;
+  fill: rgb(124, 124, 124, 0.5) !important;
+}
+.custom-select .MuiInputLabel-root {
+  color: rgb(255, 255, 255, 0.6) !important;
+}
+
+.custom-select .MuiOutlinedInput-input {
+  color: rgb(255, 255, 255, 0.8);
+}
+
+.custom-select .MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+  background-color: #202734 !important;
+  color: white !important;
+}
+/* .custom-select {
+  max-width: 10px;
+} */

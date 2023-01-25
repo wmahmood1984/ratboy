@@ -143,10 +143,11 @@ function BasicSelect({label,array,value,setValue}) {
   };
 
   return (
-    <Box 
+    <div className="custom-select">
+<Box 
     
     sx={{marginBottom:"25px",maxHeight:"20px", minWidth: 120,color:"white",border:"grey" }}>
-      <FormControl 
+      <FormControl size="small"
       
       fullWidth>
         <InputLabel id="demo-simple-select-label">{label}</InputLabel>
@@ -165,5 +166,7 @@ function BasicSelect({label,array,value,setValue}) {
         </Select>
       </FormControl>
     </Box>
+    </div>
+    
   );
 }

@@ -54,7 +54,8 @@ const TokenMetrix = ({dataA,allocations,decimals,totalSupply}) => {
       </div>
       <div className="py-4 flex justify-center  px-4">
            <DonutChart
-           className="${root}-innertext-label-root"
+           className="root-innertext-label"
+           colorFunction={(colors, index) => colors[(index % colors.length)]}
            colors={
              ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722', '#795548', '#607d8b' ]
            }
