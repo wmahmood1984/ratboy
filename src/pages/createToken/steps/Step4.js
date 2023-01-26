@@ -21,7 +21,7 @@ const Step4 = ({ increaseStep, decreaseStep
   telegram,
   github,  instagram,
   redit,
-  name,
+  name,noOfToken,
   iDOstart,
   createPool,description
 }) => {
@@ -45,7 +45,7 @@ const Step4 = ({ increaseStep, decreaseStep
   const detailList1 = [
     {
       title: "Total token",
-      desc: `${hardCap} ${symbol}`,
+      desc: `${noOfToken} ${symbol}`,
       color: "primary",
     },
     {

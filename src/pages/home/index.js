@@ -115,7 +115,7 @@ console.log("live",Data)
                 <button
                   onClick={()=>{
                     if(account){
-                      navigate("/preview")                      
+                      navigate("/createToken")                      
                     }else{
                       window.alert("Please connect your wallet") 
                     }

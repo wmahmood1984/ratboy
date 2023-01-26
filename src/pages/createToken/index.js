@@ -43,16 +43,16 @@ const CreateToken = () => {
   const [price,setPrice] = useState()
   const [hash,setHash] = useState()
   const [twitter,setTwitter] = useState()
-  const [medium,setMedium] = useState()
+  const [medium,setMedium] = useState("a")
   const [telegram,setTelegram] = useState()
-  const [telegramGroup,setTeleGramGroup] = useState()
+  const [telegramGroup,setTeleGramGroup] = useState("a")
   const [Max,setMax] = useState()
   const [Min,setMin] = useState()
   const [vesting,setVesting] = useState()
   const [IDOstart,setIDOStart] = useState()
   const [IDOEnd,setIDOEnd] = useState()
   const [currency,setCurrency] = useState(BUSD[`${chainId}`])
-  const [vestingMonths,setVestingMonths] = useState()
+  const [vestingMonths,setVestingMonths] = useState(0)
   const [symbol,setSymbol] = useState(0)
   const web3 = new Web3(Web3.givenProvider)
   const navigate = useNavigate()
@@ -114,12 +114,12 @@ const CreateToken = () => {
   const createPool = async ()=>{
     var counter = 0 
     setOpen(true)
-    console.log("data",[      [token,owner,account,currency],
+    console.log("creat Pool",[[token,account,account,currency,router],
     [title,symbol,twitter,medium,telegram,telegramGroup,website,discord,facebook,instagram,github,redit],
-    [web3.utils.toWei(noOfToken.toString(),"ether"),
-    web3.utils.toWei(price.toString(),"ether"),
-    web3.utils.toWei(Max.toString(),"ether"),
-    web3.utils.toWei(Min.toString(),"ether"),
+    [noOfToken,
+    price,
+    Max,
+    Min,
     //Date.parse(vesting)/1000,
     vestingMonths,
     Date.parse(IDOstart)/1000,
@@ -129,8 +129,8 @@ const CreateToken = () => {
     array2])
     try {
        const tx = await myContract2.methods.createIDO(
-        [token,owner,account,currency,router],
-    [title,symbol,twitter,medium,telegram,telegramGroup],
+        [token,account,account,currency,router],
+    [title,symbol,twitter,medium,telegram,telegramGroup,website,discord,facebook,instagram,github,redit],
     [web3.utils.toWei(noOfToken.toString(),"ether"),
     web3.utils.toWei(price.toString(),"ether"),
     web3.utils.toWei(Max.toString(),"ether"),
@@ -225,7 +225,7 @@ function  updateData(result) {
   };
 
   
-console.log("data",Date.parse(IDOstart) )
+
   return (
     <Layout>
 
@@ -239,7 +239,11 @@ console.log("data",Date.parse(IDOstart) )
              step={step} 
             token={token}
             setToken={setToken}
+            price={price}
+            setPrice={setPrice}
             title={title}
+            noOfToken={noOfToken}
+            setNoOFTokens={setNoOFTokens}
             symbol={symbol}
             decimals={decimals}
             handleChange={handleChange}
@@ -284,7 +288,7 @@ console.log("data",Date.parse(IDOstart) )
             setRedit={setRedit}
             description={description}
             setDescription={setDescription}
-            price={price}
+            
             createPool={createPool}
             IDOstart={IDOstart}
             IDOEnd={IDOEnd}
@@ -336,8 +340,8 @@ setTelegram,
 instagram,
 setInstagram,
 discord,
-setDiscord,
-redit,setIDOEnd,
+setDiscord,setPrice,
+redit,setIDOEnd,noOfToken,setNoOFTokens,
 setRedit,createPool,
 description,setDescription,price,listingRate,iDOstart,IDOEnd,Allocaiton1,setAllocation1,Allocaiton2,setAllocation2,Allocaiton3,setAllocation3
 }) => {
@@ -362,6 +366,8 @@ description,setDescription,price,listingRate,iDOstart,IDOEnd,Allocaiton1,setAllo
         hardCap={hardCap}
         setHardCap={setHardCap}
         min={Min}
+        price={price}
+        setPrice={setPrice}
         setMin={setMin}
         max={Max}
         setMax={setMax}
@@ -385,6 +391,8 @@ description,setDescription,price,listingRate,iDOstart,IDOEnd,Allocaiton1,setAllo
         Allocaiton3={Allocaiton3}
         setAllocation3={setAllocation3}
         setIDOEnd={setIDOEnd}
+        noOfToken={noOfToken}
+        setNoOFTokens={setNoOFTokens}
         increaseStep={increaseStep} decreaseStep={decreaseStep} />
       );
     case 2:
@@ -438,6 +446,7 @@ description,setDescription,price,listingRate,iDOstart,IDOEnd,Allocaiton1,setAllo
         redit={redit}
         createPool={createPool}
         description={description}
+        noOfToken={noOfToken}
         increaseStep={increaseStep} decreaseStep={decreaseStep} />
       );
     default:

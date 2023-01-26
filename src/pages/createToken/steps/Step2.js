@@ -9,6 +9,7 @@ const Step2 = ({ increaseStep, decreaseStep,
   token,handleChange,
   SoftCap,setSoftCap,hardCap,setHardCap,min,setMin,max,setMax,refund,setRefund,router,setRouter,liquidity,setLiquidity,listingRate,setListingRate,
   IDOstart,setIdoStart,liquidityLock,setLiquidityLock,IDOEnd,Allocaiton1,setAllocation1,Allocaiton2,setAllocation2,Allocaiton3,setAllocation3,setIDOEnd
+  ,noOfToken,setNoOFTokens,setPrice,price
 
 }) => {
   return (
@@ -54,7 +55,7 @@ const Step2 = ({ increaseStep, decreaseStep,
             <div>
               <div className="flex justify-between items-center">
                 <p>
-                  Softcap (BNB) <span className="text-red-400">*</span>
+                  Softcap {`${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} <span className="text-red-400">*</span>
                 </p>
                 <p className="hidden md:block text-violet-300 text-sm ">
                   {"Softcap must be >= 50% of Hardcap!"}
@@ -64,10 +65,13 @@ const Step2 = ({ increaseStep, decreaseStep,
               <CustomInput 
                   onChange={(e)=>{setSoftCap(e.target.value)}}
                value={SoftCap} placeholder="0" />
+  
             </div>
-            <CustomInputWithLabel value={hardCap} setValue={setHardCap} required />
-            <CustomInputWithLabel value={min} setValue={setMin} required label="Minimun buy (BNB)" />
-            <CustomInputWithLabel value={max} setValue={setMax} required label="Maximum buy (BNB)" />
+            <CustomInputWithLabel value={noOfToken} setValue={setNoOFTokens} required label={"No of Tokens"}/>
+            <CustomInputWithLabel value={price} setValue={setPrice} required label={"Launch Price"}/>
+            <CustomInputWithLabel value={hardCap} setValue={setHardCap} required label={`HardCap ${`${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`}`}/>
+            <CustomInputWithLabel value={min} setValue={setMin} required label={`Minimum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
+            <CustomInputWithLabel value={max} setValue={setMax} required label={`Maximum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
             <CustomInputWithLabel value={refund} setValue={setRefund} label="Refund type" />
             <CustomInputWithLabel value={router} setValue={setRouter} label="Router" />
             <CustomInputWithLabel value={liquidity} setValue={setLiquidity} label="liquidity (%)" required />
@@ -186,7 +190,7 @@ const CustomInput = ({ placeholder, value,setValue,...props }) => {
 };
 
 const CustomInputWithLabel = ({
-  label = "Hardcap (BNB)",
+  label,
   required,
   placeholder = "0",
   value,
