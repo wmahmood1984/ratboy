@@ -19,7 +19,7 @@ export const getContract = (library, account,abi,tokenAdd) => {
 	return contract;
 };
 
-const CreateTokenModal = ({ open, setOpen }) => {
+const CreateTokenModal = ({ open = false, setOpen }) => {
   const [tokenOption, setTokenOption] = React.useState();
   const [name,setName] = React.useState()
   const [symbol,setSymbol] = React.useState()
@@ -112,7 +112,7 @@ const CreateTokenModal = ({ open, setOpen }) => {
           </div>
         </div>
       </Box>
-      <ResponsiveDialog open={openA}></ResponsiveDialog>
+
     </Modal>
   );
 };
