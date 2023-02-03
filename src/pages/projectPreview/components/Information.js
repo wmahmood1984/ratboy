@@ -25,7 +25,7 @@ const Information = ({data}) => {
   ];
 
   return (
-    <div className="md:col-span-5 bg-dark-400 border border-lightDark rounded-md shadow-xl">
+    <div className="bg-white md:col-span-5 dark:bg-dark-400 border dark:border-lightDark rounded-md shadow-xl">
       <div className=" border-b  border-lightDark px-4 py-4">
         <p>Information</p>
       </div>

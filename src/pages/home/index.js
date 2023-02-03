@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../components/layout";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
 import Launchpad from "./Launchpad";
@@ -10,6 +10,8 @@ import Web3 from "web3"
 import { ToastContainer, toast } from 'react-toastify';
 import { Box } from "@mui/system";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { ThemeContext } from "@emotion/react";
+import CustomSelect from "../../components/CustomSelect";
 
 
 
@@ -92,11 +94,11 @@ console.log("live",Data)
   return (
     <Layout>
       <main className="px-4 pb-10 pt-20">
-        <h1 className="text-center mt-10 font-medium text-3xl">
+        <h1 className="text-center mt-10 font-medium text-3xl ">
           Current Presale
         </h1>
         <div className="mt-20">
-          <div className=" w-full md:w-auto flex justify-between items-center">
+          <div className="w-full md:w-auto flex justify-between items-center">
             <div className="hidden md:block">
               <button className="grid grid-flow-col justify-start items-center cursor-pointer">
                 <span className="">All Launchpads</span>
@@ -109,9 +111,21 @@ console.log("live",Data)
               <div className="md:w-auto w-full">
                 <SearchBox />
               </div>
-              <div className="grid grid-cols-2 md:grid-flow-col gap-2 items-center ">
-                <BasicSelect value={filter} setValue={filterFunction} label={"Filter by"} array={filterArray}/>
-                <BasicSelect value={sort} setValue={setSortFun} label={"Sort by"} array={sortArray}/>
+              <div className="grid grid-cols-3 gap-2 items-center ">
+              <CustomSelect
+                  id="Filter"
+                  label="Filter "
+                  value={filter}
+                  setValue={setFilter}
+                  list={filterArray}
+                />
+                <CustomSelect
+                  id="Sort"
+                  label="Sort"
+                  value={sort}
+                  setValue={setSort}
+                  list={sortArray}
+                />
                 <button
                   onClick={()=>{
                     if(account){
@@ -120,7 +134,7 @@ console.log("live",Data)
                       window.alert("Please connect your wallet") 
                     }
                   }}
-                  className="col-span-2  md:col-span-auto uppercase block text-center bg-primary-400 p-4 py-2 h-max rounded-md"
+                  className="text-white  md:col-span-auto uppercase block text-center bg-primary-400 p-4 py-2 h-max rounded-md"
                 >
                   Create
                 </button>
@@ -152,19 +166,34 @@ console.log("live",Data)
 
 export default Home;
 
-const CustomSelect = ({ text }) => (
-  <button className="flex border border-gray rounded-md items-center py-2 px-2 justify-between ">
-    <span className="sm:mr-24">{text}</span>
-    <span className=" text-xl">
-      <BiChevronDown />
-    </span>
-  </button>
-);
+// const CustomSelect = ({ list, id, label, value, setValue }) => {
+//   const { theme } = useContext(ThemeContext);
+//   return (
+//     <div className={` ${theme === "dark" ? "custom-select" : ""}`}>
+//       <FormControl size="small" fullWidth>
+//         <InputLabel id={id}>{label}</InputLabel>
+//         <Select
+//           labelId={id}
+//           // id="demo-simple-select"
+//           value={value}
+//           label={label}
+//           onChange={(e) => setValue(e.target.value)}
+//         >
+//           {list.map((item, i) => (
+//             <MenuItem key={i} value={item}>
+//               {item}
+//             </MenuItem>
+//           ))}
+//         </Select>
+//       </FormControl>
+//     </div>
+//   );
+// };
 
 const SearchBox = () => (
   <div className=" border border-gray rounded-md flex items-center justify-between px-3 py-2">
     <input
-      className=" bg-transparent h-full focus:outline-none"
+      className="bg-transparent h-full focus:outline-none"
       type={"text"}
       placeholder="Search"
     />

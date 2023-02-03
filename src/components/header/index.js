@@ -91,7 +91,7 @@ const Header = ({ show, setShow }) => {
 
 
   return (
-    <div className="text-white bg-dark-400 items-center flex justify-between md:justify-end  border-b border-lightDark header">
+    <div className="text-white bg-white border-gray-300  dark:bg-dark-400 items-center flex justify-between md:justify-end  border-b dark:border-lightDark header">
 
       <OutsideClickHandler
         onOutsideClick={() => {
@@ -105,12 +105,16 @@ const Header = ({ show, setShow }) => {
           {show ? <FaTimes /> : <HiOutlineMenuAlt2 />}
         </button>
       </OutsideClickHandler>
-      <div className="grid grid-flow-col justify-end items-center gap-x-6  px-4 py-4">
+      <div className="grid grid-flow-col justify-end items-center gap-x-2  px-4 py-4">
         <button 
+        style={{
+          height:"42px",
+          paddingTop:"3px"
+        }}
         onClick={() => {
           setOpenA(true);
         }}
-        className="grid grid-flow-col gap-x-2 h-full items-center justify-center font-medium uppercase bg-primary-400 border border-primary-400 bg-opacity-50 p-2 px-4 rounded-md ">
+        className="grid grid-flow-col gap-x-2 h-full items-center justify-center font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base">
           <img src={window.ethereum?.networkVersion == 97 ? BSC : ETH} alt="" />
           <p className="hidden sm:block">{window.ethereum?.networkVersion == 97 ? "BSC Testnet" : "Goerli"}</p>
         </button>
@@ -118,10 +122,10 @@ const Header = ({ show, setShow }) => {
         onClick={() => {
           setOpen(true);
         }}
-        className=" font-medium uppercase bg-primary-400 border border-primary-400 bg-opacity-50 p-2 px-4 rounded-md ">
+        className=" font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base">
         {account
                   ? `${account.slice(0, 7)}...${account.slice(-4)}`
-                  : "CONNECT"}
+                  : "CONNECT WALLET"}
         </button>
       </div>
       <ResponsiveDialogWallet

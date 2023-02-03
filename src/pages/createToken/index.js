@@ -229,8 +229,8 @@ function  updateData(result) {
   return (
     <Layout>
 
-      <div className="text-white mt-28 px-4">
-        <div className="my-20 text-white">
+      <div className="mt-28 px-4">
+        <div className="my-20">
           <div className=" hidden md:block">
             <CustomStepper step={step} />
           </div>

@@ -2,13 +2,15 @@ import TextField from "@mui/material/TextField";
 import DateAdapter from "@mui/lab/AdapterDayjs";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./style.css";
+import { ThemeContext } from "../../../context/themeContext";
 export default function CustomDatePicker({value,setValue}) {
+  const { theme } = useContext(ThemeContext);
   // const [value, setValue] = useState(new Date());
 
   return (
-    <div className="custom-date-picker">
+    <div className={`${theme === "dark" && "custom-date-picker"} `}>
       <LocalizationProvider dateAdapter={DateAdapter}>
         <DatePicker
           value={value}

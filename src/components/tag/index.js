@@ -4,10 +4,10 @@ const Tag = ({ upcoming , end  }) => {
   console.log("keyA",upcoming,end)
 
   const color = upcoming
-    ? "text-yellow-400  bg-yellow-400"
-    : end
-    ? " text-red-400  bg-red-400 "
-    : "text-green-400  bg-green-400";
+  ? "text-yellow-600  bg-yellow-400"
+  : end
+  ? " text-red-600  bg-red-400 "
+  : "";
 
   return (
     <div

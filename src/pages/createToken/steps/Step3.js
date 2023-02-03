@@ -100,7 +100,7 @@ const Step3 = ({ increaseStep, decreaseStep
               <Note />
             </div>
           </div>
-          <div className="bg-dark-500 border border-lightDark rounded-md flex h-12">
+          <div className="dark:bg-dark-500 border border-lightDark rounded-md flex h-12">
             <div className="flex justify-center items-center w-12 text-primary-400 text-xl border border-primary-400 rounded-l-md">
               <FaGlobe />
             </div>
@@ -109,7 +109,7 @@ const Step3 = ({ increaseStep, decreaseStep
               
               onChange={captureFile}
               required
-              className="w-full bg-transparent focus:outline-none flex-1 px-4 text-sm"
+              className="w-full bg-transparent focus:outline-none flex-1 px-4 text-sm border-l-primary-400 border-l"
               placeholder={
                 "https://www.zinksale.finance/#/launchpads?chain=BSC-Test"
               }
@@ -205,7 +205,7 @@ const Step3 = ({ increaseStep, decreaseStep
           Description
         </label>
         <textarea
-          className="border rounded-md border-lightDark bg-dark-500 text-sm w-full mt-1 p-4 focus:outline-none"
+          className="border rounded-md border-lightDark dark:bg-dark-500 text-sm w-full mt-1 p-4 focus:outline-none"
           id="w3review"
           name="w3review"
           rows="6"
@@ -224,7 +224,7 @@ const Step3 = ({ increaseStep, decreaseStep
         </button>
         <button
           onClick={increaseStep}
-          className=" bg-primary-400 border border-primary-400  py-2 px-8 rounded-md  font-semibold "
+          className=" bg-primary-400 border border-primary-400  py-2 px-8 rounded-md text-white  font-semibold "
         >
           NEXT
         </button>
@@ -250,7 +250,7 @@ const CustomInputWithIcon = ({
         {label}
         {required && <span className=" text-red-400 ">*</span>}
       </label>
-      <div className="bg-dark-500 border border-lightDark rounded-md flex h-12">
+      <div className="dark:bg-dark-500 border border-lightDark rounded-md flex h-12">
         <div className="flex justify-center items-center w-12 text-primary-400 text-xl border border-primary-400 rounded-l-md">
           {icon}
         </div>
@@ -259,7 +259,7 @@ const CustomInputWithIcon = ({
           value={value}
           onChange={(e)=>{setValue(e.target.value)}}
           required={required}
-          className="w-full bg-transparent focus:outline-none flex-1 px-4 text-sm"
+          className="w-full bg-transparent focus:outline-none flex-1 px-4 text-sm border-l-primary-400 border-l"
           placeholder={placeholder}
         />
       </div>

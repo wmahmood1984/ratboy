@@ -110,7 +110,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
 
 //  console.log("first",Number(formatEther(data.investedTokens))/Number(formatEther(data[4][0]))*100)
   return (
-    <div className="bg-dark-400 border border-lightDark p-4 sm:p-6 rounded-md shadow-xl py-14 h-full flex justify-center items-center  flex-col ">
+    <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl py-14 h-full flex justify-center items-center  flex-col ">
          
       <div className="w-full">
      
@@ -158,7 +158,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
           </div>
           <button 
           onClick={_Swap}
-          className=" rounded-lg py-1.5 sm:py-4 bg-primary-400 w-full text-xl font-bold">
+          className=" text-white rounded-lg py-1.5 sm:py-4 bg-primary-400 w-full text-xl font-bold">
             Buy
           </button>
         </div>
@@ -187,7 +187,7 @@ const CustomInput = ({
           Available: <span> {balance}</span>
         </p>
       </div>
-      <div className=" bg-dark-500 rounded-md mt-1 h-14 flex items-center border border-lightDark overflow-hidden">
+      <div className=" dark:bg-dark-500 rounded-md mt-1 h-14 flex items-center border border-lightDark overflow-hidden">
         <div className="grid grid-flow-col gap-x-1 justify-start items-center h-full p-2">
           <img src={icon} alt="" className="w-5 sm:w-7" />
           <span className=" font-semibold text-sm sm:text-lg">{coin}</span>

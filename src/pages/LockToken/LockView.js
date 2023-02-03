@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import UserImage from "../../assets/user.png";
 import DailyTimer from "../../components/DailyTimer";
 import Tag from "../../components/tag";
+
+
 const LockView = ({data,keyA,subData }) => {
   console.log("key",keyA)
 

@@ -1,5 +1,5 @@
 body {
-  background-color: #111721;
+  /* background-color: #111721; */
   /* border: rgb(124, 124, 124); */
 }
 
@@ -29,3 +29,7 @@ body .MuiRadio-root {
 /* .custom-select {
   max-width: 10px;
 } */
+
+.MuiBackdrop-root {
+  background-color: transparent !important;
+}

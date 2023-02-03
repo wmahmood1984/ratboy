@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
 import Locktoken from "./pages/LockToken";
+import Landing from "./pages/createToken/landing";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const theme = createTheme({
@@ -21,13 +23,14 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-        
+    <Toaster containerClassName="text-sm z-[999999999]" />
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
           <Route path="createToken" element={<CreateToken />} />
           <Route path="preview" element={<ProjectPreview />} />
           <Route path="lockToken" element={<Locktoken />} />
+          <Route path="landing" element={<Landing />} />
         </Routes>
       </BrowserRouter>
 

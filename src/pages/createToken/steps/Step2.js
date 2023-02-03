@@ -22,7 +22,7 @@ const Step2 = ({ increaseStep, decreaseStep,
                 <p>
                   Token Address <span className="text-red-400">*</span>
                 </p>
-                <p className="hidden sm:flex text-violet-300 text-sm  items-center">
+                <p className="hidden sm:flex  text-violet-500 dark:text-violet-300 text-sm  items-center">
                   <span>If i spent 1 BNB how many tokens i will recieve</span>
                   <span className="ml-1 cursor-pointer">
                     <AiOutlineQuestionCircle />
@@ -37,12 +37,12 @@ const Step2 = ({ increaseStep, decreaseStep,
             <div>
               <div className="flex justify-between items-center">
                 <p>Whitelist</p>
-                <p className=" text-violet-300 hidden sm:block text-xs sm:text-sm">
+                <p className="  text-violet-500 dark:text-violet-300 hidden sm:block text-xs sm:text-sm">
                   <span>You can enable/disable whitelist anytime</span>
                 </p>
               </div>
               <div
-                className="bg-dark-500 border border-lightDark rounded-md"
+                className="dark:bg-dark-500 border border-lightDark rounded-md"
                 style={{ height: "56px" }}
               >
                 <input
@@ -57,7 +57,7 @@ const Step2 = ({ increaseStep, decreaseStep,
                 <p>
                   Softcap {`${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} <span className="text-red-400">*</span>
                 </p>
-                <p className="hidden md:block text-violet-300 text-sm ">
+                <p className="hidden md:block  text-violet-500 dark:text-violet-300 text-sm ">
                   {"Softcap must be >= 50% of Hardcap!"}
                 </p>
               </div>
@@ -150,13 +150,13 @@ const Step2 = ({ increaseStep, decreaseStep,
             <div className="grid grid-flow-col gap-x-8 mt-10 justify-center sm:justify-end items-center">
               <button
                 onClick={decreaseStep}
-                className=" bg-transparent border border-primary-400 py-2 px-8 rounded-md  font-semibold "
+                className=" bg-transparent border border-primary-400  py-2 px-8 rounded-md  font-semibold "
               >
                 BACK
               </button>
               <button
                 onClick={increaseStep}
-                className=" bg-primary-400 border border-primary-400  py-2 px-8 rounded-md  font-semibold "
+                className=" bg-primary-400 text-white border border-primary-400  py-2 px-8 rounded-md  font-semibold "
               >
                 NEXT
               </button>
@@ -173,7 +173,7 @@ export default Step2;
 const CustomInput = ({ placeholder, value,setValue,...props }) => {
   return (
     <div
-      className="bg-dark-500 border border-lightDark rounded-md"
+      className="dark:bg-dark-500 border border-lightDark rounded-md"
       style={{ height: "56px" }}
     >
       <input
@@ -183,7 +183,7 @@ const CustomInput = ({ placeholder, value,setValue,...props }) => {
         value={value}
         onChange={(e)=>{setValue(e.target.value)}}
         type="text"
-        className=" bg-transparent w-full h-full text-gray-500 p-2"
+        className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
       />
     </div>
   );

@@ -137,7 +137,7 @@ const ProjectOverView = ({data}) => {
   ];
 
   return (
-    <div className="bg-dark-400 border border-lightDark p-4 sm:p-6 rounded-md shadow-xl">
+    <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl">
       <div className="flex justify-between items-center">
         <div className="grid grid-flow-col justify-start items-center  gap-2">
           <img src={UserImage} alt="" className="w-10 sm:w-auto" />

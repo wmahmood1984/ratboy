@@ -56,7 +56,7 @@ export default function DailyTimer2({start}) {
       {differenceTimeinSeconds>0 ? 
       <div className=" grid grid-flow-col mt-4 gap-x-4 px-10 justify-center">
         <h3 className=" text-center font-medium text-xl">Pre sale starts in</h3>
-         <div  className="text-center bg-dark-700 py-1.5 w-12 sm:w-16">
+         <div  className="text-center dark:bg-dark-700 py-1.5 w-12 sm:w-16">
           <p className=" text-xl md:text-3xl font-bold">
             {String(DaysRemaining).padStart(2, 0)}
           </p>
@@ -64,7 +64,7 @@ export default function DailyTimer2({start}) {
             Days
           </p>
         </div>
-        <div  className="text-center bg-dark-700 py-1.5 w-12 sm:w-16">
+        <div  className="text-center dark:bg-dark-700 py-1.5 w-12 sm:w-16">
           <p className=" text-xl md:text-3xl font-bold">
             {String(HoursRemaining).padStart(2, 0)}
           </p>
@@ -72,7 +72,7 @@ export default function DailyTimer2({start}) {
             Hours
           </p>
         </div>
-        <div  className="text-center bg-dark-700 py-1.5 w-12 sm:w-16">
+        <div  className="text-center dark:bg-dark-700 py-1.5 w-12 sm:w-16">
           <p className=" text-xl md:text-3xl font-bold">
             {String(MinutesRemaining).padStart(2, 0)}
           </p>
@@ -80,7 +80,7 @@ export default function DailyTimer2({start}) {
             Mins
           </p>
         </div>
-        <div  className="text-center bg-dark-700 py-1.5 w-12 sm:w-16">
+        <div  className="text-center dark:bg-dark-700 py-1.5 w-12 sm:w-16">
           <p className=" text-xl md:text-3xl font-bold">
             {String(SecondsRemaining).padStart(2, 0)}
           </p>

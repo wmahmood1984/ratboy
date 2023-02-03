@@ -11,7 +11,7 @@ const Launchpad = ({ data, keyA, subData }) => {
   //  console.log("data in Launchpad",now < data[4][6], now > data[4][7])
 
   return (
-    <div className=" bg-dark-400 border border-lightDark p-4 sm:p-6 rounded-md shadow-xl">
+    <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow">
       <div className="flex justify-between items-center border-b border-lightDark pb-4 ">
         <div className="grid sm:grid-flow-col sm:justify-start gap-x-2 sm:gap-x-4 items-center w-full sm:w-auto">
           <div className="flex sm:block justify-between w-full sm:w-auto">
@@ -103,7 +103,7 @@ const Launchpad = ({ data, keyA, subData }) => {
         <p>365 Minutes </p>
       </div>
 
-      <button className="bg-primary-400 px-14 mt-6 py-1.5 sm:py-3 mx-auto block rounded-md">
+      <button className="bg-primary-400 px-14 mt-6 py-1.5 sm:py-3 mx-auto block rounded-md text-white">
         <Link to={"/preview"} state={{ Index: keyA }}>
           View Pool
         </Link>
@@ -115,10 +115,10 @@ const Launchpad = ({ data, keyA, subData }) => {
 export default Launchpad;
 
 const ProgressBar = ({ complete }) => (
-  <div className="progressbar bg-dark-600 rounded-md h-3 relative overflow-hidden">
+  <div className="progressbar bg-gray-300 dark:bg-dark-600 rounded-md h-3 relative overflow-hidden">
     <div
       style={{ width: `${complete}` }}
-      className="progress-inner absolute top-0 left-0 w-0 h-full bg-primary-400"
+      className="progress-inner absolute top-0 left-0 h-full bg-primary-400 w-1/2"
     ></div>
   </div>
 );

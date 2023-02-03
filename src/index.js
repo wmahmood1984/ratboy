@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
-
+import { ThemeProvider } from "./context/themeContext";
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider);
@@ -15,8 +15,10 @@ function getLibrary(provider) {
 
 ReactDOM.render(
   <Web3ReactProvider getLibrary={getLibrary}>
-
-      <App />
+    <ThemeProvider>
+    <App />
+    </ThemeProvider>
+      
 
     </Web3ReactProvider>,
   document.getElementById('root')

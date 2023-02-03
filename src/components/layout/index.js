@@ -4,7 +4,7 @@ import Sidebar from "../sidebar";
 const Layout = ({ children }) => {
   const [show, setShow] = useState(false);
   return (
-    <div className="text-white">
+    <div className="dark:text-white text-black dark:bg-dark-500 bg-light ">
       <div className="flex dashboard">
         <div className=" relative dashboard-left">
           <Sidebar show={show} setShow={setShow} />

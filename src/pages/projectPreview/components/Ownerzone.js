@@ -7,7 +7,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Rocket from "../../../assets/rocket.png";
 const Ownerzone = () => {
   return (
-    <div className=" md:col-span-7 bg-dark-400 border border-lightDark rounded-md shadow-xl">
+    <div className=" bg-white  md:col-span-7 dark:bg-dark-400 border dark:border-lightDark rounded-md shadow-xl">
       <div className=" border-b  border-lightDark px-4 py-4">
         <p>Owner zone</p>
       </div>
@@ -43,7 +43,7 @@ const Ownerzone = () => {
           <div className="mt-4 sm:mt-0">
             <p className="mb-1">Pool Action</p>
 
-            <div className="grid grid-flow-col gap-x-4 justify-start items-center text-md mt-4 ">
+            <div className="grid grid-flow-col gap-x-4 justify-start items-center text-md mt-4 text-white ">
               <button className="text-sm sm:text-base bg-primary-400 py-1.5 px-6 rounded-md">
                 Finalize Pool
               </button>

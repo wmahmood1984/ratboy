@@ -334,6 +334,29 @@ export const LaunchPadABI = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_symbol",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_totalSupply",
+				"type": "uint256"
+			}
+		],
+		"name": "launchToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "_token",
 				"type": "address"
@@ -362,6 +385,30 @@ export const LaunchPadABI = [
 		"name": "setLockContract",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "userTokenList",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]
@@ -1282,7 +1329,7 @@ export const tokenLockAbi = [
 export const tokenLocklauncherAdd =  {
 	"43113" : "0x5ACfc74319Cc6d738140f684964481aF7865a4b0",//"0xb70F71cdCAd4Db7da3d171c62Abf8382c01b8f32",
 		"97" : "0xe99227298F536e8CB341A8a6c0d2e0121a5E0F6c",//"0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
-		"5" : "0xE05c6ab429Fc58F7EE490a01d5dB7CB4c6Af0762",
+		"5" : "0x6538459E66bfDb7B7a46a5277e6E7413d3d82133",
 		"80001" : "0xf4e9Bb60792d5BdF356F142cD7dF37238A305502"
 }
 
@@ -1303,7 +1350,7 @@ export const tempAdmin = "0xfef5f69FA76f35638Aa3ed77a0644Fa79d31A554"//"0xF85ee8
 export const LaunchPadAdd = {
 	"43113" : "0xa522CF9B39CdA62650c060b692684b38286ce3a8",
 		"97" : "0x0550175b6531a1195670150160a0cFABe95833b7",
-		"5" : "0xc0eB6c24Cc5aE8E8958e7086Fd3903D17B4d5446",
+		"5" : "0xb26dF25863Ec43d1A8D687312C730652137348bb",
 		"80001" : "0x4e4cefab704e4579bf28d32230ddecf0117ae9c1"
 }
 

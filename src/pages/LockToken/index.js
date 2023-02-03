@@ -8,6 +8,7 @@ import { IERC20, tokenLockLauncherAbi, tokenLocklauncherAdd, tokenObj } from "..
 import ResponsiveDialog from "../../Spinner";
 import CustomDatePicker from "../createToken/components/CustomDatepicker";
 import Web3 from "web3";
+import CustomInput from "../../components/CustomInput";
 
 
 export const getLockContract = (library, account,tokenAdd,abi) => {
@@ -85,7 +86,7 @@ const LockToken = () => {
   return (
     <Layout>
       <div className=" px-6 mt-28  mb-20 w-full">
-        <div className="bg-dark-400 border border-lightDark   rounded-md shadow-xl grid grid-cols-1">
+        <div className="bg-white dark:bg-dark-400 border dark:border-lightDark   rounded-md shadow-xl grid grid-cols-1">
           <p className="font-semibold sm:p-6 p-4 border-b border-b-gray-500">
             Create your lock
           </p>
@@ -134,7 +135,7 @@ const LockToken = () => {
             </div>
             <button 
             onClick={Approve}
-            className="bg-primary-400 block mx-auto rounded-sm mt-4 px-4 py-2">
+            className="bg-primary-400 text-white block mx-auto rounded-sm mt-4 px-4 py-2">
               Lock
             </button>
           </div>
@@ -154,30 +155,30 @@ const LockToken = () => {
 
 export default LockToken;
 
-const CustomInput = ({value,setValue, label, required = false, placeholder, ...props }) => {
-  return (
-    <div className="w-full">
-      {label && (
-        <label 
+// const CustomInput = ({value,setValue, label, required = false, placeholder, ...props }) => {
+//   return (
+//     <div className="w-full">
+//       {label && (
+//         <label 
       
-        className="mb-1 inline-block">
-          {label}
-          {required && <span className="text-red-400">*</span>}
-        </label>
-      )}
-      <div
-        className="bg-dark-500 border border-lightDark rounded-md"
-        style={{ height: "40px" }}
-      >
-        <input
-          value={value}
-          onChange={(e)=>{setValue(e.target.value)}}
-          placeholder={placeholder}
-          {...props}
-          type="text"
-          className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
-        />
-      </div>
-    </div>
-  );
-};
+//         className="mb-1 inline-block">
+//           {label}
+//           {required && <span className="text-red-400">*</span>}
+//         </label>
+//       )}
+//       <div
+//         className="bg-dark-500 border border-lightDark rounded-md"
+//         style={{ height: "40px" }}
+//       >
+//         <input
+//           value={value}
+//           onChange={(e)=>{setValue(e.target.value)}}
+//           placeholder={placeholder}
+//           {...props}
+//           type="text"
+//           className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
+//         />
+//       </div>
+//     </div>
+//   );
+// };

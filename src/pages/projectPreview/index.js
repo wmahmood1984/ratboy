@@ -27,7 +27,7 @@ const ProjectPreview = () => {
   const[_data,set_Data] = useState()
   const[sub_data,set_SubData] = useState()
   const[toggle,setToggle] = useState(false)
-    const [allocations,setAllocaitons] = useState()
+    const [allocations,setAllocaitons] = useState([])
   const [totalSupply,setTotalSupply] = useState()
   const [decimals,setDecimals] = useState()
 

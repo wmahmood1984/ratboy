@@ -10,6 +10,8 @@ import { FiCheck } from "react-icons/fi";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/themeContext";
 
 const steps = [
   {
@@ -34,6 +36,7 @@ const steps = [
 ];
 
 export default function HorizontalLabelPositionBelowStepper({ step }) {
+  const { theme: twTheme } = useContext(ThemeContext);
   const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
       top: 22,
@@ -67,9 +70,9 @@ export default function HorizontalLabelPositionBelowStepper({ step }) {
     alignItems: "center",
     ...(!ownerState.active &&
       !ownerState.completed && {
-        backgroundColor: "#111721",
+        backgroundColor: twTheme === "dark" ? "#111721" : "#fff",
         border: "3px solid #824CF4",
-        // color:"#111721",
+        color: twTheme === "dark" ? "#fff" : "#111721",
         boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)",
       }),
     ...(ownerState.active && {
@@ -136,7 +139,7 @@ export default function HorizontalLabelPositionBelowStepper({ step }) {
           <Step key={i}>
             <StepLabel StepIconComponent={ColorlibStepIcon} className="">
               <>
-                <p className="text-white text-lg"> {val.title}</p>
+                <p className="dark:text-white text-lg"> {val.title}</p>
                 <p className=" text-violet-400 mt-2 px-10">{val.desc}</p>
               </>
             </StepLabel>

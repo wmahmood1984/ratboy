@@ -1,28 +1,30 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useContext } from "react";
 import "./style.css";
 import { BiRocket } from "react-icons/bi";
 import { AiOutlineUnlock, AiOutlineQuestionCircle } from "react-icons/ai";
+import DarkModeToggle from "react-dark-mode-toggle";
 import { GiAirBalloon } from "react-icons/gi";
 import {
   HiOutlineDocumentSearch,
   HiOutlineDocumentReport,
 } from "react-icons/hi";
-
+import { ThemeContext } from "../../context/themeContext";
 import { FaTelegramPlane, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Logo from "../../Img/RatboyLogo.png";
 import { useWeb3React } from "@web3-react/core";
 const Sidebar = ({ show, setShow }) => {
+  const { theme, setTheme } = useContext(ThemeContext);
 const {account} = useWeb3React()
   return (
     <div
-      className={`sidebar ${
-        show && "active"
-      } bg-dark-400 border-r border-lightDark flex flex-col`}
+    className={`sidebar ${
+      show && "active"
+    } bg-white dark:bg-dark-400 border-r dark:border-lightDark border-gray-300 flex flex-col text-black dark:text-white`}
     >
       <div
-        className=" border-b border-lightDark flex justify-center items-center sidebar-logo"
+        className=" border-b border-gray-300  dark:border-lightDark flex pl-6 items-center sidebar-logo"
         style={{ minHeight: "75px" }}
       >
         <img width={"200px"} src={Logo} alt="" className="mx-auto" />
@@ -34,7 +36,7 @@ const {account} = useWeb3React()
               <li>
                 <Link
                   to={account? `${val.link}` : "#"}
-                  className="grid grid-flow-col text-sm justify-start gap-x-2 items-center py-2 px-2 hover:bg-primary-400 rounded-lg my-1"
+                  className="grid grid-flow-col text-sm justify-start gap-x-2 items-center py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg my-1 font-bold"
                 >
                   <span className="text-lg">{val.icon}</span>{" "}
                   <span>{val.text}</span>
@@ -73,6 +75,18 @@ const {account} = useWeb3React()
             <p>Balance:</p>
             <p>$0.00</p>
           </div>
+          <div className="mt-2">
+              {/* <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "dark" ? <FaSun /> : <FaMoon />}
+            </button> */}
+              <DarkModeToggle
+                onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+                checked={theme === "dark"}
+                size={50}
+              />
+            </div>
         </div>
       </div>
     </div>
