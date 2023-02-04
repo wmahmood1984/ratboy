@@ -27,7 +27,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
-          <Route path="createToken" element={<CreateToken />} />
+          <Route path="createPresale" element={<CreateToken />} />
           <Route path="preview" element={<ProjectPreview />} />
           <Route path="lockToken" element={<Locktoken />} />
           <Route path="landing" element={<Landing />} />
