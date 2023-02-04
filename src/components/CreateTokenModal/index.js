@@ -11,7 +11,7 @@ import { LaunchPadABI, LaunchPadAdd } from "../../config";
 import { Contract } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 import { useNavigate } from "react-router-dom";
-import ResponsiveDialog from "../../Spinner.jsx"
+import spinner from "../../Img/spinner.gif"
 
 export const getContract = (library, account,abi,tokenAdd) => {
 	const signer = library?.getSigner(account).connectUnchecked();
@@ -105,12 +105,14 @@ const CreateTokenModal = ({ open = false, setOpen }) => {
               />
             </div> */}
             <button 
+            disabled={openA}
             onClick={createToken}
             className="bg-primary-400 block mx-auto rounded-md mt-4 px-4 py-2">
-              Create Token
+              Create Token {" "}{openA? <img style={{marginLeft:"33%"}} width="33px" src={spinner}></img>: null}
             </button>
           </div>
         </div>
+
       </Box>
 
     </Modal>
