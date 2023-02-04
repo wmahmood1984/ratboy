@@ -133,16 +133,13 @@ const Header = ({ show, setShow }) => {
         }
 
         <button 
-        style={{
-          height:"42px",
-          paddingTop:"3px"
-        }}
+        style={{display:"flex"}}
         onClick={() => {
           setOpenA(true);
         }}
-        className="grid grid-flow-col gap-x-2 h-full items-center justify-center font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base">
-          <img src={window.ethereum?.networkVersion == 97 ? BSC : ETH} alt="" />
-          <p className="hidden sm:block">{window.ethereum?.networkVersion == 97 ? "BSC Testnet" : "Goerli"}</p>
+        className="font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base">
+          <img width={"25px"} src={window.ethereum?.networkVersion == 97 ? BSC : ETH} alt="" />
+          <span style={{marginLeft:"15px"}} className="hidden sm:block">{window.ethereum?.networkVersion == 97 ? "BSC Testnet" : "Goerli"}</span>
         </button>
         <button 
         onClick={() => {
