@@ -38,7 +38,7 @@ const Step1 = ({ increaseStep, decreaseStep,token,setToken,name,symbol,decimals 
               
               }}
               className="  py-4 px-4 w-full h-full bg-transparent focus:outline-none"
-              placeholder="234mknjknfgj453456jmngjf87485hjb435nn23k"
+              placeholder="token address"
             />
           </div>
 
@@ -51,9 +51,9 @@ const Step1 = ({ increaseStep, decreaseStep,token,setToken,name,symbol,decimals 
               <p>Symbol</p>
               <p className="flex items-center">
                 <span className="text-gray-500">{symbol}</span>
-                <div className="w-6 ml-2">
+                {/* <div className="w-6 ml-2">
                   <img src={user} alt="" />
-                </div>{" "}
+                </div>{" "} */}
               </p>
             </div>
             <div className="py-4 flex justify-between items-center mb-1.5 border-b  border-lightDark text-sm">
@@ -67,7 +67,16 @@ const Step1 = ({ increaseStep, decreaseStep,token,setToken,name,symbol,decimals 
             </p>
             <button
               className=" text-white bg-primary-400 rounded-md px-10 py-2"
-              onClick={increaseStep}
+              onClick={
+                ()=>{
+                  if(name){
+                    increaseStep()
+                  }else{
+                    window.alert("Invalid Token Address")
+                  }
+
+                }
+                }
             >
               Next
             </button>
