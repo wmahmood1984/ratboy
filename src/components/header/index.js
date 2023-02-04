@@ -69,9 +69,9 @@ const Header = ({ show, setShow }) => {
 
   console.log("tier",tier)
 
-  window.ethereum?.on("accountsChanged", (e, r) => {
-    window.location.reload();
-  });
+  // window.ethereum?.on("accountsChanged", (e, r) => {
+  //   window.location.reload();
+  // });
 
 
   window.ethereum?.on("chainChanged", (e, r) => {
