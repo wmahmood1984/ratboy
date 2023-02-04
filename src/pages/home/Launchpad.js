@@ -16,7 +16,7 @@ const Launchpad = ({ data, keyA, subData }) => {
         <div className="grid sm:grid-flow-col sm:justify-start gap-x-2 sm:gap-x-4 items-center w-full sm:w-auto">
           <div className="flex sm:block justify-between w-full sm:w-auto">
             <div>
-              <img src={UserImage} alt="" />
+              <img width={"100px"} src={data[5]} alt="" />
             </div>
             <div className="sm:hidden">
               {" "}
