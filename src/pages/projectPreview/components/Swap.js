@@ -165,7 +165,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
       <div className="w-full">
      
         {/* <Timer /> */}
-        <DailyTimer2 start={data[4][6]} />
+        <Timer start={data[4][6]} />
         <div>
           <Progressbar complete={Number(sub_data.investedBUSD) / Number(formatEther(data[4][0]))} />
           <div className="flex items-center justify-between mt-1">

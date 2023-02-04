@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import * as dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { convertLength } from "@mui/material/styles/cssUtils";
 dayjs.extend(utc);
 dayjs.extend(customParseFormat);
-const Timer = () => {
+const Timer = ({start}) => {
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -12,9 +13,9 @@ const Timer = () => {
 
   //   console.log("TIME", dayjs(Date.now()).utc().format());
 
-  const difference =
-    +dayjs.utc(`2022-03-05T12:00:00.000+0000`, "YYYY-MM-DDTHH:mm:ss.000ZZ") -
-    +Date.now();
+  const difference = start*1000 - new Date().getTime()
+    // +dayjs.utc(`${Date.parse(start*1000)}`, "YYYY-MM-DDTHH:mm:ss.000ZZ") -
+    // +Date.now();
   useEffect(() => {
     const id = setTimeout(() => {
       if (difference > 0) {
@@ -29,6 +30,8 @@ const Timer = () => {
       clearTimeout(id);
     };
   });
+
+  console.log("time",difference)
 
   const timeList = [
     {
@@ -51,7 +54,10 @@ const Timer = () => {
   return (
     <div className=" grid grid-flow-col mt-4 gap-x-4 px-10 justify-center">
       {timeList.map((val, i) => (
-        <div key={i} className="text-center bg-dark-700 py-1.5 w-12 sm:w-16">
+        <div
+          key={i}
+          className="text-center dark:bg-dark-700 py-1.5 w-12 sm:w-16"
+        >
           <p className=" text-xl md:text-3xl font-bold">
             {String(val.time).padStart(2, 0)}
           </p>

@@ -131,7 +131,7 @@ const CreateToken = () => {
     hash,
     array2])
     try {
-       const tx = await myContract2.methods.createIDO(
+       const tx = await myContract2.methods.createPresale(
         [token,account,account,currency,router],
     [title,symbol,twitter,medium,telegram,telegramGroup,website,discord,facebook,instagram,github,redit],
     [web3.utils.toWei(noOfToken.toString(),"ether"),
