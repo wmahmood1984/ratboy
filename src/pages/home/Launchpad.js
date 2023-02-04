@@ -69,8 +69,8 @@ const Launchpad = ({ data, keyA, subData }) => {
       <div className="text-sm sm:text-base font-bold flex justify-between items-center mt-4">
         <p>Soft/Hard Cap:</p>
         <p className=" text-primary-400">
-          {formatEther(data[4][2])} {data[3][1]} - {formatEther(data[4][0])}{" "}
-          {data[3][1]}
+          {formatEther(data[4][2])} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"} - {formatEther(data[4][0])}{" "}
+          {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}
         </p>
       </div>
       <div className="font-bold flex justify-between items-center mt-4">
