@@ -9,6 +9,7 @@ import ResponsiveDialog from "../../Spinner";
 import CustomDatePicker from "../createToken/components/CustomDatepicker";
 import Web3 from "web3";
 import CustomInput from "../../components/CustomInput";
+import { toast } from "react-hot-toast";
 
 
 export const getLockContract = (library, account,tokenAdd,abi) => {
@@ -53,7 +54,7 @@ const LockToken = () => {
         setStatus("")
       }
     }else{
-      window.alert("Please check date and amount")
+      toast.error("Please check date and amount")
     }
   }
   
@@ -80,7 +81,7 @@ const LockToken = () => {
         setStatus("")
       }
     }else{
-      window.alert("Please check date and amount")
+      toast.error("Please check date and amount")
     }
   }
 

@@ -23,7 +23,7 @@ const Launchpad = ({ data, keyA, subData }) => {
               {/* <Tag upcoming={now < data[4][6]} end={now > data[4][7]} /> */}
               <div
                 className={`${now < data[4][6] ? 
-                  "text-orange-400  bg-yellow-400" : 
+                  "text-red-400  bg-yellow-400" : 
                   now > data[4][7] ? " text-red-400  bg-red-400 " : "text-green-400  bg-green-400"
                 }  bg-opacity-30 text-yellow max-w-max p-0.5 sm:py-2 mt-2 sm:px-4 ml-auto rounded-md text-xs sm:text-sm`}
               >
@@ -54,7 +54,7 @@ const Launchpad = ({ data, keyA, subData }) => {
           </p>
           <div
                 className={`${now < data[4][6] ? 
-                  "text-yellow-400  bg-yellow-400" : 
+                  "text-red-400  bg-yellow-400" : 
                   now > data[4][7] ? " text-red-400  bg-red-400 " : "text-green-400  bg-green-400"
                 }  bg-opacity-30 text-yellow max-w-max p-0.5 sm:py-2 mt-2 sm:px-4 ml-auto rounded-md text-xs sm:text-sm`}
               >

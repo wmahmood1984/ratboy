@@ -131,7 +131,7 @@ console.log("live",Data)
                     if(account){
                       navigate("/createPresale")                      
                     }else{
-                      window.alert("Please connect your wallet") 
+                        toast.error("Please connect your wallet") 
                     }
                   }}
                   className="text-white  md:col-span-auto uppercase block text-center bg-primary-400 p-4 py-2 h-max rounded-md"

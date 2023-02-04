@@ -5,6 +5,7 @@ import CustomDatePicker from "../components/CustomDatepicker";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import "./style.css";
+import { toast } from "react-hot-toast";
 
 const Step2 = ({ increaseStep, decreaseStep, 
   token,handleChange,
@@ -190,13 +191,13 @@ const CustomInput = ({ placeholder, value,setValue,validation ,...props }) => {
          if(validation=="number"){
           if(!isNaN(e.target.value)){
             setValue(e.target.value)
-          }else{window.alert("not a valid number")}
+          }else{toast.error("not a valid number")}
          }else if(
           validation =="address"
          ){
           if(e.target.value.slice(0,2)=="0x" && e.target.value.length ==42){
           setValue(e.target.value)
-         }else{window.alert("not a valid address")}
+         }else{toast.error("not a valid address")}
 
          }else {
           setValue(e.target.value)

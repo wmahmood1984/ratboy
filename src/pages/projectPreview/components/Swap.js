@@ -13,7 +13,8 @@ import { IERC20, IGOAbi } from "../../../config";
 import { useWeb3React } from "@web3-react/core";
 import ResponsiveDialog from "../../../Spinner";
 import { Contract } from "ethers";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-hot-toast";
+
 
 
 
@@ -100,7 +101,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
       //   theme: "light",
       //   })
     
-      window.alert("please enter valid amount")
+      toast.error("please enter valid amount")
     } else{
       // toast("Please connect your wallet", {
     

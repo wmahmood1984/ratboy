@@ -23,7 +23,21 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-    <Toaster containerClassName="text-sm z-[999999999]" />
+    <Toaster  
+    containerStyle={{
+      position: 'relative',
+      top:"50px"
+    }}
+    toastOptions={{
+      className: 'text-sm z-[999999999]" ',
+      style: {
+        border: '1px solid #713200',
+        padding: '16px',
+        color: '#713200',
+        
+      },
+    }}
+    />
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />

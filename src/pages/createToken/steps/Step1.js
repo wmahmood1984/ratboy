@@ -7,6 +7,8 @@ import CreateTokenModal from "../../../components/CreateTokenModal";
 
 import { validate, getAddressInfo } from 'bitcoin-address-validation';
 import { convertLength } from "@mui/material/styles/cssUtils";
+import { toast } from "react-hot-toast";
+
 
 
 const Step1 = ({ increaseStep, decreaseStep,token,setToken,name,symbol,decimals }) => {
@@ -32,7 +34,9 @@ const Step1 = ({ increaseStep, decreaseStep,token,setToken,name,symbol,decimals 
                 if(e.target.value.slice(0,2)=="0x" && e.target.value.length==42){
                   setToken(e.target.value)
                 }else{
-                  window.alert("not a valid token address")
+
+                  toast.error("not a valid token address")
+                  
                 }
 
               
@@ -72,7 +76,7 @@ const Step1 = ({ increaseStep, decreaseStep,token,setToken,name,symbol,decimals 
                   if(name){
                     increaseStep()
                   }else{
-                    window.alert("Invalid Token Address")
+                    toast.error("Invalid Token Address")
                   }
 
                 }

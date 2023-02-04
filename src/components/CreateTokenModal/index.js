@@ -7,7 +7,7 @@ import CustomInput from "../CustomInput";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { ThemeContext } from "../../context/themeContext";
 import { useWeb3React } from "@web3-react/core";
-import { LaunchPadABI, LaunchPadAdd } from "../../config";
+import { chainIdSelected, LaunchPadABI, LaunchPadAdd } from "../../config";
 import { Contract } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 import { useNavigate } from "react-router-dom";
@@ -30,8 +30,9 @@ const CreateTokenModal = ({ open = false, setOpen }) => {
   const { theme } = React.useContext(ThemeContext);
   const {account,library,chainId} = useWeb3React()
   const navigate = useNavigate()
+  const chain = chainId ? chainId: chainIdSelected
 
-  const contract = getContract(library,account,LaunchPadABI,LaunchPadAdd[`${chainId}`])
+  const contract = getContract(library,account,LaunchPadABI,LaunchPadAdd[`${chain}`])
 
   const createToken = async ()=>{
     setOpenA(true)

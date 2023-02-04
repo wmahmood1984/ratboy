@@ -4,7 +4,7 @@ import { useWeb3React } from "@web3-react/core";
 import React, { useEffect, useState } from "react";
 import { Layout } from "../../components";
 import CustomStepper from "../../components/stepper";
-import { BUSD, IERC20, LaunchPadABI, LaunchPadAdd, tokenObj } from "../../config";
+import { BUSD, chainIdSelected, IERC20, LaunchPadABI, LaunchPadAdd, tokenObj } from "../../config";
 // import Step1 from "./steps/Step1";
 import { Step1, Step2, Step3 } from "./steps";
 import Step4 from "./steps/Step4";
@@ -83,9 +83,9 @@ const CreateToken = () => {
 
 
 
+  const chain = chainId ? chainId : chainIdSelected
 
-
-  const myContract2 = new web3.eth.Contract(LaunchPadABI,LaunchPadAdd[`${chainId}`])
+  const myContract2 = new web3.eth.Contract(LaunchPadABI,LaunchPadAdd[`${chain}`])
 
   useEffect(()=>{
     const abc = async()=>{

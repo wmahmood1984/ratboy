@@ -6,6 +6,7 @@ import { FiFacebook, FiTwitter } from "react-icons/fi";
 import { RiGithubLine, RiTelegramLine } from "react-icons/ri";
 import { ImReddit } from "react-icons/im";
 import { GiTuba } from "react-icons/gi";
+import { toast } from "react-hot-toast";
 const Step3 = ({ increaseStep, decreaseStep 
   ,hash,
   captureFile,
@@ -225,7 +226,7 @@ const Step3 = ({ increaseStep, decreaseStep
         <button
           onClick={()=>{
             if(hash==undefined){
-              window.alert("URL must end with a supported extension png, jpg, jpeg or gif. You can upload your image athttps://upload.zinksale.finance/")
+              toast.error("URL must end with a supported extension png, jpg, jpeg or gif. You can upload your image athttps://upload.zinksale.finance/")
             }else{
               increaseStep()
             }
