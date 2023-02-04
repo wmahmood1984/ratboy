@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import StepWrap from "../components/StepWrap";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import CustomDatePicker from "../components/CustomDatepicker";
@@ -6,6 +6,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import "./style.css";
 import { toast } from "react-hot-toast";
+import { ThemeContext } from "@emotion/react";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+
 
 const Step2 = ({ increaseStep, decreaseStep, 
   token,handleChange,
@@ -85,7 +88,22 @@ const Step2 = ({ increaseStep, decreaseStep,
             <CustomInputWithLabel validation={"number"} value={hardCap} setValue={setHardCap} required label={`HardCap ${`${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`}`}/>
             <CustomInputWithLabel validation={"number"} value={min} setValue={setMin} required label={`Minimum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
             <CustomInputWithLabel validation={"number"} value={max} setValue={setMax} required label={`Maximum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
-            <CustomInputWithLabel validation={"number"} value={refund} setValue={setRefund} label="Refund type" />
+            <div>
+      <p>
+        Refund
+        <span className="text-red-400">*</span>
+      </p>
+      <CustomSelect
+      
+                  id="Refund"
+                  label="Refund"
+                  value={refund}
+                  setValue={setRefund}
+                  list={["Refund","Burn"]}
+                />
+
+    </div>
+
             <CustomInputWithLabel validation={"address" }value={router} setValue={setRouter} label="Router" />
             <CustomInputWithLabel validation={"number"} value={liquidity} setValue={setLiquidity} label="liquidity (%)" required />
             {/* <CustomInputWithLabel validation={"number"} value={Allocaiton1} setValue={setAllocation1} label="Allocation 1(%)" required />
@@ -227,6 +245,32 @@ const CustomInputWithLabel = ({
         {required && <span className="text-red-400">*</span>}
       </p>
       <CustomInput value={value} setValue={setValue} placeholder={placeholder} validation={validation} />
+    </div>
+  );
+};
+
+
+const CustomSelect = ({ list, id, label, value, setValue }) => {
+  const { theme } = useContext(ThemeContext);
+  return (
+    <div className={` ${theme === "dark" ? "custom-select" : "dark:bg-dark-500 border border-lightDark rounded-md"}`}>
+      <FormControl size="small" fullWidth>
+        <InputLabel id={id}>{label}</InputLabel>
+        <Select
+         className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
+          labelId={id}
+          // id="demo-simple-select"
+          value={value}
+          label={label}
+          onChange={(e) => setValue(e.target.value)}
+        >
+          {list.map((item, i) => (
+            <MenuItem key={i} value={item}>
+              {item}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 };
