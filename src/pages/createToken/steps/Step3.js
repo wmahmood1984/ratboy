@@ -223,7 +223,13 @@ const Step3 = ({ increaseStep, decreaseStep
           BACK
         </button>
         <button
-          onClick={increaseStep}
+          onClick={()=>{
+            if(hash==undefined){
+              window.alert("URL must end with a supported extension png, jpg, jpeg or gif. You can upload your image athttps://upload.zinksale.finance/")
+            }else{
+              increaseStep()
+            }
+          }}
           className=" bg-primary-400 border border-primary-400  py-2 px-8 rounded-md text-white  font-semibold "
         >
           NEXT
