@@ -129,7 +129,7 @@ const Step2 = ({ increaseStep, decreaseStep,
                 validation={"number"}
                 value={liquidityLock}
                 setValue={setLiquidityLock}
-                label="Liquidity lockup (minutes)"
+                label="Liquidity lockup (Days)"
                 required
               />
             </div>

@@ -144,7 +144,7 @@ const CreateToken = () => {
     Allocaiton2,
     Allocaiton3,
     web3.utils.toWei(ListingRate.toString(),"ether"),
-    liquidity,liquidityLock,
+    liquidity,liquidityLock*24*60*60,
   ],
     hash,
     array2).send({from:account}).
