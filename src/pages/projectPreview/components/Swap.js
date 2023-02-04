@@ -33,6 +33,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
   const [tBalance,setTbalance] = useState()
   const [amount,setAmount] = useState()
   const [open,setOpen] = useState()
+  const [title,setTitle] = useState()
 
   const myContract =data &&  getContract(library, account,data._address);
   useEffect(()=>{
@@ -52,6 +53,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
       var counter = 0
       setOpen(true)
       setAmount("")
+      setTitle("Buy in process...")
       var tokens = amount / formatEther(data[4][1])
     
       try {
@@ -111,6 +113,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
       var counter = 0
       setOpen(true)
       setAmount("")
+      setTitle("Emergency withdraw in process...")
       var tokens = amount / formatEther(data[4][1])
     
       try {
@@ -216,7 +219,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
           </button>
         </div>
       </div>
-      <ResponsiveDialog open={open} />
+      <ResponsiveDialog open={open} title={title} />
     </div>
   );
 };

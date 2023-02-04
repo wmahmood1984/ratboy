@@ -71,6 +71,7 @@ const CreateToken = () => {
   const [router,setRouter] = useState()
   const [liquidity,setLiquidity]= useState()
   const [liquidityLock,setLiquidityLock]= useState()
+  const [status,setStatus] = useState()
 
 
   const [website,setWebsite] = useState()
@@ -115,6 +116,7 @@ const CreateToken = () => {
   const createPool = async ()=>{
     var counter = 0 
     setOpen(true)
+    setStatus("Creating Pool....")
     console.log("creat Pool",[[token,account,account,currency,router],
     [title,symbol,twitter,medium,telegram,telegramGroup,website,discord,facebook,instagram,github,redit],
     [noOfToken,
@@ -226,6 +228,8 @@ function  updateData(result) {
   };
 
   const approve = async ()=>{
+    setOpen(true)
+    setStatus("Approving tokens....")
     var counter =0
     try {
       const contract = new web3.eth.Contract(IERC20,token);
@@ -329,7 +333,7 @@ function  updateData(result) {
           provided or published.
         </p>
       </div>
-      <ResponsiveDialog open={open}/>
+      <ResponsiveDialog open={open} title={status}/>
     </Layout>
   );
 };

@@ -36,6 +36,7 @@ const Ownerzone2 = ({ data }) => {
   const [badge8, setbadge8] = useState(false);
   const [badge9, setbadge9] = useState(false);
   const [badge10, setbadge10] = useState(false);
+  const [title,setTitle] = useState()
 
 
   const myContract = getContract(library, account, data._address);
@@ -63,7 +64,9 @@ const Ownerzone2 = ({ data }) => {
   
 
   const authorize = async () => {
+    
     setOpen(true);
+    setTitle("Aurhotizing...")
     try {
       const tx1 = await myContract.adminAllowance(true);
 
@@ -81,6 +84,7 @@ const Ownerzone2 = ({ data }) => {
 
   const _addBadges = async () => {
     setOpen(true);
+    setTitle("Adding badges...")
     try {
       const tx1 = await myContract.addBadges([badge1,badge2,badge3,badge4,badge5,badge6,badge7,badge8,badge9,badge10],{gasLimit:300000});
 
@@ -211,7 +215,7 @@ const Ownerzone2 = ({ data }) => {
           </div>
         </div>
       </div>
-      <ResponsiveDialog open={open}></ResponsiveDialog>
+      <ResponsiveDialog open={open} title={title}></ResponsiveDialog>
     </div>
   );
 };
