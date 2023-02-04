@@ -4,6 +4,11 @@ import coin from "../../../assets/coin.png";
 import StepWrap from "../components/StepWrap";
 import { useState } from "react";
 import CreateTokenModal from "../../../components/CreateTokenModal";
+
+import { validate, getAddressInfo } from 'bitcoin-address-validation';
+import { convertLength } from "@mui/material/styles/cssUtils";
+
+
 const Step1 = ({ increaseStep, decreaseStep,token,setToken,name,symbol,decimals }) => {
   const [openCreateToken, setOpenCreateToken] = useState();
 
@@ -20,8 +25,18 @@ const Step1 = ({ increaseStep, decreaseStep,token,setToken,name,symbol,decimals 
           <div className="w-full border border-dark-500 dark:bg-dark-500 overflow-hidden rounded-lg text-gray-600 mt-5">
             <input
               type="text"
+              required
               value={token}
-              onChange={(e)=>{setToken(e.target.value)}}
+              onChange={(e)=>{
+                console.log("validat",e.target.value)
+                if(e.target.value.slice(0,2)=="0x" && e.target.value.length==42){
+                  setToken(e.target.value)
+                }else{
+                  window.alert("not a valid token address")
+                }
+
+              
+              }}
               className="  py-4 px-4 w-full h-full bg-transparent focus:outline-none"
               placeholder="234mknjknfgj453456jmngjf87485hjb435nn23k"
             />

@@ -5,6 +5,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import { useContext, useState } from "react";
 import "./style.css";
 import { ThemeContext } from "../../../context/themeContext";
+import { DateTimePicker } from "@mui/lab";
 export default function CustomDatePicker({value,setValue}) {
   const { theme } = useContext(ThemeContext);
   // const [value, setValue] = useState(new Date());
@@ -12,7 +13,7 @@ export default function CustomDatePicker({value,setValue}) {
   return (
     <div className={`${theme === "dark" && "custom-date-picker"} `}>
       <LocalizationProvider dateAdapter={DateAdapter}>
-        <DatePicker
+        <DateTimePicker
           value={value}
           onChange={(newValue) => {
             setValue(newValue);

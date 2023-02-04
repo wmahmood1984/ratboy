@@ -5,6 +5,7 @@ import CustomDatePicker from "../components/CustomDatepicker";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import "./style.css";
+
 const Step2 = ({ increaseStep, decreaseStep, 
   token,handleChange,
   SoftCap,setSoftCap,hardCap,setHardCap,min,setMin,max,setMax,refund,setRefund,router,setRouter,liquidity,setLiquidity,listingRate,setListingRate,
@@ -62,22 +63,23 @@ const Step2 = ({ increaseStep, decreaseStep,
                 </p>
               </div>
 
-              <CustomInput 
+              <CustomInput
+              validation={"number"} 
                   setValue={setSoftCap}
-               value={SoftCap} placeholder="0" />
+                  value={SoftCap} placeholder="0" />
   
             </div>
-            <CustomInputWithLabel value={noOfToken} setValue={setNoOFTokens} required label={"No of Tokens"}/>
-            <CustomInputWithLabel value={price} setValue={setPrice} required label={"Launch Price"}/>
-            <CustomInputWithLabel value={hardCap} setValue={setHardCap} required label={`HardCap ${`${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`}`}/>
-            <CustomInputWithLabel value={min} setValue={setMin} required label={`Minimum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
-            <CustomInputWithLabel value={max} setValue={setMax} required label={`Maximum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
-            <CustomInputWithLabel value={refund} setValue={setRefund} label="Refund type" />
-            <CustomInputWithLabel value={router} setValue={setRouter} label="Router" />
-            <CustomInputWithLabel value={liquidity} setValue={setLiquidity} label="liquidity (%)" required />
-            <CustomInputWithLabel value={Allocaiton1} setValue={setAllocation1} label="Allocation 1(%)" required />
-            <CustomInputWithLabel value={Allocaiton2} setValue={setAllocation2} label="Allocaiton 2 (%)" required />
-            <CustomInputWithLabel value={Allocaiton3} setValue={setAllocation3} label="Allocation 3 (%)" required />
+            <CustomInputWithLabel validation={"number"} value={noOfToken} setValue={setNoOFTokens} required label={"No of Tokens"}/>
+            <CustomInputWithLabel validation={"number"} value={price} setValue={setPrice} required label={"Launch Price"}/>
+            <CustomInputWithLabel validation={"number"} value={hardCap} setValue={setHardCap} required label={`HardCap ${`${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`}`}/>
+            <CustomInputWithLabel validation={"number"} value={min} setValue={setMin} required label={`Minimum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
+            <CustomInputWithLabel validation={"number"} value={max} setValue={setMax} required label={`Maximum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
+            <CustomInputWithLabel validation={"number"} value={refund} setValue={setRefund} label="Refund type" />
+            <CustomInputWithLabel validation={"address" }value={router} setValue={setRouter} label="Router" />
+            <CustomInputWithLabel validation={"number"} value={liquidity} setValue={setLiquidity} label="liquidity (%)" required />
+            <CustomInputWithLabel validation={"number"} value={Allocaiton1} setValue={setAllocation1} label="Allocation 1(%)" required />
+            <CustomInputWithLabel validation={"number"} value={Allocaiton2} setValue={setAllocation2} label="Allocaiton 2 (%)" required />
+            <CustomInputWithLabel validation={"number"} value={Allocaiton3} setValue={setAllocation3} label="Allocation 3 (%)" required />
             <div>
               <div className="flex justify-between items-center">
                 <p>
@@ -85,7 +87,7 @@ const Step2 = ({ increaseStep, decreaseStep,
                 </p>
                 <p className=" text-violet-300 text-sm ">{"1 BNB = 0 ZETA"}</p>
               </div>
-              <CustomInput value={listingRate} setValue={setListingRate} placeholder="0" />
+              <CustomInput validation={"number"} value={listingRate} setValue={setListingRate} placeholder="0" />
             </div>
           </div>
           <div className="py-10">
@@ -122,6 +124,7 @@ const Step2 = ({ increaseStep, decreaseStep,
                 </div>
               </div>
               <CustomInputWithLabel
+                validation={"number"}
                 value={liquidityLock}
                 setValue={setLiquidityLock}
                 label="Liquidity lockup (minutes)"
@@ -170,7 +173,7 @@ const Step2 = ({ increaseStep, decreaseStep,
 
 export default Step2;
 
-const CustomInput = ({ placeholder, value,setValue,...props }) => {
+const CustomInput = ({ placeholder, value,setValue,validation ,...props }) => {
   return (
     <div
       className="dark:bg-dark-500 border border-lightDark rounded-md"
@@ -181,7 +184,24 @@ const CustomInput = ({ placeholder, value,setValue,...props }) => {
        // key={key}
         {...props}
         value={value}
-        onChange={(e)=>{setValue(e.target.value)}}
+        onChange={(e)=>{
+         if(validation=="number"){
+          if(!isNaN(e.target.value)){
+            setValue(e.target.value)
+          }else{window.alert("not a valid number")}
+         }else if(
+          validation =="address"
+         ){
+          if(e.target.value.slice(0,2)=="0x" && e.target.value.length ==42){
+          setValue(e.target.value)
+         }else{window.alert("not a valid address")}
+
+         }else {
+          setValue(e.target.value)
+         }   
+
+        
+        }}
         type="text"
         className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
       />
@@ -194,7 +214,8 @@ const CustomInputWithLabel = ({
   required,
   placeholder = "0",
   value,
-  setValue
+  setValue,
+  validation
 }) => {
   return (
     <div>
@@ -202,7 +223,7 @@ const CustomInputWithLabel = ({
         {label}
         {required && <span className="text-red-400">*</span>}
       </p>
-      <CustomInput value={value} setValue={setValue} placeholder={placeholder} />
+      <CustomInput value={value} setValue={setValue} placeholder={placeholder} validation={validation} />
     </div>
   );
 };
