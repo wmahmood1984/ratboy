@@ -97,13 +97,13 @@ const CreateTokenModal = ({ open = false, setOpen }) => {
             <CustomInput value={symbol} setValue={setSymbol} label={"Symbol"} required />
             <CustomInput value={decimals} setValue={setDecimals} label={"Decimals"} required />
             <CustomInput value={totalSupply} setValue={setTotalSupply} label={"Total supply"} required />
-            <div className="custom-checkbox ">
+            {/* <div className="custom-checkbox ">
               <FormControlLabel
                 control={<Checkbox color="primary" />}
                 label="
                 Implement Rat Anti-Bot System?"
               />
-            </div>
+            </div> */}
             <button 
             onClick={createToken}
             className="bg-primary-400 block mx-auto rounded-md mt-4 px-4 py-2">
