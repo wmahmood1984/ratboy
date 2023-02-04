@@ -12,7 +12,7 @@ import {
 import { ThemeContext } from "../../context/themeContext";
 import { FaTelegramPlane, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Logo from "../../Img/RatboyLogo.png";
+import Logo from "../../Img/Ratpad logo compressed.png";
 import { useWeb3React } from "@web3-react/core";
 const Sidebar = ({ show, setShow }) => {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -27,7 +27,10 @@ const {account} = useWeb3React()
         className=" border-b border-gray-300  dark:border-lightDark flex pl-6 items-center sidebar-logo"
         style={{ minHeight: "75px" }}
       >
-        <img width={"200px"} src={Logo} alt="" className="mx-auto" />
+<div className="grid grid-flow-col gap-2 justify-start items-center">
+      <img src={Logo} className="w-14" alt="" />
+      <p className="font-medium text-lg">Ratboy</p>
+    </div>
       </div>
       <div className="flex flex-col justify-between flex-1 px-6 py-4">
         <ul className="">
@@ -70,7 +73,10 @@ const {account} = useWeb3React()
           </li>
         </ul>
         <div>
-          <img src={Logo} alt="" />
+        <div className="grid grid-flow-col gap-2 justify-start items-center">
+      <img src={Logo} className="w-14" alt="" />
+      <p className="font-medium text-lg">Ratboy</p>
+    </div>
           {/* <div className="flex justify-between items-center mt-4 font-bold">
             <p>Balance:</p>
             <p>$0.00</p>
