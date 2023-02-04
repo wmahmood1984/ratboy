@@ -68,7 +68,7 @@ const CreateToken = () => {
   const [hardCap,setHardCap] = useState()
   const [refund,setRefund] = useState()
   const [decimals,setDecimals] = useState()
-  const [router,setRouter] = useState()
+  const [router,setRouter] = useState("0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D")
   const [liquidity,setLiquidity]= useState()
   const [liquidityLock,setLiquidityLock]= useState()
   const [status,setStatus] = useState()
