@@ -54,7 +54,16 @@ const Step2 = ({ increaseStep, decreaseStep,
               </div>
             </div>
             <CustomInputWithLabel validation={"number"} value={noOfToken} setValue={setNoOFTokens} required label={"No of Tokens"}/>
-            <CustomInputWithLabel validation={"number"} value={price} setValue={setPrice} required label={"Launch Price"}/>
+            <CustomInputWithLabel validation={"number"} value={price} setValue={setPrice} required label={"Presale Rate"}/>
+            <div>
+              <div className="flex justify-between items-center">
+                <p>
+                  listing rate<span className="text-red-400">*</span>
+                </p>
+                <p className=" text-violet-300 text-sm ">{"1 BNB = 0 ZETA"}</p>
+              </div>
+              <CustomInput validation={"number"} value={listingRate} setValue={setListingRate} placeholder="0" />
+            </div>
             <div>
               <div className="flex justify-between items-center">
                 <p>
@@ -81,15 +90,7 @@ const Step2 = ({ increaseStep, decreaseStep,
             {/* <CustomInputWithLabel validation={"number"} value={Allocaiton1} setValue={setAllocation1} label="Allocation 1(%)" required />
             <CustomInputWithLabel validation={"number"} value={Allocaiton2} setValue={setAllocation2} label="Allocaiton 2 (%)" required />
             <CustomInputWithLabel validation={"number"} value={Allocaiton3} setValue={setAllocation3} label="Allocation 3 (%)" required /> */}
-            <div>
-              <div className="flex justify-between items-center">
-                <p>
-                  listing rate<span className="text-red-400">*</span>
-                </p>
-                <p className=" text-violet-300 text-sm ">{"1 BNB = 0 ZETA"}</p>
-              </div>
-              <CustomInput validation={"number"} value={listingRate} setValue={setListingRate} placeholder="0" />
-            </div>
+            
           </div>
           <div className="py-10">
             <p className=" text-xs text-violet-300">
