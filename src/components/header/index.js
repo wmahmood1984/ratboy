@@ -67,6 +67,8 @@ const Header = ({ show, setShow }) => {
     abc();
   }, [account, network]);
 
+  console.log("tier",tier)
+
   window.ethereum?.on("accountsChanged", (e, r) => {
     window.location.reload();
   });
@@ -126,7 +128,7 @@ const Header = ({ show, setShow }) => {
         {account ? 
         <div className="grid grid-flow-col gap-x-2 h-full items-center justify-center font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base">
         <span>Your Tier: </span>
-        <span>{tier}</span>
+        <span>{tier=="1" ? "Tier 0": tier==2? "Tier 2" : "Tier 3"}</span>
       </div>:null
         }
 
