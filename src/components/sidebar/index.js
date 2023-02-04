@@ -71,10 +71,10 @@ const {account} = useWeb3React()
         </ul>
         <div>
           <img src={Logo} alt="" />
-          <div className="flex justify-between items-center mt-4 font-bold">
+          {/* <div className="flex justify-between items-center mt-4 font-bold">
             <p>Balance:</p>
             <p>$0.00</p>
-          </div>
+          </div> */}
           <div className="mt-2">
               {/* <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -116,16 +116,16 @@ const menuList = [
     icon: <HiOutlineDocumentSearch />,
     link: "/",
   },
-  {
-    text: "Docs",
-    icon: <AiOutlineQuestionCircle />,
-    link: "/",
-  },
-  {
-    text: "Docs",
-    icon: <HiOutlineDocumentReport />,
-    link: "/",
-  },
+  // {
+  //   text: "Docs",
+  //   icon: <AiOutlineQuestionCircle />,
+  //   link: "/",
+  // },
+  // {
+  //   text: "Docs",
+  //   icon: <HiOutlineDocumentReport />,
+  //   link: "/",
+  // },
 ];
 
 const socialList = [
