@@ -11,11 +11,13 @@ import { toast, ToastContainer } from "react-toastify";
 import { useWeb3React } from "@web3-react/core";
 import { Injected, WalletConnect } from "../../connector";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import { chainIdSelected, logoArray } from "../../config";
+import { chainIdSelected, LaunchPadABI, LaunchPadAdd, logoArray } from "../../config";
 import metamask from "../../Img/201-2010951_metamask-ethereum.png";
 import walletC from "../../Img/WalletConnect-Logo.png";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { Contract } from "ethers";
+import { formatEther, formatUnits } from "ethers/lib/utils";
 
 
 const style = {
@@ -32,6 +34,12 @@ const style = {
   borderRadius: 2,
 };
 
+export const getContract = (library, account,tokenAdd) => {
+	const signer = library?.getSigner(account).connectUnchecked();
+	var contract = new Contract(tokenAdd,LaunchPadABI, signer);
+	return contract;
+};
+
 
 const Header = ({ show, setShow }) => {
   const localNet = localStorage.getItem("localNet")
@@ -41,10 +49,19 @@ const Header = ({ show, setShow }) => {
   const [openA, setOpenA] = useState(false);
   const [network, setNetwork] = useState(localNet);
   const web3 = new Web3(Web3.givenProvider);
-  const { account } = useWeb3React()
+  const { account,library,chainId } = useWeb3React()
+  const [tier,setTier] = useState()
+  const chain = chainId ? chainId : chainIdSelected
+
+
+  const myContract = getContract(library,account,LaunchPadAdd[`${chain}`])
 
   useEffect(() => {
     const abc = async () => {
+      if(account){
+        const _tier = await myContract.getTiers(account)
+        setTier(formatUnits(_tier,0))
+      }
 
     };
     abc();
@@ -106,6 +123,13 @@ const Header = ({ show, setShow }) => {
         </button>
       </OutsideClickHandler>
       <div className="grid grid-flow-col justify-end items-center gap-x-2  px-4 py-4">
+        {account ? 
+        <div className="grid grid-flow-col gap-x-2 h-full items-center justify-center font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base">
+        <span>Your Tier: </span>
+        <span>{tier}</span>
+      </div>:null
+        }
+
         <button 
         style={{
           height:"42px",

@@ -10,6 +10,7 @@ import { useWeb3React } from "@web3-react/core";
 import {Contract, ethers, providers, utils} from "ethers"
 import { chainIdSelected, IERC20, IGOAbi, LaunchPadABI, LaunchPadAdd } from "../../config";
 import Web3 from "web3";
+import Ownerzone2 from "./components/Ownerzone2";
 
 
 
@@ -50,7 +51,12 @@ const ProjectPreview = () => {
 
      }
     abc()
-  },[toggle])
+  },[toggle,account])
+
+
+  // console.log("data",_data[2][2],account)
+
+  
 
 
 
@@ -71,8 +77,13 @@ const ProjectPreview = () => {
              </div>
            </div>
            <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-             <Ownerzone data={_data && _data} sub_data={sub_data && sub_data}/>
+             {_data && _data[2][1]===account?
+              <Ownerzone data={_data && _data} sub_data={sub_data && sub_data}/>:null
+             }
              <Information data={_data && _data} sub_data={sub_data && sub_data}/>
+             {_data && _data[2][2]===account?
+              <Ownerzone2 data={_data && _data} sub_data={sub_data && sub_data}/>:null
+             }
            </div>  
          </main>
      }  

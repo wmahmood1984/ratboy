@@ -63,7 +63,7 @@ const Step2 = ({ increaseStep, decreaseStep,
               </div>
 
               <CustomInput 
-                  onChange={(e)=>{setSoftCap(e.target.value)}}
+                  setValue={setSoftCap}
                value={SoftCap} placeholder="0" />
   
             </div>

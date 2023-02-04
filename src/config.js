@@ -459,10 +459,42 @@ export const IGOAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "Badges",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "Buy",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Router",
+		"outputs": [
+			{
+				"internalType": "contract IUniswapV2Router02",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -482,6 +514,19 @@ export const IGOAbi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool[]",
+				"name": "_badges",
+				"type": "bool[]"
+			}
+		],
+		"name": "addBadges",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -602,6 +647,26 @@ export const IGOAbi = [
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "finalize",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getBadges",
+		"outputs": [
+			{
+				"internalType": "bool[]",
+				"name": "",
+				"type": "bool[]"
 			}
 		],
 		"stateMutability": "view",
@@ -1179,6 +1244,19 @@ export const tokenLockLauncherAbi = [
 	},
 	{
 		"inputs": [],
+		"name": "Launcher",
+		"outputs": [
+			{
+				"internalType": "contract LaundhPadMaking",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "admin",
 		"outputs": [
 			{
@@ -1326,17 +1404,19 @@ export const tokenLockAbi = [
 	}
 ]
 
+const goerliRouter = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+
 export const tokenLocklauncherAdd =  {
 	"43113" : "0x5ACfc74319Cc6d738140f684964481aF7865a4b0",//"0xb70F71cdCAd4Db7da3d171c62Abf8382c01b8f32",
 		"97" : "0xe99227298F536e8CB341A8a6c0d2e0121a5E0F6c",//"0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
-		"5" : "0x6538459E66bfDb7B7a46a5277e6E7413d3d82133",
+		"5" : "0x85f7094141e780E6AFF19D7300Db6bd8aE87b4E4",
 		"80001" : "0xf4e9Bb60792d5BdF356F142cD7dF37238A305502"
 }
 
 export const tokenObj = {
 	"43113" : "0x5ACfc74319Cc6d738140f684964481aF7865a4b0",//"0xb70F71cdCAd4Db7da3d171c62Abf8382c01b8f32",
 		"97" : "0xe99227298F536e8CB341A8a6c0d2e0121a5E0F6c",//"0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
-		"5" : "0x38c18F30F87cA9F0c7da55B2f1CEBfB65E1d15d3",
+		"5" : "0x4fee46384Bffd5ffe8A4aa7f55ec6D531a7b9A32",
 		"80001" : "0xf4e9Bb60792d5BdF356F142cD7dF37238A305502"
 }
 
@@ -1350,7 +1430,7 @@ export const tempAdmin = "0xfef5f69FA76f35638Aa3ed77a0644Fa79d31A554"//"0xF85ee8
 export const LaunchPadAdd = {
 	"43113" : "0xa522CF9B39CdA62650c060b692684b38286ce3a8",
 		"97" : "0x0550175b6531a1195670150160a0cFABe95833b7",
-		"5" : "0xb26dF25863Ec43d1A8D687312C730652137348bb",
+		"5" : "0x0E117d27Ed13dc589C06390c7d19333656c25bc3",
 		"80001" : "0x4e4cefab704e4579bf28d32230ddecf0117ae9c1"
 }
 

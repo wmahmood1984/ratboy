@@ -106,6 +106,52 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
     }
   }
 
+  const _EmergencyWithdraw = async ()=>{
+    if(account){
+      var counter = 0
+      setOpen(true)
+      setAmount("")
+      var tokens = amount / formatEther(data[4][1])
+    
+      try {
+         const tx1 = await myContract.withdraw(
+          {gasLimit: 3000000})
+          // .send({from:account,gasLimit: 3000000})
+          // .on("confirmation",(e,r)=>{
+          //   if(counter===0){
+          //     setToggle(!toggle)
+          //     setOpen(false)
+          //     setPhrase(`YOU GOT ${tokens} GEMZ TOKEN $${amount}`)
+          //     setShowSC(true)
+          //     counter++
+          //   }
+          // })
+    
+          await tx1.wait()
+          
+          // if(tx1){
+          //   setToggle(!toggle)
+          //   setOpen(false)
+          //   setPhrase(`YOU GOT ${tokens} ${_title_Symbol[1]} TOKEN $${amount}`)
+          //   setShowSC(true)
+          // }
+          if(tx1){
+            setToggle(!toggle)
+            setOpen(false)
+            // setPhrase(`YOU GOT ${tokens} ${_title_Symbol[1]} TOKEN $${amount}`)
+            // setShowSC(true)
+          }
+       } catch (error) {
+         console.log("error in Swap",error)
+         setOpen(false)
+       }
+    } else{
+      // toast("Please connect your wallet", {
+    
+      //   })
+    }
+  }
+
 
 
 //  console.log("first",Number(formatEther(data.investedTokens))/Number(formatEther(data[4][0]))*100)
@@ -160,6 +206,13 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
           onClick={_Swap}
           className=" text-white rounded-lg py-1.5 sm:py-4 bg-primary-400 w-full text-xl font-bold">
             Buy
+          </button>
+          <br/>
+          <button
+          style={{marginTop:"10px"}} 
+          onClick={_EmergencyWithdraw}
+          className=" text-white rounded-lg py-1.5 sm:py-4 bg-primary-400 w-full text-xl font-bold">
+            Emergency Withdaraw
           </button>
         </div>
       </div>

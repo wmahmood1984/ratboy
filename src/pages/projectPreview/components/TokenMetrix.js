@@ -36,8 +36,9 @@ const TokenMetrix = ({dataA,allocations,decimals,totalSupply}) => {
    const locked = allocations &&  amountsOnly.reduce(myFunc, 0)
 
 
-
+   allocations && allocationAmounts.push({label:"Liquidity",value:Number((formatEther(dataA[4][0]))/totalSupply*100)})
    allocations && allocationAmounts.push({label:"UnLocked",value:Number((totalSupply-locked)/totalSupply*100)})
+
 
 
 
@@ -45,11 +46,13 @@ const TokenMetrix = ({dataA,allocations,decimals,totalSupply}) => {
    const series = allocations && allocations.map((v,e)=>Number(formatUnits(v.Amount,decimals)/ totalSupply*100))
    const locked2 = allocations && series.reduce(myFunc,0)
    const labels = allocations && allocations.map((v,e)=>v.Title)
+   allocations && series.push((dataA[4][0])/totalSupply*100)
+   allocations && labels.push("Liquidity")
    allocations && series.push((totalSupply-locked)/totalSupply*100)
    allocations && labels.push("unLocked")
 
 
-     console.log("data",totalSupply)
+     console.log("data",labels)
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark rounded-md shadow-xl">
       <div className=" border-b  border-lightDark px-4 py-4">

@@ -15,6 +15,7 @@ import { Contract } from "ethers";
 
 import { ToastContainer, toast } from 'react-toastify';
 import ResponsiveDialog from "../../Spinner";
+import Launchpad from "../home/Launchpad";
 
 
 const projectId = '2HdKrtd8GBGyqmO0u1BW2Re1hSK';
@@ -224,6 +225,22 @@ function  updateData(result) {
     setStep((prev) => prev - 1);
   };
 
+  const approve = async ()=>{
+    var counter =0
+    try {
+      const contract = new web3.eth.Contract(IERC20,token);
+      contract.methods.approve(LaunchPadAdd[`${chainId}`],web3.utils.toWei(noOfToken.toString(), "ether")).send({from:account})
+      .on("confirmation",(e,r)=>{
+        if(counter===0){
+          createPool()
+          counter++
+        }
+      })
+    } catch (error) {
+      console.log("err in approval",error)
+    }
+  }
+
   
 
   return (
@@ -289,7 +306,7 @@ function  updateData(result) {
             description={description}
             setDescription={setDescription}
             
-            createPool={createPool}
+            createPool={approve}
             IDOstart={IDOstart}
             IDOEnd={IDOEnd}
             setIDOEnd={setIDOEnd}
