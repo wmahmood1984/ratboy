@@ -53,6 +53,8 @@ const Step2 = ({ increaseStep, decreaseStep,
                 />
               </div>
             </div>
+            <CustomInputWithLabel validation={"number"} value={noOfToken} setValue={setNoOFTokens} required label={"No of Tokens"}/>
+            <CustomInputWithLabel validation={"number"} value={price} setValue={setPrice} required label={"Launch Price"}/>
             <div>
               <div className="flex justify-between items-center">
                 <p>
@@ -69,8 +71,7 @@ const Step2 = ({ increaseStep, decreaseStep,
                   value={SoftCap} placeholder="0" />
   
             </div>
-            <CustomInputWithLabel validation={"number"} value={noOfToken} setValue={setNoOFTokens} required label={"No of Tokens"}/>
-            <CustomInputWithLabel validation={"number"} value={price} setValue={setPrice} required label={"Launch Price"}/>
+
             <CustomInputWithLabel validation={"number"} value={hardCap} setValue={setHardCap} required label={`HardCap ${`${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`}`}/>
             <CustomInputWithLabel validation={"number"} value={min} setValue={setMin} required label={`Minimum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
             <CustomInputWithLabel validation={"number"} value={max} setValue={setMax} required label={`Maximum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
