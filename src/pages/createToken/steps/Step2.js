@@ -77,9 +77,9 @@ const Step2 = ({ increaseStep, decreaseStep,
             <CustomInputWithLabel validation={"number"} value={refund} setValue={setRefund} label="Refund type" />
             <CustomInputWithLabel validation={"address" }value={router} setValue={setRouter} label="Router" />
             <CustomInputWithLabel validation={"number"} value={liquidity} setValue={setLiquidity} label="liquidity (%)" required />
-            <CustomInputWithLabel validation={"number"} value={Allocaiton1} setValue={setAllocation1} label="Allocation 1(%)" required />
+            {/* <CustomInputWithLabel validation={"number"} value={Allocaiton1} setValue={setAllocation1} label="Allocation 1(%)" required />
             <CustomInputWithLabel validation={"number"} value={Allocaiton2} setValue={setAllocation2} label="Allocaiton 2 (%)" required />
-            <CustomInputWithLabel validation={"number"} value={Allocaiton3} setValue={setAllocation3} label="Allocation 3 (%)" required />
+            <CustomInputWithLabel validation={"number"} value={Allocaiton3} setValue={setAllocation3} label="Allocation 3 (%)" required /> */}
             <div>
               <div className="flex justify-between items-center">
                 <p>
