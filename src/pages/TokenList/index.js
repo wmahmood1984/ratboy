@@ -1,11 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "../../components";
 import All from "./components/All";
 import MyLock from "./components/MyLock";
+import Web3 from "web3"
+import { LaunchPadABI, LaunchPadAdd, tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
+import { convertLength } from "@mui/material/styles/cssUtils";
+import { useWeb3React } from "@web3-react/core";
+
+
 
 const TokenList = () => {
+
   const [selectedTab, setSelectedTab] = useState(0);
   const tabs = ["All", "My Lock"];
+  const { account,library, chainId} = useWeb3React();
+  const [DataA,setData] = useState()
+
+  const web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
+ // const navigate = useNavigate()
+  const [filter,setFilter] = useState()
+  const [sort,setSort] = useState()
+
+  const myContract = chainId ?  new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chainId}`])
+  : new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`5`])
+
+
+
+
+  useEffect(() => {
+    const abc = async ()=>{
+   
+        const data = await myContract.methods.getArray().call()
+
+        setData(data)
+
+      
+    }
+    abc()
+}, [account])
+
+
+const Data = DataA && DataA.filter(item=>item.LP==false)
+const MYLock = DataA && Data.filter(item=>item.user==account)
+
+
+console.log("data in list",MYLock)         
 
   return (
     <Layout>
@@ -34,7 +73,12 @@ const TokenList = () => {
             ))}
           </div>
 
-          {selectedTab === 0 ? <All /> : <MyLock />}
+          {selectedTab === 0 ? <All 
+          data={Data &&Data}
+          /> 
+          : <MyLock  
+          data={Data && MYLock}
+          />}
         </div>
       </div>
     </Layout>

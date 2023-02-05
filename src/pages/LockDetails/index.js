@@ -1,29 +1,50 @@
+import { formatEther } from "ethers/lib/utils";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Layout } from "../../components";
 import ListItem from "../../components/listItem";
 import { shortAddress } from "../../helpers";
 
 const LockDetails = () => {
+  const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
+
+  function dateFormat(string){
+    var day = new Date(string).getDay()
+    var date = new Date(string).getUTCDate()
+    var month = new Date(string).getUTCMonth()+1
+    var _year1 = new Date(string).getUTCFullYear()
+    var hours = new Date(string).getUTCHours()
+    var formatedHours = hours/10>1? `${hours}` : `0${hours}`
+    var minutes = new Date(string).getUTCMinutes()
+    var formatedMinutes = minutes/10>1? `${hours}` : `0${hours}`
+    console.log("string",day)
+    return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`
+  }
+
+
+  const {state} = useLocation()
   const tableHead = [
     "Wallet",
     "Amount",
-    "Cycle(d)",
-    "Cycle Release(%)",
-    "TGE(%)",
+    // "Cycle(d)",
+    // "Cycle Release(%)",
+    // "TGE(%)",
     "Unlock time(UTC)",
     "",
   ];
   const lockList = [
     {
-      wallet: "0xC216EeE5686c69075DC56D396d477C0922DF278e",
-      amount: "80000",
+      wallet: `${state.user}`,
+      amount: `${formatEther(state.amount)}`,
       cycle: "729",
       cycleRealese: "1",
       tge: "10",
-      unlock: "2023.02.06 23:42",
+      unlock: `${dateFormat(Number(state.time))}`,
     },
   ];
+
+  console.log("stat",state)
+
   return (
     <Layout>
       <div className=" px-6 mt-28  mb-20 ">
@@ -31,18 +52,18 @@ const LockDetails = () => {
           <p className="p-4  border-b dark:border-lightDark">Lock Info</p>
           <div className="p-4">
             <div className="grid gap-y-4 mt-4">
-              <ListItem title={" Current Locked Amount"} desc={"80,000 QJT"} />
-              <ListItem title={"Current Values Locked"} desc={"$0"} />{" "}
+              <ListItem title={" Current Locked Amount"} desc={`${formatEther(state.amount)} ${state.symbol} `} />
+              {/* <ListItem title={"Current Values Locked"} desc={"$0"} />{" "} */}
               <ListItem
                 title={"Token Address"}
                 desc={shortAddress(
-                  "0xc0d3d6602E183f433bf44675B85Aeb5483361755"
+                  state.token
                 )}
                 color={"primary"}
               />{" "}
-              <ListItem title={"Token Name"} desc={"QJI"} />
-              <ListItem title={"Token Symbol"} desc={"QJI"} />
-              <ListItem title={"Token Decimal"} desc={"18"} />
+              <ListItem title={"Token Name"} desc={`${state.name}`} />
+              <ListItem title={"Token Symbol"} desc={`${state.name}`} />
+              {/* <ListItem title={"Token Decimal"} desc={"18"} /> */}
             </div>
           </div>
         </div>{" "}
@@ -66,13 +87,14 @@ const LockDetails = () => {
                       <p>{shortAddress(token.wallet)}</p>
                     </td>{" "}
                     <td className="py-4 ">{token.amount}</td>
-                    <td className="py-4 ">{token.cycle}</td>
+                    {/* <td className="py-4 ">{token.cycle}</td>
                     <td className="py-4 ">{token.cycleRealese}</td>
-                    <td className="py-4 ">{token.tge}</td>
+                    <td className="py-4 ">{token.tge}</td> */}
                     <td className="py-4 ">{token.unlock}</td>
                     <td className="py-4 text-right">
                       <Link
                         to="/token_list/lock_record"
+                        state={state}
                         className="text-primary-400"
                       >
                         View

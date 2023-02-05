@@ -11,6 +11,7 @@ import {Contract, ethers, providers, utils} from "ethers"
 import { chainIdSelected, IERC20, IGOAbi, LaunchPadABI, LaunchPadAdd } from "../../config";
 import Web3 from "web3";
 import Ownerzone2 from "./components/Ownerzone2";
+import Information2 from "./components/Information2";
 
 
 
@@ -31,6 +32,7 @@ const ProjectPreview = () => {
     const [allocations,setAllocaitons] = useState([])
   const [totalSupply,setTotalSupply] = useState()
   const [decimals,setDecimals] = useState()
+  const [entitlement,setEntitlement] = useState()
 
 
 
@@ -49,12 +51,15 @@ const ProjectPreview = () => {
      setTotalSupply(tSupply / (10**tdecimals))
      setDecimals(tdecimals)
 
+     const PreSaleContract = new web3.eth.Contract(IGOAbi,data[0][Index][1]) 
+     const ent = await PreSaleContract.methods.getEntitlement(account).call()
+      setEntitlement(ent / (10**tdecimals))
      }
     abc()
   },[toggle,account])
 
+//  console.log("data in overview ",PreSaleContract)
 
-  // console.log("data",_data[2][2],account)
 
   
 
@@ -83,7 +88,11 @@ const ProjectPreview = () => {
              <Information data={_data && _data} sub_data={sub_data && sub_data}/>
              {_data && _data[2][2]===account?
               <Ownerzone2 data={_data && _data} sub_data={sub_data && sub_data}/>:null
+             }{sub_data.liquidity == "0" ? 
+              <Information2 data={_data && _data} sub_data={sub_data && sub_data} ent={entitlement}/> : null
+
              }
+
            </div>  
          </main>
      }  

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Layout } from "../../components";
 import ListItem from "../../components/listItem";
 import { shortAddress } from "../../helpers";
 import { FiChevronRight } from "react-icons/fi";
 import { Collapse } from "@mui/material";
 const LockRecordDetails = () => {
+  const {state} = useLocation()
   const [show, setShow] = useState(false);
   const head = ["Unlock #", "Time (UTC)", "Unlocked tokens"];
   const data = [
@@ -30,13 +31,13 @@ const LockRecordDetails = () => {
               <ListItem
                 title={"Token Address"}
                 desc={shortAddress(
-                  "0xc0d3d6602E183f433bf44675B85Aeb5483361755"
+                  state.token
                 )}
                 color={"primary"}
               />{" "}
-              <ListItem title={"Token Name"} desc={"QJI"} />
-              <ListItem title={"Token Symbol"} desc={"QJI"} />
-              <ListItem title={"Token Decimal"} desc={"18"} />
+              <ListItem title={"Token Name"} desc={`${state.name}`} />
+              <ListItem title={"Token Symbol"} desc={`${state.symbol}`} />
+              {/* <ListItem title={"Token Decimal"} desc={"18"} /> */}
             </div>
           </div>
         </div>{" "}
@@ -47,14 +48,14 @@ const LockRecordDetails = () => {
               <ListItem
                 title={"Token Address"}
                 desc={shortAddress(
-                  "0xc0d3d6602E183f433bf44675B85Aeb5483361755"
+                  state.token
                 )}
                 color={"primary"}
               />{" "}
-              <ListItem title={"Token Name"} desc={"QJI"} />
-              <ListItem title={"Token Symbol"} desc={"QJI"} />
-              <ListItem title={"Token Decimal"} desc={"18"} />
-              <div className="text-xs sm:text-sm flex justify-between pb-2 items-center border-b border-lightDark">
+              <ListItem title={"Token Name"} desc={`${state.name}`} />
+              <ListItem title={"Token Symbol"} desc={`${state.symbol}`} />
+              {/* <ListItem title={"Token Decimal"} desc={"18"} /> */}
+              {/* <div className="text-xs sm:text-sm flex justify-between pb-2 items-center border-b border-lightDark">
                 <p className=" ">{"Vesting Info"}</p>
                 <button
                   onClick={() => setShow(!show)}
@@ -62,7 +63,7 @@ const LockRecordDetails = () => {
                 >
                   <FiChevronRight />
                 </button>
-              </div>
+              </div> */}
               <div>
                 <Collapse in={show}>
                   <table className="w-full">

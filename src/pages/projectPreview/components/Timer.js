@@ -31,7 +31,7 @@ const Timer = ({start}) => {
     };
   });
 
-  console.log("time",difference)
+//  console.log("time",difference)
 
   const timeList = [
     {

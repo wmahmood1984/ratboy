@@ -95,11 +95,11 @@ const CreateTokenModal = ({ open = false, setOpen }) => {
               />
               <p className="text-primary-400 text-sm mt-1 ">0.01 BNB</p>
             </div>
-            <CustomInput value={name} setValue={setName} label={"Name"} required />
+            <CustomInput validation={"text"} value={name} setValue={setName} label={"Name"} required />
 
-            <CustomInput value={symbol} setValue={setSymbol} label={"Symbol"} required />
-            <CustomInput value={decimals} setValue={setDecimals} label={"Decimals"} required />
-            <CustomInput value={totalSupply} setValue={setTotalSupply} label={"Total supply"} required />
+            <CustomInput validation={"text"} value={symbol} setValue={setSymbol} label={"Symbol"} required />
+            <CustomInput validation={"number"} value={decimals} setValue={setDecimals} label={"Decimals"} required />
+            <CustomInput validation={"number"} value={totalSupply} setValue={setTotalSupply} label={"Total supply"} required />
             {/* <div className="custom-checkbox ">
               <FormControlLabel
                 control={<Checkbox color="primary" />}

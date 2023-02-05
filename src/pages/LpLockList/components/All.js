@@ -1,7 +1,8 @@
+import { formatEther } from "ethers/lib/utils";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const All = () => {
+const All = ({data}) => {
   const tokenList = [
     {
       name: "QJT",
@@ -33,15 +34,15 @@ const All = () => {
             </tr>
           </thead>
           <tbody>
-            {tokenList.map((token, index) => (
+            {data && data.map((token, index) => (
               <tr key={index} className=" border-b dark:border-lightDark ">
                 <td className="py-4">
                   <div className="flex">
-                    <img
+                    {/* <img
                       src={token.image}
                       className="w-10 h-10 rounded-full mr-3"
                       alt=""
-                    />
+                    /> */}
                     <div>
                       <p className="font-medium">{token.symbol}</p>
                       <p className="font-normal">{token.name}</p>
@@ -50,12 +51,15 @@ const All = () => {
                 </td>{" "}
                 <td className="py-4 ">
                   <div className="flex r">
-                    <p className="font-medium">{token.amount}</p>
+                    <p className="font-medium">{formatEther(token.amount)}</p>
                     <p className="font-normal ml-2">{token.symbol}</p>
                   </div>
                 </td>
                 <td className="py-4 text-right">
-                  <Link to="/token_list/details" className="text-primary-400">
+                  <Link 
+                  to="/token_list/details"
+                  state={data[index]} 
+                  className="text-primary-400">
                     View
                   </Link>
                 </td>{" "}

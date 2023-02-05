@@ -17,12 +17,16 @@ import {
   FaTelegramPlane,
   FaTwitter,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Img/Ratpad logo compressed.png";
 import { useWeb3React } from "@web3-react/core";
 import { MdOutlineListAlt } from "react-icons/md";
 import { Collapse } from "@mui/material";
+import { toast } from "react-hot-toast";
+
+
 const Sidebar = ({ show, setShow }) => {
+  const navigate = useNavigate()
   const { theme, setTheme } = useContext(ThemeContext);
   const { account } = useWeb3React();
   const [selected, setSelected] = useState(null);
@@ -48,14 +52,15 @@ const Sidebar = ({ show, setShow }) => {
           {menuList.map((val, i) => (
             <React.Fragment key={i}>
               <li>
-                <Link
-                  to={account ? `${val.link}` : "#"}
+                <div
+                 // to={account ? `${val.link}` : "#"}
                   onClick={(e) => {
                     if (val.subLink.length > 0) {
                       e.preventDefault();
                       if (selected === i) {
                         return setSelected(null);
                       }
+                      navigate(`${val.link}`)
                       setSelected(i);
                     }
                   }}
@@ -69,19 +74,26 @@ const Sidebar = ({ show, setShow }) => {
                       <BiChevronDown />
                     </button>
                   )}
-                </Link>
+                </div>
                 {val.subLink?.length > 0 && (
                   <Collapse in={i === selected}>
                     <ul className="ml-4">
                       {val.subLink?.map((subLink, i) => (
                         <li key={i}>
-                          <Link
-                            to={account ? `${subLink.link}` : "#"}
+                          <button
+                            //to={account ? `${subLink.link}` : "#"}
+                            onClick={()=>{
+                              if(account || !subLink.req){
+                                navigate(`${subLink.link}`)
+                              }else{
+                                toast.error("Wallet not connected")
+                              }
+                            }}
                             className="grid grid-flow-col text-sm justify-start gap-x-2 items-center py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg my-1 font-bold"
                           >
                             {/* <span className="text-lg">{subLink.icon}</span>{" "} */}
                             <span>{subLink.text}</span>
-                          </Link>
+                          </button>
                         </li>
                       ))}
                     </ul>
@@ -156,26 +168,30 @@ const menuList = [
     text: "Presale Launches",
     icon: <BiRocket />,
     link: "/",
+    req : false,
   },
   {
     text: "RatPad Lock",
     icon: <AiOutlineUnlock />,
-    link: "/lockToken",
+    link: "/",
     subLink: [
       {
         text: "Create Lock",
         icon: <MdOutlineListAlt />,
         link: "/lockToken",
+        req: true
       },
       {
         text: "Token Lock",
         icon: <MdOutlineListAlt />,
         link: "/token_list",
+        req: false
       },
       {
         text: "LP Lock",
         icon: <MdOutlineListAlt />,
         link: "/lp_list",
+        req: false
       },
     ],
   },
@@ -188,12 +204,14 @@ const menuList = [
     text: "KYC & Audit",
     icon: <HiOutlineDocumentSearch />,
     link: "/",
+    req: false
   },
 
   {
     text: "My Tokens",
     icon: <HiOutlineClipboardList />,
     link: "/my_tokens",
+    req: true
   },
   // {
   //   text: "Docs",

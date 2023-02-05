@@ -1,16 +1,17 @@
+import { formatEther } from "ethers/lib/utils";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MyLock = () => {
-  const tokenList = [
-    {
-      name: "QJT",
-      symbol: "QJT",
-      image:
-        "https://www.pinksale.finance/static/media/unknown-token.5e4a517e.png",
-      amount: "80,000",
-    },
-  ];
+const MyLock = ({data}) => {
+  // const tokenList = [
+  //   {
+  //     name: "QJT",
+  //     symbol: "QJT",
+  //     image:
+  //       "https://www.pinksale.finance/static/media/unknown-token.5e4a517e.png",
+  //     amount: "80,000",
+  //   },
+  // ];
   const tableHead = ["Token", "Amount", ""];
   return (
     <div>
@@ -26,15 +27,15 @@ const MyLock = () => {
             </tr>
           </thead>
           <tbody>
-            {tokenList.map((token, index) => (
+            {data &&  data.map((token, index) => (
               <tr key={index} className=" border-b dark:border-lightDark ">
                 <td className="py-4">
                   <div className="flex">
-                    <img
+                    {/* <img
                       src={token.image}
                       className="w-10 h-10 rounded-full mr-3"
                       alt=""
-                    />
+                    /> */}
                     <div>
                       <p className="font-medium">{token.symbol}</p>
                       <p className="font-normal">{token.name}</p>
@@ -43,12 +44,14 @@ const MyLock = () => {
                 </td>{" "}
                 <td className="py-4 ">
                   <div className="flex r">
-                    <p className="font-medium">{token.amount}</p>
+                    <p className="font-medium">{formatEther(token.amount)}</p>
                     <p className="font-normal ml-2">{token.symbol}</p>
                   </div>
                 </td>
                 <td className="py-4 text-right">
-                  <Link to="/token_list/details" className="text-primary-400">
+                  <Link 
+                  state={data[index]}
+                  to="/token_list/details" className="text-primary-400">
                     View
                   </Link>
                 </td>{" "}

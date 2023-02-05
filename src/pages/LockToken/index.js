@@ -10,6 +10,7 @@ import CustomDatePicker from "../createToken/components/CustomDatepicker";
 import Web3 from "web3";
 import CustomInput from "../../components/CustomInput";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 export const getLockContract = (library, account,tokenAdd,abi) => {
@@ -30,6 +31,8 @@ const LockToken = () => {
   const [date, setDate] = useState();
   const [open, setOpen] = useState();
   const [status, setStatus] = useState("");
+  const [LP, setLP] = useState(false);
+  const navigate = useNavigate()
 
 //  console.log("data",token,title,amount,date,open)
 
@@ -68,12 +71,19 @@ const LockToken = () => {
          console.log("ether",amount)
 
         const tx1 = await contract.lockToken(
-          token,parseEther(amount.toString()),title,Date.parse(date),{gasLimit:3000000})
+          token,parseEther(amount.toString()),title,Date.parse(date),LP,{gasLimit:3000000})
         await tx1.wait()
 
         if(tx1){
           setOpen(false)
           setStatus("")
+          if(LP){
+            navigate("/lp_list")
+          }else{
+            navigate("/token_list")
+          }
+
+
         }
       } catch (error) {
         console.log("Error in Lock Function",error)
@@ -99,8 +109,10 @@ const LockToken = () => {
             label={"Token or LP Token address"} required />
             <div className="custom-checkbox ">
               <FormControlLabel
-                control={<Checkbox color="primary" />}
-                label="use another owner?"
+                control={<Checkbox 
+                  onChange={(e)=>{setLP(e.target.checked)}}
+                  color="primary" />}
+                label="LP Token?"
               />
             </div>
             <br />

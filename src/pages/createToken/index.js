@@ -49,11 +49,11 @@ const CreateToken = () => {
   const [telegramGroup,setTeleGramGroup] = useState("a")
   const [Max,setMax] = useState()
   const [Min,setMin] = useState()
-  const [vesting,setVesting] = useState()
+  const [vesting,setVesting] = useState(0)
   const [IDOstart,setIDOStart] = useState()
   const [IDOEnd,setIDOEnd] = useState()
   const [currency,setCurrency] = useState(BUSD[`${chainId}`])
-  const [vestingMonths,setVestingMonths] = useState(0)
+  const [vestingMonths,setVestingMonths] = useState(1)
   const [symbol,setSymbol] = useState(0)
   const web3 = new Web3(Web3.givenProvider)
   const navigate = useNavigate()
@@ -72,6 +72,7 @@ const CreateToken = () => {
   const [liquidity,setLiquidity]= useState()
   const [liquidityLock,setLiquidityLock]= useState()
   const [status,setStatus] = useState()
+  const [initialVesting,setInitialVesting] = useState(100)
 
 
   const [website,setWebsite] = useState()
@@ -111,8 +112,7 @@ const CreateToken = () => {
 
   csv && array2.pop()
 
-  console.log("ido",Date.parse(IDOstart))
-  console.log("end",Date.parse(IDOEnd))
+
 //console.log("string",myContract2)
   const createPool = async ()=>{
     var counter = 0 
@@ -120,14 +120,19 @@ const CreateToken = () => {
     setStatus("Creating Pool....")
     console.log("creat Pool",[[token,account,account,currency,router],
     [title,symbol,twitter,medium,telegram,telegramGroup,website,discord,facebook,instagram,github,redit],
-    [noOfToken,
-    price,
-    Max,
-    Min,
-    //Date.parse(vesting)/1000,
+    [web3.utils.toWei(noOfToken.toString(),"ether"),
+    web3.utils.toWei(price.toString(),"ether"),
+    web3.utils.toWei(Max.toString(),"ether"),
+    web3.utils.toWei(Min.toString(),"ether"),
     vestingMonths,
     Date.parse(IDOstart)/1000,
-    Date.parse(IDOEnd)/1000
+    Date.parse(IDOEnd)/1000,
+    Allocaiton1,
+    Allocaiton2,
+    Allocaiton3,
+    web3.utils.toWei(ListingRate.toString(),"ether"),
+    liquidity,liquidityLock*24*60*60,
+    initialVesting,vesting
   ],
     hash,
     array2])
@@ -139,7 +144,6 @@ const CreateToken = () => {
     web3.utils.toWei(price.toString(),"ether"),
     web3.utils.toWei(Max.toString(),"ether"),
     web3.utils.toWei(Min.toString(),"ether"),
-    //Date.parse(vesting)/1000,
     vestingMonths,
     Date.parse(IDOstart)/1000,
     Date.parse(IDOEnd)/1000,
@@ -148,6 +152,7 @@ const CreateToken = () => {
     Allocaiton3,
     web3.utils.toWei(ListingRate.toString(),"ether"),
     liquidity,liquidityLock*24*60*60,
+    initialVesting,vesting
   ],
     hash,
     array2).send({from:account}).
@@ -321,7 +326,12 @@ function  updateData(result) {
             setAllocation2={setAllocation2}
             Allocaiton3={Allocaiton3}
             setAllocation3={setAllocation3}
-
+            initialVesting={initialVesting}
+            setInitialVesting={setInitialVesting}
+            vesting={vesting}
+            setVesting={setVesting}
+            vestingMonths={vestingMonths}
+            setVestingMonths={setVestingMonths}
             />
           </div>
         </div>
@@ -346,8 +356,8 @@ export default CreateToken;
 const Steps = ({
   step,token,setToken,title,symbol,decimals,increaseStep,decreaseStep,handleChange,SoftCap,setSoftCap,hardCap,setHardCap,Min,setMin,Max
 ,setMax,refund,setRefund,router,setRouter,liquidity,setLiquidity,ListingRate,setListingRate,IDOstart,setIDOStart,liquidityLock
-,setLiquidityLock, 
-hash,
+,setLiquidityLock,initialVesting,setInitialVesting, 
+hash,vesting,setVesting,vestingMonths,setVestingMonths,
 captureFile,
 website,
 setWebsite,
@@ -415,6 +425,12 @@ description,setDescription,price,listingRate,iDOstart,IDOEnd,Allocaiton1,setAllo
         setIDOEnd={setIDOEnd}
         noOfToken={noOfToken}
         setNoOFTokens={setNoOFTokens}
+        initialVesting={initialVesting}
+        setInitialVesting={setInitialVesting}
+        vesting={vesting}
+        setVesting={setVesting}
+        vestingMonths={vestingMonths}
+        setVestingMonths={setVestingMonths}
         increaseStep={increaseStep} decreaseStep={decreaseStep} />
       );
     case 2:

@@ -5,9 +5,285 @@ import polygon from "./Img/polygon.png"
 
 export const LaunchPadABI = [
 	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_token_owner_admin_currency",
+				"type": "address[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "_title_symbol_SocialMedia",
+				"type": "string[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_noOfTokens_price_max_min_vesting_month_start_end",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "string",
+				"name": "_hash",
+				"type": "string"
+			},
+			{
+				"internalType": "address[]",
+				"name": "_whitelist",
+				"type": "address[]"
+			}
+		],
+		"name": "createPresale",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_symbol",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_totalSupply",
+				"type": "uint256"
+			}
+		],
+		"name": "launchToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_title",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_time",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_contract",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "_LP",
+				"type": "bool"
+			}
+		],
+		"name": "setLockContract",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_token",
+				"type": "address"
+			}
+		],
+		"name": "getLockContract",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "Title",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "Contract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Time",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "LP",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct LaundhPad.tokenLockStruct[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getPoolDetails",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "ind",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_token_owner_admin_currency",
+						"type": "address[]"
+					},
+					{
+						"internalType": "string[]",
+						"name": "_title_symbol_SocialMedia",
+						"type": "string[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_noOfTokens_price_max_min_vesting_month_start_end",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "string",
+						"name": "_hash",
+						"type": "string"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_whitelist",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "investedBUSD",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "investedTokens",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct LaundhPad.Presale[]",
+				"name": "",
+				"type": "tuple[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "investedBUSD",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "investedTokens",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidity",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct LaundhPad.IGOData[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "getUserTokenList",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "Address",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "symbol",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "decimals",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct LaundhPad.tokenStruct[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -114,6 +390,11 @@ export const LaunchPadABI = [
 				"internalType": "uint256",
 				"name": "Time",
 				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "LP",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -160,272 +441,6 @@ export const LaunchPadABI = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "admin",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address[]",
-				"name": "_token_owner_admin_currency",
-				"type": "address[]"
-			},
-			{
-				"internalType": "string[]",
-				"name": "_title_symbol_SocialMedia",
-				"type": "string[]"
-			},
-			{
-				"internalType": "uint256[]",
-				"name": "_noOfTokens_price_max_min_vesting_month_start_end",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "string",
-				"name": "_hash",
-				"type": "string"
-			},
-			{
-				"internalType": "address[]",
-				"name": "_whitelist",
-				"type": "address[]"
-			}
-		],
-		"name": "createPresale",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			}
-		],
-		"name": "getLockContract",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "string",
-						"name": "Title",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "Amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "Contract",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "Time",
-						"type": "uint256"
-					}
-				],
-				"internalType": "struct LaundhPad.tokenLockStruct[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getPoolDetails",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "ind",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					},
-					{
-						"internalType": "address[]",
-						"name": "_token_owner_admin_currency",
-						"type": "address[]"
-					},
-					{
-						"internalType": "string[]",
-						"name": "_title_symbol_SocialMedia",
-						"type": "string[]"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "_noOfTokens_price_max_min_vesting_month_start_end",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "string",
-						"name": "_hash",
-						"type": "string"
-					},
-					{
-						"internalType": "address[]",
-						"name": "_whitelist",
-						"type": "address[]"
-					},
-					{
-						"internalType": "uint256",
-						"name": "investedBUSD",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "investedTokens",
-						"type": "uint256"
-					}
-				],
-				"internalType": "struct LaundhPad.Presale[]",
-				"name": "",
-				"type": "tuple[]"
-			},
-			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "investedBUSD",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "investedTokens",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "liquidity",
-						"type": "bool"
-					}
-				],
-				"internalType": "struct LaundhPad.IGOData[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_user",
-				"type": "address"
-			}
-		],
-		"name": "getUserTokenList",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "Address",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "symbol",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "decimals",
-						"type": "uint256"
-					}
-				],
-				"internalType": "struct LaundhPad.tokenStruct[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_symbol",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_totalSupply",
-				"type": "uint256"
-			}
-		],
-		"name": "launchToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_title",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_time",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_contract",
-				"type": "address"
-			}
-		],
-		"name": "setLockContract",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -561,6 +576,25 @@ export const IGOAbi = [
 				"type": "address"
 			}
 		],
+		"name": "UserClaimedTokens",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
 		"name": "WhitelistMapping",
 		"outputs": [
 			{
@@ -581,6 +615,29 @@ export const IGOAbi = [
 			}
 		],
 		"name": "addBadges",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "ethAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			}
+		],
+		"name": "addLiquidity",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -769,6 +826,25 @@ export const IGOAbi = [
 				"type": "address"
 			}
 		],
+		"name": "getEntitlement",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "netEntitlement",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
 		"name": "getTiers",
 		"outputs": [
 			{
@@ -863,27 +939,8 @@ export const IGOAbi = [
 				"type": "uint256"
 			},
 			{
-				"internalType": "bool",
-				"name": "liquidity",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "totalClaimed",
-		"outputs": [
-			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "finalized",
 				"type": "uint256"
 			}
 		],
@@ -1291,43 +1348,6 @@ export const tokenLockLauncherAbi = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_launcher",
-				"type": "address"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [],
-		"name": "Launcher",
-		"outputs": [
-			{
-				"internalType": "contract LaundhPad",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "admin",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "_token",
 				"type": "address"
 			},
@@ -1345,11 +1365,172 @@ export const tokenLockLauncherAbi = [
 				"internalType": "uint256",
 				"name": "_time",
 				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "LP",
+				"type": "bool"
 			}
 		],
 		"name": "lockToken",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_launcher",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getArray",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_contract",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "symbol",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "LP",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct tokenLockLauncher.Locks[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Launcher",
+		"outputs": [
+			{
+				"internalType": "contract LaundhPad",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "LockArray",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_contract",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "symbol",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "time",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "LP",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]
@@ -1465,7 +1646,7 @@ const goerliRouter = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 export const tokenLocklauncherAdd =  {
 	"43113" : "0x5ACfc74319Cc6d738140f684964481aF7865a4b0",//"0xb70F71cdCAd4Db7da3d171c62Abf8382c01b8f32",
 		"97" : "0xe99227298F536e8CB341A8a6c0d2e0121a5E0F6c",//"0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
-		"5" : "0x1a72D199b7dDdC64C4A55B9B2F58afef84E20CBb",
+		"5" : "0x80592b4172AB4D15c8fd7Bc23E804873047bD6bF",
 		"80001" : "0xf4e9Bb60792d5BdF356F142cD7dF37238A305502"
 }
 
@@ -1486,7 +1667,7 @@ export const tempAdmin = "0xfef5f69FA76f35638Aa3ed77a0644Fa79d31A554"//"0xF85ee8
 export const LaunchPadAdd = {
 	"43113" : "0xa522CF9B39CdA62650c060b692684b38286ce3a8",
 		"97" : "0x0550175b6531a1195670150160a0cFABe95833b7",
-		"5" : "0x44Bc141B3DC4D155c488C88a441D925e3a110035",
+		"5" : "0x6479913b655f4eae75f8fC0950238E88233A2De5",
 		"80001" : "0x4e4cefab704e4579bf28d32230ddecf0117ae9c1"
 }
 

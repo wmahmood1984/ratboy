@@ -46,6 +46,9 @@ const Step2 = ({
   setNoOFTokens,
   setPrice,
   price,
+  initialVesting,
+  setInitialVesting,
+  vesting,setVesting,vestingMonths,setVestingMonths,
 }) => {
   const [usingVest, setUsingVest] = useState(false);
   return (
@@ -271,20 +274,27 @@ const Step2 = ({
                     validation={"number"}
                     label="First release for presale (percent)"
                     required
+                    value={initialVesting}
+                    setValue={setInitialVesting}
                     placeholder="EX: 40%"
                   />
                 </div>
                 <CustomInputWithLabel
                   validation={"number"}
-                  label="Vesting period each cycle (minutes)"
+                  label="Vesting period each cycle (days)"
                   required
                   placeholder="EX: 40%"
+                  value={vestingMonths}
+                  setValue={setVestingMonths}
                 />{" "}
                 <CustomInputWithLabel
                   validation={"number"}
                   label="Presale token release each cycle (percent)"
                   required
                   placeholder="EX: 40%"
+                  value={vesting}
+                  setValue={setVesting}
+
                 />
               </div>
             )}
