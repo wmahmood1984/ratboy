@@ -31,6 +31,11 @@ const Sidebar = ({ show, setShow }) => {
         <div className="grid grid-flow-col gap-2 justify-start items-center">
           <img src={Logo} className="w-14" alt="" />
           <p className="font-medium text-lg">Ratboy</p>
+
+          <Link to="/">
+            <img src={Logo} className="w-14" alt="" />
+            <p className="font-medium text-lg">Ratboy</p>
+          </Link>
         </div>
       </div>
       <div className="flex flex-col justify-between flex-1 px-6 py-4">
@@ -77,22 +82,29 @@ const Sidebar = ({ show, setShow }) => {
           <div className="grid grid-flow-col gap-2 justify-start items-center">
             <img src={Logo} className="w-14" alt="" />
             <p className="font-medium text-lg">Ratboy</p>
-          </div>
-          {/* <div className="flex justify-between items-center mt-4 font-bold">
+
+            <div className="grid grid-flow-col gap-2 justify-start items-center">
+              <Link to="/">
+                <img src={Logo} className="w-14" alt="" />
+                <p className="font-medium text-lg">Ratboy</p>
+              </Link>
+            </div>
+            {/* <div className="flex justify-between items-center mt-4 font-bold">
             <p>Balance:</p>
             <p>$0.00</p>
           </div> */}
-          <div className="mt-2">
-            {/* <button
+            <div className="mt-2">
+              {/* <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
               {theme === "dark" ? <FaSun /> : <FaMoon />}
             </button> */}
-            <DarkModeToggle
-              onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-              checked={theme === "dark"}
-              size={50}
-            />
+              <DarkModeToggle
+                onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+                checked={theme === "dark"}
+                size={50}
+              />
+            </div>
           </div>
         </div>
       </div>
