@@ -53,14 +53,16 @@ const Sidebar = ({ show, setShow }) => {
             <React.Fragment key={i}>
               <li>
                 <div
+                style={{cursor:"pointer"}}
                  // to={account ? `${val.link}` : "#"}
                   onClick={(e) => {
-                    if (val.subLink.length > 0) {
+                    navigate(`${val.link}`)
+                    if (val.subLink?.length > 0) {
                       e.preventDefault();
                       if (selected === i) {
                         return setSelected(null);
                       }
-                      navigate(`${val.link}`)
+
                       setSelected(i);
                     }
                   }}
