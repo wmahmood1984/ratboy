@@ -28,15 +28,12 @@ const Sidebar = ({ show, setShow }) => {
         className=" border-b border-gray-300  dark:border-lightDark flex pl-6 items-center sidebar-logo"
         style={{ minHeight: "75px" }}
       >
-        <div className="grid grid-flow-col gap-2 justify-start items-center">
-          <img src={Logo} className="w-14" alt="" />
-          <p className="font-medium text-lg">Ratboy</p>
-
-          <Link to="/">
+        <Link to={"/"} className="grid grid-flow-col gap-2 items-center">
+          <>
             <img src={Logo} className="w-14" alt="" />
             <p className="font-medium text-lg">Ratboy</p>
-          </Link>
-        </div>
+          </>
+        </Link>
       </div>
       <div className="flex flex-col justify-between flex-1 px-6 py-4">
         <ul className="">
@@ -80,15 +77,15 @@ const Sidebar = ({ show, setShow }) => {
         </ul>
         <div>
           <div className="grid grid-flow-col gap-2 justify-start items-center">
-            <img src={Logo} className="w-14" alt="" />
-            <p className="font-medium text-lg">Ratboy</p>
-
-            <div className="grid grid-flow-col gap-2 justify-start items-center">
-              <Link to="/">
+            <Link
+              to="/"
+              className="grid grid-flow-col gap-2 justify-start items-center"
+            >
+              <>
                 <img src={Logo} className="w-14" alt="" />
                 <p className="font-medium text-lg">Ratboy</p>
-              </Link>
-            </div>
+              </>
+            </Link>
             {/* <div className="flex justify-between items-center mt-4 font-bold">
             <p>Balance:</p>
             <p>$0.00</p>

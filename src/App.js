@@ -10,6 +10,7 @@ import Landing from "./pages/createToken/landing";
 import { Toaster } from "react-hot-toast";
 import TokenList from "./pages/TokenList";
 import LockDetails from "./pages/LockDetails";
+import LockRecordDetails from "./pages/LockRecordDetails";
 
 function App() {
   const theme = createTheme({
@@ -48,6 +49,10 @@ function App() {
           <Route path="landing" element={<Landing />} />
           <Route path="token_list" element={<TokenList />} />
           <Route path="token_list/details" element={<LockDetails />} />
+          <Route
+            path="token_list/lock_record"
+            element={<LockRecordDetails />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

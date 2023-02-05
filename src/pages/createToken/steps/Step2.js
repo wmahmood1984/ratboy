@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import StepWrap from "../components/StepWrap";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import CustomDatePicker from "../components/CustomDatepicker";
@@ -9,14 +9,45 @@ import { toast } from "react-hot-toast";
 import { ThemeContext } from "@emotion/react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-
-const Step2 = ({ increaseStep, decreaseStep, 
-  token,handleChange,
-  SoftCap,setSoftCap,hardCap,setHardCap,min,setMin,max,setMax,refund,setRefund,router,setRouter,liquidity,setLiquidity,listingRate,setListingRate,
-  IDOstart,setIdoStart,liquidityLock,setLiquidityLock,IDOEnd,Allocaiton1,setAllocation1,Allocaiton2,setAllocation2,Allocaiton3,setAllocation3,setIDOEnd
-  ,noOfToken,setNoOFTokens,setPrice,price
-
+const Step2 = ({
+  increaseStep,
+  decreaseStep,
+  token,
+  handleChange,
+  SoftCap,
+  setSoftCap,
+  hardCap,
+  setHardCap,
+  min,
+  setMin,
+  max,
+  setMax,
+  refund,
+  setRefund,
+  router,
+  setRouter,
+  liquidity,
+  setLiquidity,
+  listingRate,
+  setListingRate,
+  IDOstart,
+  setIdoStart,
+  liquidityLock,
+  setLiquidityLock,
+  IDOEnd,
+  Allocaiton1,
+  setAllocation1,
+  Allocaiton2,
+  setAllocation2,
+  Allocaiton3,
+  setAllocation3,
+  setIDOEnd,
+  noOfToken,
+  setNoOFTokens,
+  setPrice,
+  price,
 }) => {
+  const [usingVest, setUsingVest] = useState(false);
   return (
     <div className="pb-10">
       <StepWrap>
@@ -51,14 +82,28 @@ const Step2 = ({ increaseStep, decreaseStep,
                 style={{ height: "56px" }}
               >
                 <input
-                  onChange={(e)=>{handleChange(e)}}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
                   type="file"
                   className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
                 />
               </div>
             </div>
-            <CustomInputWithLabel validation={"number"} value={noOfToken} setValue={setNoOFTokens} required label={"No of Tokens"}/>
-            <CustomInputWithLabel validation={"number"} value={price} setValue={setPrice} required label={"Presale Rate"}/>
+            <CustomInputWithLabel
+              validation={"number"}
+              value={noOfToken}
+              setValue={setNoOFTokens}
+              required
+              label={"No of Tokens"}
+            />
+            <CustomInputWithLabel
+              validation={"number"}
+              value={price}
+              setValue={setPrice}
+              required
+              label={"Presale Rate"}
+            />
             <div>
               <div className="flex justify-between items-center">
                 <p>
@@ -66,12 +111,21 @@ const Step2 = ({ increaseStep, decreaseStep,
                 </p>
                 <p className=" text-violet-300 text-sm ">{"1 BNB = 0 ZETA"}</p>
               </div>
-              <CustomInput validation={"number"} value={listingRate} setValue={setListingRate} placeholder="0" />
+              <CustomInput
+                validation={"number"}
+                value={listingRate}
+                setValue={setListingRate}
+                placeholder="0"
+              />
             </div>
             <div>
               <div className="flex justify-between items-center">
                 <p>
-                  Softcap {`${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} <span className="text-red-400">*</span>
+                  Softcap{" "}
+                  {`${
+                    window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"
+                  }`}{" "}
+                  <span className="text-red-400">*</span>
                 </p>
                 <p className="hidden md:block  text-violet-500 dark:text-violet-300 text-sm ">
                   {"Softcap must be >= 50% of Hardcap!"}
@@ -79,37 +133,70 @@ const Step2 = ({ increaseStep, decreaseStep,
               </div>
 
               <CustomInput
-              validation={"number"} 
-                  setValue={setSoftCap}
-                  value={SoftCap} placeholder="0" />
-  
+                validation={"number"}
+                setValue={setSoftCap}
+                value={SoftCap}
+                placeholder="0"
+              />
             </div>
 
-            <CustomInputWithLabel validation={"number"} value={hardCap} setValue={setHardCap} required label={`HardCap ${`${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`}`}/>
-            <CustomInputWithLabel validation={"number"} value={min} setValue={setMin} required label={`Minimum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
-            <CustomInputWithLabel validation={"number"} value={max} setValue={setMax} required label={`Maximum buy ${window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"}`} />
+            <CustomInputWithLabel
+              validation={"number"}
+              value={hardCap}
+              setValue={setHardCap}
+              required
+              label={`HardCap ${`${
+                window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"
+              }`}`}
+            />
+            <CustomInputWithLabel
+              validation={"number"}
+              value={min}
+              setValue={setMin}
+              required
+              label={`Minimum buy ${
+                window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"
+              }`}
+            />
+            <CustomInputWithLabel
+              validation={"number"}
+              value={max}
+              setValue={setMax}
+              required
+              label={`Maximum buy ${
+                window.ethereum?.networkVersion == 97 ? "(BNB)" : "(Eth)"
+              }`}
+            />
             <div>
-      <p>
-        Refund
-        <span className="text-red-400">*</span>
-      </p>
-      <CustomSelect
-      
-                  id="Refund"
-                  label="Refund"
-                  value={refund}
-                  setValue={setRefund}
-                  list={["Refund","Burn"]}
-                />
+              <p>
+                Refund
+                <span className="text-red-400">*</span>
+              </p>
+              <CustomSelect
+                id="Refund"
+                label="Refund"
+                value={refund}
+                setValue={setRefund}
+                list={["Refund", "Burn"]}
+              />
+            </div>
 
-    </div>
-
-            <CustomInputWithLabel validation={"address" }value={router} setValue={setRouter} label="Router" />
-            <CustomInputWithLabel validation={"number"} value={liquidity} setValue={setLiquidity} label="liquidity (%)" required />
+            <CustomInputWithLabel
+              validation={"address"}
+              value={router}
+              setValue={setRouter}
+              label="Router"
+            />
+            <CustomInputWithLabel
+              validation={"number"}
+              value={liquidity}
+              setValue={setLiquidity}
+              label="liquidity (%)"
+              required
+            />
             {/* <CustomInputWithLabel validation={"number"} value={Allocaiton1} setValue={setAllocation1} label="Allocation 1(%)" required />
             <CustomInputWithLabel validation={"number"} value={Allocaiton2} setValue={setAllocation2} label="Allocaiton 2 (%)" required />
             <CustomInputWithLabel validation={"number"} value={Allocaiton3} setValue={setAllocation3} label="Allocation 3 (%)" required /> */}
-            
           </div>
           <div className="py-10">
             <p className=" text-xs text-violet-300">
@@ -130,7 +217,7 @@ const Step2 = ({ increaseStep, decreaseStep,
                       <span className="text-red-400">*</span>
                     </p>
                   </div>
-                  <CustomDatePicker value={IDOstart}  setValue={setIdoStart}/>
+                  <CustomDatePicker value={IDOstart} setValue={setIdoStart} />
                 </div>
               </div>
               <div>
@@ -141,7 +228,7 @@ const Step2 = ({ increaseStep, decreaseStep,
                       <span className="text-red-400">*</span>
                     </p>
                   </div>
-                  <CustomDatePicker value={IDOEnd}  setValue={setIDOEnd}/>
+                  <CustomDatePicker value={IDOEnd} setValue={setIDOEnd} />
                 </div>
               </div>
               <CustomInputWithLabel
@@ -156,7 +243,13 @@ const Step2 = ({ increaseStep, decreaseStep,
               <div className="custom-checkbox mt-4">
                 <div>
                   <FormControlLabel
-                    control={<Checkbox color="primary" />}
+                    control={
+                      <Checkbox
+                        color="primary"
+                        checked={usingVest}
+                        onChange={() => setUsingVest(!usingVest)}
+                      />
+                    }
                     label="Using Vesting Contributor?"
                   />
                 </div>
@@ -171,6 +264,30 @@ const Step2 = ({ increaseStep, decreaseStep,
                 </p>
               </div>
             </div>
+            {usingVest && (
+              <div className="grid md:grid-cols-2 gap-6 mt-6">
+                <div className=" md:col-span-2">
+                  <CustomInputWithLabel
+                    validation={"number"}
+                    label="First release for presale (percent)"
+                    required
+                    placeholder="EX: 40%"
+                  />
+                </div>
+                <CustomInputWithLabel
+                  validation={"number"}
+                  label="Vesting period each cycle (minutes)"
+                  required
+                  placeholder="EX: 40%"
+                />{" "}
+                <CustomInputWithLabel
+                  validation={"number"}
+                  label="Presale token release each cycle (percent)"
+                  required
+                  placeholder="EX: 40%"
+                />
+              </div>
+            )}
             <div className="grid grid-flow-col gap-x-8 mt-10 justify-center sm:justify-end items-center">
               <button
                 onClick={decreaseStep}
@@ -194,7 +311,13 @@ const Step2 = ({ increaseStep, decreaseStep,
 
 export default Step2;
 
-const CustomInput = ({ placeholder, value,setValue,validation ,...props }) => {
+const CustomInput = ({
+  placeholder,
+  value,
+  setValue,
+  validation,
+  ...props
+}) => {
   return (
     <div
       className="dark:bg-dark-500 border border-lightDark rounded-md"
@@ -202,26 +325,28 @@ const CustomInput = ({ placeholder, value,setValue,validation ,...props }) => {
     >
       <input
         placeholder={placeholder}
-       // key={key}
+        // key={key}
         {...props}
         value={value}
-        onChange={(e)=>{
-         if(validation=="number"){
-          if(!isNaN(e.target.value)){
-            setValue(e.target.value)
-          }else{toast.error("not a valid number")}
-         }else if(
-          validation =="address"
-         ){
-          if(e.target.value.slice(0,2)=="0x" && e.target.value.length ==42){
-          setValue(e.target.value)
-         }else{toast.error("not a valid address")}
-
-         }else {
-          setValue(e.target.value)
-         }   
-
-        
+        onChange={(e) => {
+          if (validation == "number") {
+            if (!isNaN(e.target.value)) {
+              setValue(e.target.value);
+            } else {
+              toast.error("not a valid number");
+            }
+          } else if (validation == "address") {
+            if (
+              e.target.value.slice(0, 2) == "0x" &&
+              e.target.value.length == 42
+            ) {
+              setValue(e.target.value);
+            } else {
+              toast.error("not a valid address");
+            }
+          } else {
+            setValue(e.target.value);
+          }
         }}
         type="text"
         className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
@@ -236,7 +361,7 @@ const CustomInputWithLabel = ({
   placeholder = "0",
   value,
   setValue,
-  validation
+  validation,
 }) => {
   return (
     <div>
@@ -244,20 +369,30 @@ const CustomInputWithLabel = ({
         {label}
         {required && <span className="text-red-400">*</span>}
       </p>
-      <CustomInput value={value} setValue={setValue} placeholder={placeholder} validation={validation} />
+      <CustomInput
+        value={value}
+        setValue={setValue}
+        placeholder={placeholder}
+        validation={validation}
+      />
     </div>
   );
 };
 
-
 const CustomSelect = ({ list, id, label, value, setValue }) => {
   const { theme } = useContext(ThemeContext);
   return (
-    <div className={` ${theme === "dark" ? "custom-select" : "dark:bg-dark-500 border border-lightDark rounded-md"}`}>
+    <div
+      className={` ${
+        theme === "dark"
+          ? "custom-select"
+          : "dark:bg-dark-500 border border-lightDark rounded-md"
+      }`}
+    >
       <FormControl size="small" fullWidth>
         <InputLabel id={id}>{label}</InputLabel>
         <Select
-         className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
+          className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
           labelId={id}
           // id="demo-simple-select"
           value={value}
