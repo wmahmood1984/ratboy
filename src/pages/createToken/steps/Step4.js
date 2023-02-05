@@ -28,7 +28,8 @@ const Step4 = ({ increaseStep, decreaseStep
 
   const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
 
-  function dateFormat(string){
+  function dateFormat(stringA){
+    var string = Date.parse(stringA)
     var day = new Date(string).getDay()
     var date = new Date(string).getUTCDate()
     var month = new Date(string).getUTCMonth()+1
@@ -36,7 +37,7 @@ const Step4 = ({ increaseStep, decreaseStep
     var hours = new Date(string).getUTCHours()
     var formatedHours = hours/10>1? `${hours}` : `0${hours}`
     var minutes = new Date(string).getUTCMinutes()
-    var formatedMinutes = minutes/10>1? `${hours}` : `0${hours}`
+    var formatedMinutes = minutes/10>1? `${minutes}` : `0${minutes}`
     
     return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`
   }
@@ -147,6 +148,9 @@ const Step4 = ({ increaseStep, decreaseStep
       desc: "No",
     },
   ];
+
+
+
   return (
     <StepWrap>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -111,7 +111,8 @@ const CreateToken = () => {
 
   csv && array2.pop()
 
-
+  console.log("ido",Date.parse(IDOstart))
+  console.log("end",Date.parse(IDOEnd))
 //console.log("string",myContract2)
   const createPool = async ()=>{
     var counter = 0 
@@ -245,7 +246,7 @@ function  updateData(result) {
     }
   }
 
-  
+
 
   return (
     <Layout>

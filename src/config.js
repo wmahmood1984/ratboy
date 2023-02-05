@@ -1423,7 +1423,7 @@ export const tokenObj = {
 
 export var chainIdSelected = "5"
 
-export const setChainId = (id)=>{chainIdSelected=id}
+
 
 export const tempAdmin = "0xfef5f69FA76f35638Aa3ed77a0644Fa79d31A554"//"0xF85ee861F7360E5882FE1efE8DFc29C204d4BfaE"//"0xAa2F7afCBfbfe76D0aa9460bC77ABe2b726E0A15"//"0xfef5f69FA76f35638Aa3ed77a0644Fa79d31A554"//"0x77547F859Ca0F1114c25Db094Bb0f682dD47512D"//"0xF85ee861F7360E5882FE1efE8DFc29C204d4BfaE"
 
