@@ -32,7 +32,7 @@ const Sidebar = ({ show, setShow }) => {
         <Link to={"/"} className="grid grid-flow-col gap-2 items-center">
           <>
             <img src={Logo} className="w-14" alt="" />
-            <p className="font-medium text-lg">Ratboy</p>
+            <p className="font-medium text-lg">Ratpad</p>
           </>
         </Link>
       </div>
@@ -84,7 +84,7 @@ const Sidebar = ({ show, setShow }) => {
             >
               <>
                 <img src={Logo} className="w-14" alt="" />
-                <p className="font-medium text-lg">Ratboy</p>
+                <p className="font-medium text-lg">Ratpad</p>
               </>
             </Link>
             {/* <div className="flex justify-between items-center mt-4 font-bold">
