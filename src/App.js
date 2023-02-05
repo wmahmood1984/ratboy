@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import TokenList from "./pages/TokenList";
 import LockDetails from "./pages/LockDetails";
 import LockRecordDetails from "./pages/LockRecordDetails";
+import MyTokens from "./pages/MyTokens";
 
 function App() {
   const theme = createTheme({
@@ -52,7 +53,8 @@ function App() {
           <Route
             path="token_list/lock_record"
             element={<LockRecordDetails />}
-          />
+          />{" "}
+          <Route path="my_tokens" element={<MyTokens />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

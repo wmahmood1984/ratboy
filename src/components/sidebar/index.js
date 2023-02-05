@@ -8,6 +8,7 @@ import { GiAirBalloon } from "react-icons/gi";
 import {
   HiOutlineDocumentSearch,
   HiOutlineDocumentReport,
+  HiOutlineClipboardList,
 } from "react-icons/hi";
 import { ThemeContext } from "../../context/themeContext";
 import { FaClipboardList, FaTelegramPlane, FaTwitter } from "react-icons/fa";
@@ -48,7 +49,7 @@ const Sidebar = ({ show, setShow }) => {
                   <span>{val.text}</span>
                 </Link>
               </li>
-              {i === 3 && (
+              {i === 4 && (
                 <div className="border-b border-lightDark my-4"></div>
               )}
             </React.Fragment>
@@ -136,6 +137,11 @@ const menuList = [
     text: "Token",
     icon: <MdOutlineListAlt />,
     link: "/token_list",
+  },
+  {
+    text: "My Tokens",
+    icon: <HiOutlineClipboardList />,
+    link: "/my_tokens",
   },
   // {
   //   text: "Docs",
