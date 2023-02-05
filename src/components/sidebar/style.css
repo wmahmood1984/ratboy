@@ -21,13 +21,13 @@
   .sidebar {
     left: auto;
     bottom: auto;
-    right: -100%;
+    left: -100%;
     z-index: 99999999;
     height: calc(100% - 75px);
     top: 75px;
   }
   .sidebar.active {
-    right: 0%;
+    left: 0%;
   }
   .sidebar-logo {
     display: none;
