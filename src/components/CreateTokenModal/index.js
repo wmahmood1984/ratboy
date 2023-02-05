@@ -43,7 +43,9 @@ const CreateTokenModal = ({ open = false, setOpen }) => {
 
        if(receipt){
          console.log("response",receipt)
-         navigate("/landing",{state:{hash:receipt.transactionHash,address:receipt.events[0].address,name,symbol,decimals,totalSupply}})
+         navigate("/my_tokens"
+         //,{state:{hash:receipt.transactionHash,address:receipt.events[0].address,name,symbol,decimals,totalSupply}}
+         )
          setOpenA(false)
        }
     } catch (error) {

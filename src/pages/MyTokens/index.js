@@ -88,7 +88,12 @@ const MyTokens = () => {
                     <p className="font-medium">{shortAddress(token.Address)}</p>
                   </td>
                   <td className="py-4 text-right">
-                    <a href="/" className="text-primary-400">
+                    <a target={"blank"} href={
+                      chainId == "5" ? 
+                      `https://goerli.etherscan.io/token/${token.Address}`
+                      : `https://testnet.bscscan.com/token/${token.Address}`
+                      
+                      } className="text-primary-400">
                       View
                     </a>
                   </td>{" "}
