@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
-import { BiRocket } from "react-icons/bi";
+import { BiChevronDown, BiRocket } from "react-icons/bi";
 import { AiOutlineUnlock, AiOutlineQuestionCircle } from "react-icons/ai";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { GiAirBalloon } from "react-icons/gi";
@@ -11,14 +11,21 @@ import {
   HiOutlineClipboardList,
 } from "react-icons/hi";
 import { ThemeContext } from "../../context/themeContext";
-import { FaClipboardList, FaTelegramPlane, FaTwitter } from "react-icons/fa";
+import {
+  FaArrowDown,
+  FaClipboardList,
+  FaTelegramPlane,
+  FaTwitter,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Logo from "../../Img/Ratpad logo compressed.png";
 import { useWeb3React } from "@web3-react/core";
 import { MdOutlineListAlt } from "react-icons/md";
+import { Collapse } from "@mui/material";
 const Sidebar = ({ show, setShow }) => {
   const { theme, setTheme } = useContext(ThemeContext);
   const { account } = useWeb3React();
+  const [selected, setSelected] = useState(null);
   return (
     <div
       className={`sidebar ${
@@ -43,11 +50,43 @@ const Sidebar = ({ show, setShow }) => {
               <li>
                 <Link
                   to={account ? `${val.link}` : "#"}
-                  className="grid grid-flow-col text-sm justify-start gap-x-2 items-center py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg my-1 font-bold"
+                  onClick={(e) => {
+                    if (val.subLink.length > 0) {
+                      e.preventDefault();
+                      if (selected === i) {
+                        return setSelected(null);
+                      }
+                      setSelected(i);
+                    }
+                  }}
+                  className=" text-sm  py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg font-bold flex items-center justify-between my-1"
                 >
-                  <span className="text-lg">{val.icon}</span>{" "}
-                  <span>{val.text}</span>
+                  <div className="grid grid-flow-col justify-start gap-x-2 items-center ">
+                    <p className="text-lg">{val.icon}</p> <p>{val.text}</p>
+                  </div>
+                  {val.subLink?.length > 0 && (
+                    <button className="text-xl">
+                      <BiChevronDown />
+                    </button>
+                  )}
                 </Link>
+                {val.subLink?.length > 0 && (
+                  <Collapse in={i === selected}>
+                    <ul className="ml-4">
+                      {val.subLink?.map((subLink, i) => (
+                        <li key={i}>
+                          <Link
+                            to={account ? `${subLink.link}` : "#"}
+                            className="grid grid-flow-col text-sm justify-start gap-x-2 items-center py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg my-1 font-bold"
+                          >
+                            {/* <span className="text-lg">{subLink.icon}</span>{" "} */}
+                            <span>{subLink.text}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </Collapse>
+                )}
               </li>
               {i === 4 && (
                 <div className="border-b border-lightDark my-4"></div>
@@ -77,7 +116,7 @@ const Sidebar = ({ show, setShow }) => {
           </li>
         </ul>
         <div>
-          <div className="grid grid-flow-col gap-2 justify-start items-center">
+          <div className="justify-start items-center">
             <Link
               to="/"
               className="grid grid-flow-col gap-2 justify-start items-center"
@@ -119,9 +158,26 @@ const menuList = [
     link: "/",
   },
   {
-    text: "Token Lock",
+    text: "RatPad Lock",
     icon: <AiOutlineUnlock />,
     link: "/lockToken",
+    subLink: [
+      {
+        text: "Create Lock",
+        icon: <MdOutlineListAlt />,
+        link: "/lockToken",
+      },
+      {
+        text: "Token Lock",
+        icon: <MdOutlineListAlt />,
+        link: "/token_list",
+      },
+      {
+        text: "LP Lock",
+        icon: <MdOutlineListAlt />,
+        link: "/lp_list",
+      },
+    ],
   },
   // {
   //   text: "Bulk Airdrops",
@@ -133,11 +189,7 @@ const menuList = [
     icon: <HiOutlineDocumentSearch />,
     link: "/",
   },
-  {
-    text: "Token",
-    icon: <MdOutlineListAlt />,
-    link: "/token_list",
-  },
+
   {
     text: "My Tokens",
     icon: <HiOutlineClipboardList />,

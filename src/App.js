@@ -12,6 +12,7 @@ import TokenList from "./pages/TokenList";
 import LockDetails from "./pages/LockDetails";
 import LockRecordDetails from "./pages/LockRecordDetails";
 import MyTokens from "./pages/MyTokens";
+import LpLockList from "./pages/LpLockList";
 
 function App() {
   const theme = createTheme({
@@ -55,6 +56,7 @@ function App() {
             element={<LockRecordDetails />}
           />{" "}
           <Route path="my_tokens" element={<MyTokens />} />
+          <Route path="lp_list" element={<LpLockList />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
