@@ -58,13 +58,16 @@ const Header = ({ show, setShow }) => {
   const [openA, setOpenA] = useState(false);
   const [network, setNetwork] = useState(localNet);
   const web3 = new Web3(Web3.givenProvider);
-  const { account, library, chainId } = useWeb3React();
+  const { account, library, chainId,activate } = useWeb3React();
   const [tier, setTier] = useState();
   const chain = chainId ? chainId : chainIdSelected;
 
   const myContract = getContract(library, account, LaunchPadAdd[`${chain}`]);
 
   useEffect(() => {
+    if(localStorage.getItem("Connected")){
+      activate(Injected)
+    }
     const abc = async () => {
       if (account) {
         const _tier = await myContract.getTiers(account);
@@ -192,6 +195,8 @@ function ResponsiveDialogWallet({ open, setOpen, network, setNetwork }) {
   const handleClose2 = () => {
     setOpen(false);
     activate(Injected);
+    localStorage.setItem("Connected", true);
+
   };
 
   const handleDeactivate = () => {
