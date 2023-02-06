@@ -13,6 +13,7 @@ import LockDetails from "./pages/LockDetails";
 import LockRecordDetails from "./pages/LockRecordDetails";
 import MyTokens from "./pages/MyTokens";
 import LpLockList from "./pages/LpLockList";
+import TokenCreateSuccess from "./pages/tokenCreateSuccess";
 
 function App() {
   const theme = createTheme({
@@ -29,15 +30,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Toaster
-        containerStyle={{
-          position: "relative",
-          top: "50px",
-        }}
         toastOptions={{
           className: 'text-sm z-[999999999]" ',
           style: {
             border: "1px solid #713200",
-            padding: "16px",
             color: "#713200",
           },
         }}
@@ -57,6 +53,7 @@ function App() {
           />{" "}
           <Route path="my_tokens" element={<MyTokens />} />
           <Route path="lp_list" element={<LpLockList />} />
+          <Route path="token_create_success" element={<TokenCreateSuccess />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

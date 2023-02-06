@@ -3,17 +3,15 @@ import Layout from "../../components/layout";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
 import Launchpad from "./Launchpad";
 import { Link, useNavigate } from "react-router-dom";
-import {Contract, ethers, providers, utils} from "ethers"
+import { Contract, ethers, providers, utils } from "ethers";
 import { LaunchPadABI, LaunchPadAdd } from "../../config";
 import { useWeb3React } from "@web3-react/core";
-import Web3 from "web3"
-import { ToastContainer, toast } from 'react-toastify';
+import Web3 from "web3";
+import { ToastContainer, toast } from "react-toastify";
 import { Box } from "@mui/system";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { ThemeContext } from "@emotion/react";
 import CustomSelect from "../../components/CustomSelect";
-
-
 
 // export const getContract = (library, account,chainId) => {
 // 	const signer = library?.getSigner(account).connectUnchecked();
@@ -21,76 +19,81 @@ import CustomSelect from "../../components/CustomSelect";
 // 	return contract;
 // };
 
-
-
-
 const Home = () => {
+  const { account, library, chainId } = useWeb3React();
+  const [Data, setData] = useState();
+  const [subData, setSubtData] = useState();
+  const web3 = new Web3(
+    new Web3.providers.HttpProvider(
+      "https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"
+    )
+  );
+  const navigate = useNavigate();
+  const [filter, setFilter] = useState();
+  const [sort, setSort] = useState();
 
-  const { account,library, chainId} = useWeb3React();
-  const [Data,setData] = useState()
-  const [subData,setSubtData] = useState()
-  const web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
-  const navigate = useNavigate()
-  const [filter,setFilter] = useState()
-  const [sort,setSort] = useState()
-
-  const myContract = chainId ?  new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chainId}`])
-  : new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`5`])
-
-
-
+  const myContract = chainId
+    ? new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chainId}`])
+    : new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`5`]);
 
   useEffect(() => {
-    const abc = async ()=>{
-      
-        const data = await myContract.methods.getPoolDetails().call()
-      
-        setData(data[0])
-        setSubtData(data[1])
-      
-    }
-    abc()
-}, [account])
+    const abc = async () => {
+      const data = await myContract.methods.getPoolDetails().call();
 
+      setData(data[0]);
+      setSubtData(data[1]);
+    };
+    abc();
+  }, [account]);
 
+  const filterArray = ["upComing", "InProgress", "Filled", "Cancelled"];
+  const sortArray = ["HardCap", "SoftCap", "LPPercent", "Start Time"];
 
-const filterArray = ["upComing","InProgress","Filled","Cancelled"]
-const sortArray = ["HardCap","SoftCap","LPPercent","Start Time"]
+  const now = new Date().getTime() / 1000;
 
+  const originalData = Data && [...Data];
+  const originalDataS = subData && [...subData];
 
+  const live =
+    Data &&
+    Data.filter(
+      (item) =>
+        item._noOfTokens_price_max_min_vesting_month_start_end[6] < now &&
+        item._noOfTokens_price_max_min_vesting_month_start_end[7] > now
+    );
+  const UpComing =
+    Data &&
+    Data.filter(
+      (item) => item._noOfTokens_price_max_min_vesting_month_start_end[6] > now
+    );
+  const _end =
+    Data &&
+    Data.filter(
+      (item) => item._noOfTokens_price_max_min_vesting_month_start_end[7] < now
+    );
+  const cancelled = [];
 
-const now = new Date().getTime()/1000
+  const filterFunction = (ind) => {
+    setFilter(ind);
+  };
 
-const originalData = Data && [...Data]
-const originalDataS = subData && [...subData]
+  const setSortFun = (crit) => {
+    setSort(crit);
+    var arraytemp = [...Data];
+    var sortedArray =
+      crit == 0
+        ? arraytemp.sort((a, b) => a[4][2] - b[4][2])
+        : crit == 1
+        ? arraytemp.sort((a, b) => a[4][3] - b[4][3])
+        : crit == 2
+        ? arraytemp.sort((a, b) => a[4][11] - b[4][11])
+        : crit == 3
+        ? arraytemp.sort((a, b) => a[4][5] - b[4][5])
+        : [];
+    setData(sortedArray);
+  };
 
-
-
-const live = Data && Data.filter((item)=>item._noOfTokens_price_max_min_vesting_month_start_end[6]<now && item._noOfTokens_price_max_min_vesting_month_start_end[7]>now)
-const UpComing = Data && Data.filter((item)=>item._noOfTokens_price_max_min_vesting_month_start_end[6]>now)
-const _end = Data && Data.filter((item)=>item._noOfTokens_price_max_min_vesting_month_start_end[7]<now)
-const cancelled = []
-
-
-
-const filterFunction = (ind)=>{
-
-  setFilter(ind)
-
-
-}
-
-
-const setSortFun = (crit)=>{
-  setSort(crit)
-    var arraytemp = [...Data]
-    var sortedArray = crit==0? arraytemp.sort((a,b)=>a[4][2]-b[4][2]) : crit ==1 ? 
-                               arraytemp.sort((a,b)=>a[4][3]-b[4][3]) : crit==2 ? arraytemp.sort((a,b)=>a[4][11]-b[4][11]):  
-    crit==3? arraytemp.sort((a,b)=>a[4][5]-b[4][5]): []
-    setData(sortedArray)
-}
-
-console.log("live",Data)
+  console.log("live", Data);
   return (
     <Layout>
       <main className="px-4 pb-10 pt-20">
@@ -112,7 +115,7 @@ console.log("live",Data)
                 <SearchBox />
               </div>
               <div className="grid grid-cols-3 gap-2 items-center ">
-              <CustomSelect
+                <CustomSelect
                   id="Filter"
                   label="Filter "
                   value={filter}
@@ -127,11 +130,11 @@ console.log("live",Data)
                   list={sortArray}
                 />
                 <button
-                  onClick={()=>{
-                    if(account){
-                      navigate("/createPresale")                      
-                    }else{
-                        toast.error("Please connect your wallet") 
+                  onClick={() => {
+                    if (account) {
+                      navigate("/createPresale");
+                    } else {
+                      toast.error("Please connect your wallet");
                     }
                   }}
                   className="text-white  md:col-span-auto uppercase block text-center bg-primary-400 p-4 py-2 h-max rounded-md"
@@ -144,22 +147,29 @@ console.log("live",Data)
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mt-10">
-          
-          {Data && subData &&  Data.filter(
-            item=> filter==null || (filter == 1 && item._noOfTokens_price_max_min_vesting_month_start_end[5]<now && item._noOfTokens_price_max_min_vesting_month_start_end[6]>now)
-                                     || (filter ==0 && item._noOfTokens_price_max_min_vesting_month_start_end[5]>now)
-                                     ||  (filter ==2 &&  item._noOfTokens_price_max_min_vesting_month_start_end[6]<now)
-           
-          ).map((val, i) => (
-            <React.Fragment key={i}>
-              <Launchpad keyA={i} data={val} subData={subData[i]}/>
-            </React.Fragment>
-          ))
-          }
+          {Data &&
+            subData &&
+            Data.filter(
+              (item) =>
+                filter == null ||
+                (filter == 1 &&
+                  item._noOfTokens_price_max_min_vesting_month_start_end[5] <
+                    now &&
+                  item._noOfTokens_price_max_min_vesting_month_start_end[6] >
+                    now) ||
+                (filter == 0 &&
+                  item._noOfTokens_price_max_min_vesting_month_start_end[5] >
+                    now) ||
+                (filter == 2 &&
+                  item._noOfTokens_price_max_min_vesting_month_start_end[6] <
+                    now)
+            ).map((val, i) => (
+              <React.Fragment key={i}>
+                <Launchpad keyA={i} data={val} subData={subData[i]} />
+              </React.Fragment>
+            ))}
         </div>
       </main>
-      
-      
     </Layout>
   );
 };
@@ -203,40 +213,37 @@ const SearchBox = () => (
   </div>
 );
 
-
-function BasicSelect({label,array,value,setValue}) {
-
-
+function BasicSelect({ label, array, value, setValue }) {
   const handleChange = (e) => {
-
     setValue(e.target.value);
   };
 
   return (
     <div className="custom-select">
-<Box 
-    
-    sx={{marginBottom:"25px",maxHeight:"20px", minWidth: 120,color:"white",border:"grey" }}>
-      <FormControl size="small"
-      
-      fullWidth>
-        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={value}
-          label="Age"
-          onChange={handleChange}
-        >
-          {array.map((v,e)=>
-          <MenuItem value={e}>{v}</MenuItem>
-          )}
-          
- 
-        </Select>
-      </FormControl>
-    </Box>
+      <Box
+        sx={{
+          marginBottom: "25px",
+          maxHeight: "20px",
+          minWidth: 120,
+          color: "white",
+          border: "grey",
+        }}
+      >
+        <FormControl size="small" fullWidth>
+          <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={value}
+            label="Age"
+            onChange={handleChange}
+          >
+            {array.map((v, e) => (
+              <MenuItem value={e}>{v}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
     </div>
-    
   );
 }
