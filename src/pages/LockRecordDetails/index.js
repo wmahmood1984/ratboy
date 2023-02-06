@@ -6,7 +6,10 @@ import { shortAddress } from "../../helpers";
 // import { FiChevronRight } from "react-icons/fi";
 import { Collapse } from "@mui/material";
 import Timer from "./Timer";
+import { useWeb3React } from "@web3-react/core";
+import { formatEther } from "@ethersproject/units";
 const LockRecordDetails = () => {
+  const {chainId} = useWeb3React()
   const { state } = useLocation();
   const [show, setShow] = useState(false);
   const head = ["Unlock #", "Time (UTC)", "Unlocked tokens"];
@@ -22,6 +25,22 @@ const LockRecordDetails = () => {
       token: "8,000 (10%)",
     },
   ];
+
+
+  const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
+
+  function dateFormat(string){
+    var day = new Date(string).getDay()
+    var date = new Date(string).getUTCDate()
+    var month = new Date(string).getUTCMonth()+1
+    var _year1 = new Date(string).getUTCFullYear()
+    var hours = new Date(string).getUTCHours()
+    var formatedHours = hours/10>1? `${hours}` : `0${hours}`
+    var minutes = new Date(string).getUTCMinutes()
+    var formatedMinutes = minutes/10>1? `${minutes}` : `0${minutes}`
+    
+    return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`
+  }
   return (
     <Layout>
       <div className=" px-6 mt-28  mb-20 ">
@@ -29,13 +48,20 @@ const LockRecordDetails = () => {
           <p className=" font-semibold text-lg text-center text-primary-400 ">
             Unlock In
           </p>
-          <Timer />
+          <Timer start={state.time/1000} />
         </div>{" "}
         <div className="bg-white dark:bg-dark-400 border dark:border-lightDark   rounded-md shadow grid grid-cols-1  ">
           <p className="p-4  border-b dark:border-lightDark">Token Info</p>
           <div className="p-4">
             <div className="grid gap-y-4 mt-4">
               <ListItem
+                linkable={true}
+                refA={
+                  chainId == "97" ? 
+                  `https://testnet.bscscan.com/token/${state.token}` :
+                  `https://goerli.etherscan.io/token/${state.token}`
+                    
+                }
                 title={"Token Address"}
                 desc={shortAddress(state.token)}
                 color={"primary"}
@@ -52,20 +78,20 @@ const LockRecordDetails = () => {
             <div className="grid gap-y-4 mt-4">
               <ListItem
                 title={"Total Amount Locked"}
-                desc={"55,555 MOONDAY"}
+                desc={`${formatEther(state.amount)} ${state.symbol}`}
                 color={"primary"}
               />{" "}
-              <ListItem title={"Total Values Locked"} desc={`0`} />
+              {/* <ListItem title={"Total Values Locked"} desc={`0`} /> */}
               <ListItem
                 title={"Owner"}
                 desc={shortAddress(
-                  "0x09b754BA0f822a3C02733cbF691C65fa9a996Bdc"
+                  state.user
                 )}
               />
-              <ListItem title={"Lock Date"} desc={"2023.02.06 08:43 UTC"} />{" "}
+              <ListItem title={"Lock Date"} desc={state.now?dateFormat(state.now/1000): dateFormat(state.time/1000) } />{" "}
               <ListItem
                 title={"Unlock Date"}
-                desc={"2025.02.06 07:47 UTC (in 2 years)"}
+                desc={dateFormat(state.time/1000)}
               />
               {/* <div className="text-xs sm:text-sm flex justify-between pb-2 items-center border-b border-lightDark">
                 <p className=" ">{"Vesting Info"}</p>

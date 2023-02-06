@@ -1,3 +1,4 @@
+import { useWeb3React } from "@web3-react/core";
 import { formatEther } from "ethers/lib/utils";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -6,6 +7,7 @@ import ListItem from "../../components/listItem";
 import { shortAddress } from "../../helpers";
 
 const LockDetails = () => {
+  const {chainId} = useWeb3React()
   const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
 
   function dateFormat(string){
@@ -55,6 +57,13 @@ const LockDetails = () => {
               <ListItem title={" Current Locked Amount"} desc={`${formatEther(state.amount)} ${state.symbol} `} />
               {/* <ListItem title={"Current Values Locked"} desc={"$0"} />{" "} */}
               <ListItem
+                linkable={true}
+                refA={
+                  chainId == "97" ? 
+                  `https://testnet.bscscan.com/token/${state.token}` :
+                  `https://goerli.etherscan.io/token/${state.token}`
+                   
+                }
                 title={"Token Address"}
                 desc={shortAddress(
                   state.token
@@ -62,7 +71,7 @@ const LockDetails = () => {
                 color={"primary"}
               />{" "}
               <ListItem title={"Token Name"} desc={`${state.name}`} />
-              <ListItem title={"Token Symbol"} desc={`${state.name}`} />
+              <ListItem title={"Token Symbol"} desc={`${state.symbol}`} />
               {/* <ListItem title={"Token Decimal"} desc={"18"} /> */}
             </div>
           </div>
