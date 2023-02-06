@@ -14,6 +14,8 @@ export default function CustomDatePicker({value,setValue}) {
     <div className={`${theme === "dark" && "custom-date-picker"} `}>
       <LocalizationProvider dateAdapter={DateAdapter}>
         <DateTimePicker
+          closeOnSelect
+          
           value={value}
           onChange={(newValue) => {
             setValue(newValue);
