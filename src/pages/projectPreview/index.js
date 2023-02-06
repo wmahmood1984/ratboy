@@ -5,7 +5,7 @@ import Swap from "./components/Swap";
 import TokenMetrix from "./components/TokenMetrix";
 import Ownerzone from "./components/Ownerzone";
 import Information from "./components/Information";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
 import {Contract, ethers, providers, utils} from "ethers"
 import { chainIdSelected, IERC20, IGOAbi, LaunchPadABI, LaunchPadAdd } from "../../config";
@@ -21,12 +21,26 @@ import Information2 from "./components/Information2";
 const ProjectPreview = () => {
   const {account,library,chainId} = useWeb3React()
   const web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
-  let location = useLocation();
-  const { Index } = location.state;
   var chain = chainId ? chainId : chainIdSelected
-
   const myContract = new web3.eth.Contract(LaunchPadABI,LaunchPadAdd[`${chain}`])
-  const[_data,set_Data] = useState()
+  console.log("index",myContract)
+
+
+  let location = useLocation();
+
+
+  let {params} = useParams()
+
+  const getIndex = async ()=>{
+    const _ind = await myContract.methods.PresaleMapping(params).call()
+    console.log("index",_ind)
+    return _ind
+  }
+//  const { Index } = location.state;
+   
+
+
+   const[_data,set_Data] = useState()
   const[sub_data,set_SubData] = useState()
   const[toggle,setToggle] = useState(false)
     const [allocations,setAllocaitons] = useState([])
@@ -38,12 +52,15 @@ const ProjectPreview = () => {
 
   useEffect(()=>{
     const abc = async()=>{
+      const IndexA = location.state?.Index ? location.state?.Index : await getIndex()
+      
       const data = await myContract.methods.getPoolDetails().call()
-      set_Data(data[0][Index])
-      set_SubData(data[1][Index])
+      set_Data(data[0][IndexA])
+      set_SubData(data[1][IndexA])
+      console.log("indexA",data) 
+      const TokenContract = new web3.eth.Contract(IERC20,data[0][IndexA][2][0])
 
-      const TokenContract = new web3.eth.Contract(IERC20,data[0][Index][2][0]) 
-      const _alloc = await myContract.methods.getLockContract(data[0][Index][2][0]).call()
+      const _alloc = await myContract.methods.getLockContract(data[0][IndexA][2][0]).call()
       setAllocaitons(_alloc)
 
     const tSupply = await TokenContract.methods.totalSupply().call()
@@ -51,7 +68,7 @@ const ProjectPreview = () => {
      setTotalSupply(tSupply / (10**tdecimals))
      setDecimals(tdecimals)
 
-     const PreSaleContract = new web3.eth.Contract(IGOAbi,data[0][Index][1]) 
+     const PreSaleContract = new web3.eth.Contract(IGOAbi,data[0][IndexA][1]) 
      const ent = await PreSaleContract.methods.getEntitlement(account).call()
       setEntitlement(ent / (10**tdecimals))
      }

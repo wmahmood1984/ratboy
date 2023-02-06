@@ -48,6 +48,7 @@ function App() {
           <Route path="landing" element={<Landing />} />
           <Route path="token_list" element={<TokenList />} />
           <Route path="token_list/details" element={<LockDetails />} />
+          <Route path="token_list/details/:params" element={<LockDetails />} />
           <Route
             path="token_list/lock_record"
             element={<LockRecordDetails />}

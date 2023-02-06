@@ -57,7 +57,7 @@ const All = ({data}) => {
                 </td>
                 <td className="py-4 text-right">
                   <Link 
-                  to="/token_list/details"
+                  to={`/token_list/details/${token._contract}`}
                   state={data[index]} 
                   className="text-primary-400">
                     View

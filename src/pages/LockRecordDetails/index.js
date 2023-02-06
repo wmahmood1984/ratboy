@@ -41,6 +41,8 @@ const LockRecordDetails = () => {
     
     return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`
   }
+
+  console.log("data in array",state)
   return (
     <Layout>
       <div className=" px-6 mt-28  mb-20 ">
