@@ -83,9 +83,9 @@ const Header = ({ show, setShow }) => {
   //   window.location.reload();
   // });
 
-  // window.ethereum?.on("chainChanged", (e, r) => {
-  //   window.location.reload();
-  // });
+  window.ethereum?.on("chainChanged", (e, r) => {
+    window.location.reload();
+  });
 
   if (window.ethereum?.networkVersion !== network) {
     try {
@@ -93,7 +93,7 @@ const Header = ({ show, setShow }) => {
         method: "wallet_switchEthereumChain",
         params: [{ chainId: web3.utils.toHex(network) }],
       });
-    } catch (err) {
+    } catch  (err) {
       // This error code indicates that the chain has not been added to MetaMask
       if (err.code === 4902) {
         // await window.ethereum.request({

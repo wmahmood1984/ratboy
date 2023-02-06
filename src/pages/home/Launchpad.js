@@ -8,7 +8,7 @@ import Tag from "../../components/tag";
 const Launchpad = ({ data, keyA, subData }) => {
   var now = new Date().getTime() / 1000;
 
-  //  console.log("data in Launchpad",now < data[4][6], now > data[4][7])
+
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow">
@@ -75,7 +75,7 @@ const Launchpad = ({ data, keyA, subData }) => {
       </div>
       <div className="font-bold flex justify-between items-center mt-4">
         <p>
-          {Number(subData.investedBUSD / formatEther(data[4][0])).toFixed(3)}%
+          {subData&&  Number(subData.investedBUSD / formatEther(data[4][0])).toFixed(3)}%
         </p>
         {/* <p className=" text-primary-400">60 BNB - 100 BNB</p> */}
       </div>

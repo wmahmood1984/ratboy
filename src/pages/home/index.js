@@ -29,7 +29,7 @@ const Home = () => {
     )
   ) : new Web3(
     new Web3.providers.HttpProvider(
-      rpcObj[`${5}`]
+      "https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"
     )
   );
   const navigate = useNavigate();
@@ -41,17 +41,21 @@ const Home = () => {
   const myContract = chainId
     ? new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chainId}`])
     : new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`5`]);
-
+ 
   useEffect(() => {
     const abc = async () => {
       const data = await myContract.methods.getPoolDetails().call();
 
       setData(data[0]);
       setSubtData(data[1]);
+      console.log("live",data[1]);
     };
     abc();
-  }, [account,chainId]);
-  console.log("live", myContract);
+  }, [account]);
+
+
+
+
 
   const filterArray = ["upComing", "InProgress", "Filled", "Cancelled"];
   const sortArray = ["HardCap", "SoftCap", "LPPercent", "Start Time"];
@@ -171,7 +175,7 @@ const Home = () => {
                     now)
             ).map((val, i) => (
               <React.Fragment key={i}>
-                <Launchpad keyA={i} data={val} subData={subData[i]} />
+                <Launchpad keyA={i} data={val} subData={subData &&  subData[i]} />
               </React.Fragment>
             ))}
         </div>
