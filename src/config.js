@@ -1657,6 +1657,13 @@ export const tokenObj = {
 		"80001" : "0xf4e9Bb60792d5BdF356F142cD7dF37238A305502"
 }
 
+export const rpcObj = {
+	"43113" : "0x5ACfc74319Cc6d738140f684964481aF7865a4b0",//"0xb70F71cdCAd4Db7da3d171c62Abf8382c01b8f32",
+		"97" : "https://data-seed-prebsc-2-s3.binance.org:8545/",//"0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
+		"5" : "https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5",
+		"80001" : "0xf4e9Bb60792d5BdF356F142cD7dF37238A305502"
+}
+
 
 export var chainIdSelected = "5"
 

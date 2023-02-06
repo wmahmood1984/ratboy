@@ -4,7 +4,7 @@ import { BiChevronDown, BiSearch } from "react-icons/bi";
 import Launchpad from "./Launchpad";
 import { Link, useNavigate } from "react-router-dom";
 import { Contract, ethers, providers, utils } from "ethers";
-import { LaunchPadABI, LaunchPadAdd } from "../../config";
+import { LaunchPadABI, LaunchPadAdd, rpcObj } from "../../config";
 import { useWeb3React } from "@web3-react/core";
 import Web3 from "web3";
 import { ToastContainer, toast } from "react-toastify";
@@ -23,15 +23,21 @@ const Home = () => {
   const { account, library, chainId } = useWeb3React();
   const [Data, setData] = useState();
   const [subData, setSubtData] = useState();
-  const web3 = new Web3(
+  const web3 = chainId ?  new Web3(
     new Web3.providers.HttpProvider(
-      "https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"
+      rpcObj[`${chainId}`]
+    )
+  ) : new Web3(
+    new Web3.providers.HttpProvider(
+      rpcObj[`${5}`]
     )
   );
   const navigate = useNavigate();
   const [filter, setFilter] = useState();
   const [sort, setSort] = useState();
 
+
+  
   const myContract = chainId
     ? new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chainId}`])
     : new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`5`]);
@@ -44,7 +50,8 @@ const Home = () => {
       setSubtData(data[1]);
     };
     abc();
-  }, [account]);
+  }, [account,chainId]);
+  console.log("live", myContract);
 
   const filterArray = ["upComing", "InProgress", "Filled", "Cancelled"];
   const sortArray = ["HardCap", "SoftCap", "LPPercent", "Start Time"];
@@ -93,8 +100,7 @@ const Home = () => {
     setData(sortedArray);
   };
 
-  console.log("live", Data);
-  return (
+   return (
     <Layout>
       <main className="px-4 pb-10 pt-20">
         <h1 className="text-center mt-10 font-medium text-3xl ">

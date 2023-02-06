@@ -3,7 +3,7 @@ import { Layout } from "../../components";
 import All from "./components/All";
 import MyLock from "./components/MyLock";
 import Web3 from "web3"
-import { LaunchPadABI, LaunchPadAdd, tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
+import { LaunchPadABI, LaunchPadAdd, rpcObj, tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import { useWeb3React } from "@web3-react/core";
 
@@ -16,7 +16,15 @@ const TokenList = () => {
   const { account,library, chainId} = useWeb3React();
   const [DataA,setData] = useState()
 
-  const web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
+  const web3 = chainId ?  new Web3(
+    new Web3.providers.HttpProvider(
+      rpcObj[`${chainId}`]
+    )
+  ) : new Web3(
+    new Web3.providers.HttpProvider(
+      rpcObj[`${5}`]
+    )
+  );
  // const navigate = useNavigate()
   const [filter,setFilter] = useState()
   const [sort,setSort] = useState()
@@ -37,7 +45,7 @@ const TokenList = () => {
       
     }
     abc()
-}, [account])
+}, [account,chainId])
 
 
 const Data = DataA && DataA.filter(item=>item.LP==false)

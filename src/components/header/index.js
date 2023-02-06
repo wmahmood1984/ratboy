@@ -77,15 +77,15 @@ const Header = ({ show, setShow }) => {
     abc();
   }, [account, network]);
 
-  console.log("tier", tier);
+  console.log("tier", window.ethereum?.networkVersion !== network, network,window.ethereum?.networkVersion);
 
   // window.ethereum?.on("accountsChanged", (e, r) => {
   //   window.location.reload();
   // });
 
-  window.ethereum?.on("chainChanged", (e, r) => {
-    window.location.reload();
-  });
+  // window.ethereum?.on("chainChanged", (e, r) => {
+  //   window.location.reload();
+  // });
 
   if (window.ethereum?.networkVersion !== network) {
     try {
@@ -248,7 +248,7 @@ function ResponsiveDialogWallet({ open, setOpen, network, setNetwork }) {
                 <img width="50px" src={walletC}></img>
               </span>{" "}
               <span style={{ marginLeft: "15px", fontSize: "20px" }}>
-                Wallet Connectk
+                Wallet Connect
               </span>
             </div>
 
