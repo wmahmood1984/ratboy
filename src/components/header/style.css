@@ -3,7 +3,7 @@
   width: calc(100% - 250px);
   right: 0;
   top: 0;
-  z-index: 9999;
+  z-index: 999;
   transition: all 0.5s;
 }
 
