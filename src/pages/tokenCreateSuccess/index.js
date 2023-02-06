@@ -60,16 +60,16 @@ const TokenCreateSuccess = () => {
             </tbody>
           </table>
           <div className="flex flex-col md:flex-row  justify-center items-center mt-5">
-            <button className="bg-primary-400 md:w-auto w-full px-10 py-1.5 sm:py-2 rounded-md">
+            <button className="bg-primary-400 text-white md:w-auto w-full px-10 py-1.5 sm:py-2 rounded-md">
               View Transaction
             </button>
             <button
               onClick={() => copyToClipBoard(token)}
-              className="bg-primary-400 md:w-auto w-full px-10 py-1.5 sm:py-2 my-4 md:my-0 md:ml-2 rounded-md"
+              className="bg-primary-400 text-white md:w-auto w-full px-10 py-1.5 sm:py-2 my-4 md:my-0 md:ml-2 rounded-md"
             >
               Copy Address
             </button>{" "}
-            <button className="bg-primary-400 md:w-auto w-full px-10 py-1.5 sm:py-2 md:ml-2 rounded-md">
+            <button className="bg-primary-400 text-white md:w-auto w-full px-10 py-1.5 sm:py-2 md:ml-2 rounded-md">
               Create LaunchPad
             </button>
           </div>
