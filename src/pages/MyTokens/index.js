@@ -90,8 +90,8 @@ const MyTokens = () => {
                   <td className="py-4 text-right">
                     <a target={"blank"} href={
                       chainId == "5" ? 
-                      `https://goerli.etherscan.io/token/${token.Address}`
-                      : `https://testnet.bscscan.com/token/${token.Address}`
+                      `https://goerli.etherscan.io/address/${token.Address}`
+                      : `https://testnet.bscscan.com/address/${token.Address}`
                       
                       } className="text-primary-400">
                       View

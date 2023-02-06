@@ -169,8 +169,8 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
         <div>
           <Progressbar complete={Number(sub_data.investedBUSD) / Number(formatEther(data[4][0]))} />
           <div className="flex items-center justify-between mt-1">
-            <p>{sub_data.investedBUSD} {data[3][1]}</p>
-            <p>{formatEther(data[4][0])} {data[3][1]}</p>
+            <p>{sub_data.investedBUSD} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}</p>
+            <p>{data[4][16] ? formatEther(data[4][16]):10000} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}</p>
           </div>
           <div className="mt-6">
             <div>
@@ -190,7 +190,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
                 icon={data[5]}
                 coin={data[3][1]}
                 disabled = {true}
-                value={Number(amount / (formatEther(data[4][1]))).toFixed(4)}
+                value={amount? Number(amount / (formatEther(data[4][1]))).toFixed(4) : 0}
               />
             </div>
           </div>

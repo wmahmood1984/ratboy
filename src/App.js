@@ -43,6 +43,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="createPresale" element={<CreateToken />} />
           <Route path="preview" element={<ProjectPreview />} />
+          <Route path="preview/:params" element={<ProjectPreview />} />
           <Route path="lockToken" element={<Locktoken />} />
           <Route path="landing" element={<Landing />} />
           <Route path="token_list" element={<TokenList />} />

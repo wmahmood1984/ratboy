@@ -87,11 +87,9 @@ const Launchpad = ({ data, keyA, subData }) => {
         />
         <div className="font-bold flex justify-between items-center mt-1">
           <p>
-            {subData.investedBUSD} {data[3][1]}
+            {subData.investedBUSD} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}
           </p>
-          <p>
-            {formatEther(data[4][0])} {data[3][1]}
-          </p>
+          <p>{data[4][16] ? formatEther(data[4][16]):10000} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}</p>
         </div>
       </div>
       <div className="flex justify-between items-center border-b border-lightDark mt-8 pb-2">
@@ -104,7 +102,7 @@ const Launchpad = ({ data, keyA, subData }) => {
       </div>
 
       <button className="bg-primary-400 px-14 mt-6 py-1.5 sm:py-3 mx-auto block rounded-md text-white">
-        <Link to={"/preview"} state={{ Index: keyA }}>
+        <Link to={`/preview/${data[1]}`} state={{ Index: keyA }}>
           View Pool
         </Link>
       </button>

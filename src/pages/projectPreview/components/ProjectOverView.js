@@ -10,6 +10,7 @@ import ListItem from "../../../components/listItem";
 import Web3 from "web3";
 import { IERC20 } from "../../../config";
 import { formatEther } from "ethers/lib/utils";
+import { useWeb3React } from "@web3-react/core";
 
 const SocialIcons = [
   {
@@ -61,7 +62,7 @@ const ProjectOverView = ({data}) => {
   const [symbol,setSymbol]=useState()
   const [decimals,setDecimals]=useState()
   const [totalSupply,settotalSupply]=useState()
-
+  const {chainId } = useWeb3React()
 
 
 
@@ -136,6 +137,8 @@ const ProjectOverView = ({data}) => {
     },
   ];
 
+  console.log("data in overview",data)
+
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl">
       <div className="flex justify-between items-center">
@@ -182,7 +185,16 @@ const ProjectOverView = ({data}) => {
           </p>
           <div className="grid gap-y-4 mt-4">
               <React.Fragment >
-                <ListItem title={"Presale Address"} desc={`${data._address.slice(0,5)}...${data._address.slice(-4)}`} color={"primary"} />
+                <ListItem title={"Presale Address"} refA={
+                                                 chainId == "5" ? 
+                                                 `https://goerli.etherscan.io/address/${data._address}`
+                                                 : `https://testnet.bscscan.com/address/${data._address}`
+                } linkable={true} desc={`${data._address.slice(0,5)}...${data._address.slice(-4)}`} color={"primary"} />
+                <ListItem title={"Token Address"} refA={
+                                                                   chainId == "5" ? 
+                                                                   `https://goerli.etherscan.io/token/${data[2][0]}`
+                                                                   : `https://testnet.bscscan.com/token/${data[2][0]}`
+                } linkable={true} desc={`${data[2][0].slice(0,5)}...${data[2][0].slice(-4)}`} color={"primary"} />
               </React.Fragment>
               <React.Fragment >
                 <ListItem title={"Token name"} desc={name} />
@@ -221,7 +233,7 @@ const ProjectOverView = ({data}) => {
                 <ListItem title={"Hard Cap"} desc={Number(formatEther(data[4][0]))}  />
               </React.Fragment>
               <React.Fragment >
-                <ListItem title={"UnSold Tokens"} desc={Number(formatEther(data[4][0]))-Number(data.investedTokens)}  />
+                <ListItem title={"Refund Type"} desc={data[4][17] && Number(formatEther(data[4][17]))==0?"Refund" : "Burn"  }  />
               </React.Fragment>
               <React.Fragment >
                 <ListItem title={"Presale Start Time"} desc={dateFormat(data[4][6]*1000)}  />
@@ -230,13 +242,13 @@ const ProjectOverView = ({data}) => {
                 <ListItem title={"Presale End Time"} desc={dateFormat(data[4][6]*1000)}  />
               </React.Fragment>
               <React.Fragment >
-                <ListItem title={"Listing On"} desc={`dummy`} color={"primary"} />
+                <ListItem title={"Listing On"} linkable={true} refA={data[2][4]} desc={`${data[2][4].slice(0,4)}...${data[2][4].slice(-4)}`} color={"primary"} />
               </React.Fragment>
               <React.Fragment >
-                <ListItem title={"Liquidity Percent"} desc={`dummy%`} />
+                <ListItem title={"Liquidity Percent"} desc={`${data[4][11]}%`} />
               </React.Fragment>
               <React.Fragment >
-                <ListItem title={"Liquidity Lockup Time"} desc={"dummy"} />
+                <ListItem color={"primary"} linkable={true} refA={"/lp_list"} title={"Liquidity Lockup Time"} desc={`${dateFormat(data[4][12]*1000)}`} />
               </React.Fragment>
            
           </div>

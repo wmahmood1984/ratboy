@@ -39,10 +39,10 @@ const Information = ({data}) => {
               <ListItem title={"Sale Type"} desc={"Public"} color={"parimary"} />
             </React.Fragment>
             <React.Fragment >
-              <ListItem title={"Max Buy"} desc={`${formatEther(data[4][2])} ${data[3][1]}`} />
+              <ListItem title={"Max Buy"} desc={`${formatEther(data[4][2])} ${window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}`} />
             </React.Fragment>
             <React.Fragment >
-              <ListItem title={"Minimum Buy"}desc={`${formatEther(data[4][3])} ${data[3][1]}`} />
+              <ListItem title={"Minimum Buy"}desc={`${formatEther(data[4][3])} ${window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}`} />
             </React.Fragment>
 
         </div>

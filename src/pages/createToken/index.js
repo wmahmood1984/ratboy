@@ -82,7 +82,7 @@ const CreateToken = () => {
   const [discord,setDiscord] = useState()
   const [redit,setRedit] = useState()
 
-
+  var now = new Date().getTime()/1000
 
   const chain = chainId ? chainId : chainIdSelected
 
@@ -113,7 +113,7 @@ const CreateToken = () => {
   csv && array2.pop()
 
 
-//console.log("string",myContract2)
+console.log("string",now)
   const createPool = async ()=>{
     var counter = 0 
     setOpen(true)
@@ -131,8 +131,9 @@ const CreateToken = () => {
     Allocaiton2,
     Allocaiton3,
     web3.utils.toWei(ListingRate.toString(),"ether"),
-    liquidity,liquidityLock*24*60*60,
-    initialVesting,vesting
+    liquidity,(Number(now)+(Number(liquidityLock)*24*60*60)),
+    initialVesting,vesting,
+    web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether",refund )
   ],
     hash,
     array2])
@@ -151,8 +152,9 @@ const CreateToken = () => {
     Allocaiton2,
     Allocaiton3,
     web3.utils.toWei(ListingRate.toString(),"ether"),
-    liquidity,liquidityLock*24*60*60,
-    initialVesting,vesting
+    liquidity,Number(Math.floor(now)+(liquidityLock*24*60*60)),
+    initialVesting,vesting,
+    web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether",refund )
   ],
     hash,
     array2).send({from:account}).
@@ -199,7 +201,8 @@ const captureFile = async(e)=>{
    reader.onloadend = async ()=>{
     imageBugger = Buffer(reader.result)
      console.log("buffer",imageBugger)
- client.add(imageBugger).then((res) => {
+   client.add(imageBugger).then((res,error) => {
+    console.log("pic",res.path,error)
    setHash(`https://gateway.pinata.cloud/ipfs/${res.path}`)
 
 });}
