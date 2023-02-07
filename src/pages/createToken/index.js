@@ -75,12 +75,12 @@ const CreateToken = () => {
   const [initialVesting,setInitialVesting] = useState(100)
 
 
-  const [website,setWebsite] = useState()
-  const [facebook,setFacebook] = useState()
-  const [github,setGithub] = useState()
-  const [instagram,setInstagram] = useState()
-  const [discord,setDiscord] = useState()
-  const [redit,setRedit] = useState()
+  const [website,setWebsite] = useState(" ")
+  const [facebook,setFacebook] = useState(" ")
+  const [github,setGithub] = useState(" ")
+  const [instagram,setInstagram] = useState(" ")
+  const [discord,setDiscord] = useState(" ")
+  const [redit,setRedit] = useState(" ")
 
   var now = new Date().getTime()/1000
 
