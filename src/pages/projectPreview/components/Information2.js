@@ -5,7 +5,7 @@ import ListItem from "../../../components/listItem";
 
 
 
-const Information2 = ({data,ent}) => {
+const Information2 = ({data,ent,Claim,sub_data}) => {
   const informationList = [
     {
       title: "Status",
@@ -47,7 +47,13 @@ const Information2 = ({data,ent}) => {
             <React.Fragment >
               <ListItem title={"Your Entitlement"}desc={`${ent}`} />
             </React.Fragment>
-
+            <button
+            disabled={Number(sub_data.liquidity)==0}
+          onClick={Claim}
+          className=" font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base"
+        >
+          Claim
+        </button>
         </div>
       </div>
     </div>

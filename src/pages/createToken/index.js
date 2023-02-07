@@ -16,6 +16,7 @@ import { Contract } from "ethers";
 import { ToastContainer, toast } from 'react-toastify';
 import ResponsiveDialog from "../../Spinner";
 import Launchpad from "../home/Launchpad";
+import { formatEther, parseEther } from "@ethersproject/units";
 
 
 const projectId = '2HdKrtd8GBGyqmO0u1BW2Re1hSK';
@@ -81,6 +82,7 @@ const CreateToken = () => {
   const [instagram,setInstagram] = useState(" ")
   const [discord,setDiscord] = useState(" ")
   const [redit,setRedit] = useState(" ")
+  const [feePool,setfeePool] = useState(" ")
 
   var now = new Date().getTime()/1000
 
@@ -100,6 +102,9 @@ const CreateToken = () => {
         const _decimals = await tokenContract.decimals()
         setDecimals(_decimals)
       }
+
+      const _fee = await myContract2.methods.feeForPooCreation().call()
+      setfeePool(formatEther(_fee))
     }
 
     abc()
@@ -157,7 +162,7 @@ console.log("string",now)
     web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether",refund )
   ],
     hash,
-    array2).send({from:account}).
+    array2).send({from:account,value:parseEther(feePool) }).
         on("confirmation",(e,r)=>{
           if(counter===0){
             setOpen(false)

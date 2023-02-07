@@ -12,6 +12,7 @@ import { chainIdSelected, IERC20, IGOAbi, LaunchPadABI, LaunchPadAdd } from "../
 import Web3 from "web3";
 import Ownerzone2 from "./components/Ownerzone2";
 import Information2 from "./components/Information2";
+import ResponsiveDialog from "../../Spinner";
 
 
 
@@ -43,11 +44,13 @@ const ProjectPreview = () => {
    const[_data,set_Data] = useState()
   const[sub_data,set_SubData] = useState()
   const[toggle,setToggle] = useState(false)
-    const [allocations,setAllocaitons] = useState([])
+  const [allocations,setAllocaitons] = useState([])
   const [totalSupply,setTotalSupply] = useState()
   const [decimals,setDecimals] = useState()
   const [entitlement,setEntitlement] = useState()
-
+  const[open,setOpen] = useState()
+  const[status,setStatus] = useState()
+  
 
 
   useEffect(()=>{
@@ -75,10 +78,24 @@ const ProjectPreview = () => {
     abc()
   },[toggle,account])
 
-//  console.log("data in overview ",PreSaleContract)
+  console.log("data in overview ",sub_data.liquidity)
 
 
-  
+const Claim = async ()=>{
+  setOpen(true)
+  setStatus("Claiming.....")
+  var counter =0
+  try {
+    const contract = new web3.eth.Contract(IGOAbi,_data[1]);
+    contract.methods.claim().send({from:account})
+    .on("confirmation",(e,r)=>{
+      setOpen(false)
+    })
+  } catch (error) {
+    console.log("err in Claim",error)
+    setOpen(false)
+  }
+}  
 
 
 
@@ -106,7 +123,7 @@ const ProjectPreview = () => {
              {_data && _data[2][2]===account?
               <Ownerzone2 data={_data && _data} sub_data={sub_data && sub_data}/>:null
              }{sub_data.liquidity == "0" ? 
-              <Information2 data={_data && _data} sub_data={sub_data && sub_data} ent={entitlement}/> : null
+              <Information2 Claim={Claim} data={_data && _data} sub_data={sub_data && sub_data} ent={entitlement}/> : null
 
              }
 
@@ -117,7 +134,7 @@ const ProjectPreview = () => {
 
 
       
- 
+      <ResponsiveDialog open={open} title={status}/>
     </Layout>
   );
 };

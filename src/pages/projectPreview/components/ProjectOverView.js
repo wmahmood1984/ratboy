@@ -137,7 +137,7 @@ const ProjectOverView = ({data}) => {
     },
   ];
 
-  console.log("data in overview",data)
+  console.log("first",data[4][5],data[4][6],now)
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl">
@@ -152,7 +152,7 @@ const ProjectOverView = ({data}) => {
           </button>
         </div>
         <div>
-        <Tag upcoming={now < data[4][6]} end={now > data[4][7]} />
+        <Tag upcoming={now < data[4][5]} end={now > data[4][6]} />
         </div>
       </div>
       <div>

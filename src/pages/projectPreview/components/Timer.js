@@ -5,15 +5,16 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { convertLength } from "@mui/material/styles/cssUtils";
 dayjs.extend(utc);
 dayjs.extend(customParseFormat);
-const Timer = ({start}) => {
+const Timer = ({start, end}) => {
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
   //   console.log("TIME", dayjs(Date.now()).utc().format());
-
-  const difference = start*1000 - new Date().getTime()
+  const startDiff = start*1000 - new Date().getTime()
+  const endDiff = end*1000 - new Date().getTime()
+  const difference = startDiff > 0 ? startDiff : endDiff 
     // +dayjs.utc(`${Date.parse(start*1000)}`, "YYYY-MM-DDTHH:mm:ss.000ZZ") -
     // +Date.now();
   useEffect(() => {
@@ -31,7 +32,7 @@ const Timer = ({start}) => {
     };
   });
 
-//  console.log("time",difference)
+
 
   const timeList = [
     {
@@ -52,7 +53,8 @@ const Timer = ({start}) => {
     },
   ];
   return (
-    <div className=" grid grid-flow-col mt-4 gap-x-4 px-10 justify-center">
+    <div  className=" grid grid-flow-col mt-4 gap-x-4 px-10 justify-center">
+      {difference >0  ? `Sale ${difference == startDiff ? "Starts" :difference == endDiff ? "Ends" : null} In:`: null}
       {timeList.map((val, i) => (
         <div
           key={i}
