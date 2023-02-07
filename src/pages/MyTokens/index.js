@@ -3,7 +3,7 @@ import { Contract } from "ethers";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "../../components";
-import { chainIdSelected, LaunchPadABI, LaunchPadAdd } from "../../config";
+import { chainIdSelected, LaunchPadABI, LaunchPadAdd, tokenLauncherAbi, tokenlauncherAdd } from "../../config";
 
 import { shortAddress } from "../../helpers";
 
@@ -19,7 +19,7 @@ const MyTokens = () => {
   const {library, account,chainId} = useWeb3React()
   const chain = chainId? chainId : chainIdSelected
   const [tokenList,setTokenList] = useState()
-  const myContract = getContract(library,account,LaunchPadABI,LaunchPadAdd[`${chain}`])
+  const myContract = getContract(library,account,tokenLauncherAbi,tokenlauncherAdd[`${chain}`])
 
   // const tokenList = [
   //   {
