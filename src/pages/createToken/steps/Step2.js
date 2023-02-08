@@ -48,7 +48,10 @@ const Step2 = ({
   price,
   initialVesting,
   setInitialVesting,
-  vesting,setVesting,vestingMonths,setVestingMonths,
+  vesting,
+  setVesting,
+  vestingMonths,
+  setVestingMonths,
 }) => {
   const [usingVest, setUsingVest] = useState(false);
   return (
@@ -231,7 +234,7 @@ const Step2 = ({
                       <span className="text-red-400">*</span>
                     </p>
                   </div>
-                  <CustomDatePicker value={IDOstart+(24*60*60*1000)} setValue={setIDOEnd} />
+                  <CustomDatePicker value={IDOEnd} setValue={setIDOEnd} />
                 </div>
               </div>
               <CustomInputWithLabel
@@ -294,7 +297,6 @@ const Step2 = ({
                   placeholder="EX: 40%"
                   value={vesting}
                   setValue={setVesting}
-
                 />
               </div>
             )}
