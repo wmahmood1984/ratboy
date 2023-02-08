@@ -106,11 +106,6 @@ const CreateToken = () => {
     LaunchPadABI,
     LaunchPadAdd[`${chain}`]
   );
-  console.log(dayjs().format("YYYY-MM-DDTHH:mm:ss"));
-  console.log(
-    dayjs((dayjs().unix() + 86400) * 1000).format("YYYY-MM-DDTHH:mm:ss"),
-    dayjs().unix() + 86400
-  );
 
   const refundArray = ["Refund", "Burn"];
   useEffect(() => {
