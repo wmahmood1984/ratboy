@@ -1780,3 +1780,4 @@ export const acceptableArray = [
 export const acceptableObj = {};
 
 //0x942ce81eed20d4ee6b07a194eaebc1a0d1d8576c contract //
+const apikey = "NKXY8JG8IJ1GDK2HXJFUFZFCQW6HNY4DSY"
