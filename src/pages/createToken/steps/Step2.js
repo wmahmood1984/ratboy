@@ -7,7 +7,15 @@ import Checkbox from "@mui/material/Checkbox";
 import "./style.css";
 import { toast } from "react-hot-toast";
 import { ThemeContext } from "@emotion/react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  FormLabel,
+  InputLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+} from "@mui/material";
 
 const Step2 = ({
   increaseStep,
@@ -54,6 +62,7 @@ const Step2 = ({
   setVestingMonths,
 }) => {
   const [usingVest, setUsingVest] = useState(false);
+  const [isWhiteList, setIsWhiteList] = useState(false);
   return (
     <div className="pb-10">
       <StepWrap>
@@ -76,26 +85,6 @@ const Step2 = ({
                 placeholder="234mknjknfgj453456jmngjf87485hjb435nn23k"
               />
             </div>
-            <div>
-              <div className="flex justify-between items-center">
-                <p>Whitelist</p>
-                <p className="  text-violet-500 dark:text-violet-300 hidden sm:block text-xs sm:text-sm">
-                  <span>You can enable/disable whitelist anytime</span>
-                </p>
-              </div>
-              <div
-                className="dark:bg-dark-500 border border-lightDark rounded-md"
-                style={{ height: "56px" }}
-              >
-                <input
-                  onChange={(e) => {
-                    handleChange(e);
-                  }}
-                  type="file"
-                  className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
-                />
-              </div>
-            </div>
             <CustomInputWithLabel
               validation={"number"}
               value={noOfToken}
@@ -103,6 +92,66 @@ const Step2 = ({
               required
               label={"No of Tokens"}
             />
+            <div>
+              <FormControl fullWidth>
+                {/* <FormLabel id="demo-row-radio-buttons-group-label">
+                  <p></p>
+                </FormLabel> */}
+                <div className="flex items-center justify-between">
+                  <p>WhiteList</p>
+                  <p className="  text-violet-500 dark:text-violet-300 hidden sm:block text-xs sm:text-sm">
+                    <span>You can enable/disable whitelist anytime</span>
+                  </p>
+                </div>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value={false}
+                    control={
+                      <Radio
+                        checked={!isWhiteList}
+                        onChange={() => setIsWhiteList(false)}
+                      />
+                    }
+                    label="Disable"
+                  />
+                  <FormControlLabel
+                    value={true}
+                    control={
+                      <Radio
+                        checked={isWhiteList}
+                        onChange={() => setIsWhiteList(true)}
+                      />
+                    }
+                    label="Enable"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
+            {isWhiteList && (
+              <div>
+                <div className="flex justify-between items-center">
+                  <p>Whitelist</p>
+                </div>
+                <div
+                  className="dark:bg-dark-500 border border-lightDark rounded-md"
+                  style={{ height: "56px" }}
+                >
+                  <input
+                    onChange={(e) => {
+                      handleChange(e);
+                    }}
+                    type="file"
+                    accept=".csv"
+                    className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
+                  />
+                </div>
+              </div>
+            )}
+
             <CustomInputWithLabel
               validation={"number"}
               value={price}
