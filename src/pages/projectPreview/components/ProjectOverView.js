@@ -11,6 +11,8 @@ import Web3 from "web3";
 import { IERC20 } from "../../../config";
 import { formatEther } from "ethers/lib/utils";
 import { useWeb3React } from "@web3-react/core";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const SocialIcons = [
   {
@@ -51,7 +53,7 @@ const SocialIcons = [
 
 
 
-const ProjectOverView = ({data}) => {
+const ProjectOverView = ({data,strings,hash}) => {
 
 
 
@@ -64,6 +66,7 @@ const ProjectOverView = ({data}) => {
   const [totalSupply,settotalSupply]=useState()
   const {chainId } = useWeb3React()
 
+  const navigate = useNavigate()
 
 
 
@@ -105,39 +108,39 @@ const ProjectOverView = ({data}) => {
   const SocialIcons = [
     {
       icon: <FaGlobe />,
-      link: data[3][6]?data[3][6]:undefined,
+      link: strings[6]?strings[6]:undefined,
     },
     {
       icon: <RiTelegramLine />,
-      link: data[3][4]?data[3][4]:undefined,
+      link: strings[4]?strings[4]:undefined,
     },
     {
       icon: <FaDiscord />,
-      link: data[3][7]?data[3][7]:undefined,
+      link: strings[7]?strings[7]:undefined,
     },
     {
       icon: <FiFacebook />,
-      link: data[3][8]?data[3][8]:undefined,
+      link: strings[8]?strings[8]:undefined,
     },
     {
       icon: <FaInstagram />,
-      link: data[3][9]?data[3][9]:undefined,
+      link: strings[9]?strings[9]:undefined,
     },
     {
       icon: <ImReddit />,
-      link: data[3][11]?data[3][11]:undefined,
+      link: strings[11]?strings[11]:undefined,
     },
     {
       icon: <RiGithubLine />,
-      link: data[3][10]?data[3][10]:undefined,
+      link: strings[10]?strings[10]:undefined,
     },
     {
       icon: <FiTwitter />,
-      link: data[3][2]?data[3][2]:undefined,
+      link: strings[2]?strings[2]:undefined,
     },
   ];
 
-  console.log("Project Overview ",data[4][5],data[4][6],now)
+
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl">
@@ -145,11 +148,14 @@ const ProjectOverView = ({data}) => {
         <div className="grid grid-flow-col justify-start items-center  gap-2">
           <img width={"150px"} src={data[5]} alt=""  />
           <div>
-            <p className="font-semibold ">{data[3][0]}</p>
+            <p className="font-semibold ">{strings[0]}</p>
           </div>
-          <button className="text-xl sm:text-2xl">
+          <Link
+          to="/edit_presale"
+          state={{strings,hash}}
+          className="text-xl sm:text-2xl">
             <FaRegEdit />
-          </button>
+          </Link>
         </div>
         <div>
         {/* <Tag upcoming={now < data[4][5]} end={now > data[4][6]} /> */}
@@ -172,7 +178,7 @@ const ProjectOverView = ({data}) => {
           Project Overview
         </p>
         <p className="text-gray-400 text-sm mt-3">
-          {data[3][7]}
+          {strings[7]}
         </p>
 
         <ul className=" flex justify-between items-center my-6">
@@ -218,24 +224,24 @@ const ProjectOverView = ({data}) => {
                 <ListItem title={"Token Decimals"} desc={decimals} />
               </React.Fragment> 
               <React.Fragment >
-                <ListItem title={"Tokens for Presale"} desc={`${Number(formatEther(data[4][0]))} ${data[3][1]}`}  />
+                <ListItem title={"Tokens for Presale"} desc={`${Number(formatEther(data[4][0]))} ${strings[1]}`}  />
               </React.Fragment>
               <React.Fragment >
-                <ListItem title={"Tokens for Liquidity"} desc={`${Number(formatEther(data[4][0]))*data[4][8]} ${data[3][1]}`}  />
+                <ListItem title={"Tokens for Liquidity"} desc={`${Number(formatEther(data[4][0]))*data[4][8]} ${strings[1]}`}  />
               </React.Fragment>
               <React.Fragment >
                 <ListItem title={"Presale Rate"} desc={`1 ${window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"} = 
             
             ${1/ formatEther(data[4][1])} 
             
-            ${data[3][1]}`} />
+            ${strings[1]}`} />
               </React.Fragment>
               <React.Fragment >
                 <ListItem title={"Listing Rate"} desc={`1 ${window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"} = 
             
             ${1/ formatEther(data[4][10])} 
             
-            ${data[3][1]}`}  />
+            ${strings[1]}`}  />
               </React.Fragment>
              
               <React.Fragment >

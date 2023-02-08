@@ -89,6 +89,8 @@ const CreateToken = () => {
   const chain = chainId ? chainId : chainIdSelected
 
   const myContract2 = new web3.eth.Contract(LaunchPadABI,LaunchPadAdd[`${chain}`])
+
+  const refArray = ["Refund","Burn"]
   
   useEffect(()=>{
     const abc = async()=>{
@@ -139,7 +141,7 @@ const CreateToken = () => {
     web3.utils.toWei(ListingRate.toString(),"ether"),
     liquidity,Number(Math.floor(now)+(liquidityLock*24*60*60)),
     initialVesting,vesting,
-    web3.utils.toWei(SoftCap.toString(),"ether"),web3.utils.toWei(hardCap.toString(),"ether"),refund
+    web3.utils.toWei(SoftCap.toString(),"ether"),web3.utils.toWei(hardCap.toString(),"ether"),refArray.indexOf(refund)
   ],
     hash,
     array2])
@@ -160,7 +162,7 @@ const CreateToken = () => {
     web3.utils.toWei(ListingRate.toString(),"ether"),
     liquidity,Number(Math.floor(now)+(liquidityLock*24*60*60)),
     initialVesting,vesting,
-    web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether"),refund
+    web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether"),refArray.indexOf(refund)
   ],
     hash,
     array2).send({from:account,value:parseEther("0.001") }).
@@ -257,11 +259,12 @@ function  updateData(result) {
       })
     } catch (error) {
       console.log("err in approval",error)
+      setOpen(false)
     }
   }
 
 
-console.log("data in something",refund)
+console.log("data in something",csv)
 
 
   return (

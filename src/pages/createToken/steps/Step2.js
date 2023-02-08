@@ -308,16 +308,16 @@ const Step2 = ({
                     label="Using Vesting Contributor?"
                   />
                 </div>
-                <FormControlLabel
+                {/* <FormControlLabel
                   control={<Checkbox color="primary" />}
                   label="Using Team Vesting?"
-                />
+                /> */}
               </div>
-              <div className="hidden sm:block">
+              {/* <div className="hidden sm:block">
                 <p className="  text-primary-400 mt-4 text-sm">
                   Need 0 ZETA to create launchpad
                 </p>
-              </div>
+              </div> */}
             </div>
             {usingVest && (
               <div className="grid md:grid-cols-2 gap-6 mt-6">

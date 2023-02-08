@@ -44,6 +44,7 @@ const ProjectPreview = () => {
 
    const[_data,set_Data] = useState()
   const[sub_data,set_SubData] = useState()
+  const[strings,setStrings] = useState()
   const[toggle,setToggle] = useState(false)
   const [allocations,setAllocaitons] = useState([])
   const [totalSupply,setTotalSupply] = useState()
@@ -51,6 +52,7 @@ const ProjectPreview = () => {
   const [entitlement,setEntitlement] = useState()
   const[open,setOpen] = useState()
   const[status,setStatus] = useState()
+  const[hash,setHash] = useState()
   
 
 
@@ -77,12 +79,17 @@ const ProjectPreview = () => {
      const PreSaleContract = new web3.eth.Contract(IGOAbi,data[0][IndexA][1]) 
      const ent = await PreSaleContract.methods.getEntitlement(account).call()
       setEntitlement(ent / (10**tdecimals))
+     const _string = await PreSaleContract.methods.getDetails().call()
+
+     setStrings(_string[2])
+     setHash(_string[4])
+
      }
     abc()
   },[toggle,account])
 
 
-
+  console.log("Project Overview ",strings,hash)
 
 const Claim = async ()=>{
   setOpen(true)
@@ -105,10 +112,10 @@ const Claim = async ()=>{
   return (
     <Layout>
      {
-     _data && sub_data && 
+     _data && sub_data && strings && hash && 
            <main className="px-4 pb-10 pt-28 grid grid-cols-1 gap-y-4">
              <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
-             <ProjectOverView data={_data && _data} sub_data={sub_data && sub_data}/>
+             <ProjectOverView data={_data && _data} sub_data={sub_data && sub_data} strings={strings && strings} hash={hash && hash}/>
              <div className=" flex flex-col">
                <div className="flex-1">
                  <Swap data={_data && _data} toggle={toggle} sub_data={sub_data && sub_data} setToggle={setToggle}/>
