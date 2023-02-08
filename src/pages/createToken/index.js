@@ -4,39 +4,23 @@ import { useWeb3React } from "@web3-react/core";
 import React, { useEffect, useState } from "react";
 import { Layout } from "../../components";
 import CustomStepper from "../../components/stepper";
-<<<<<<<<< Temporary merge branch 1
-import {
-  BUSD,
-  chainIdSelected,
-  IERC20,
-  LaunchPadABI,
-  LaunchPadAdd,
-  tokenObj,
-} from "../../config";
-=========
 import { BUSD, chainIdSelected, IERC20, LaunchPadABI, LaunchPadAdd, RouterA, tokenObj } from "../../config";
->>>>>>>>> Temporary merge branch 2
 // import Step1 from "./steps/Step1";
 import { Step1, Step2, Step3 } from "./steps";
 import Step4 from "./steps/Step4";
 import Web3 from "web3";
 import { Router, useNavigate } from "react-router-dom";
 import Papa from "papaparse"
->>>>>>>>> Temporary merge branch 2
 import { Contract } from "ethers";
 
 import { ToastContainer, toast } from 'react-toastify';
 import ResponsiveDialog from "../../Spinner";
 import Launchpad from "../home/Launchpad";
-<<<<<<<<< Temporary merge branch 1
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-=========
 import { formatEther, parseEther } from "@ethersproject/units";
->>>>>>>>> Temporary merge branch 2
 
-const projectId = "2HdKrtd8GBGyqmO0u1BW2Re1hSK";
-const projectSecret = "624bcf5bf92747f385771188371089f4";
+
+const projectId = '2HdKrtd8GBGyqmO0u1BW2Re1hSK';
+const projectSecret = '624bcf5bf92747f385771188371089f4';
 const auth =
     'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
     const ipfsClient = require('ipfs-http-client');
@@ -54,54 +38,6 @@ const CreateToken = () => {
   const { account,library, chainId} = useWeb3React();
   const [open, setOpen] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-<<<<<<<<< Temporary merge branch 1
-  const [title, setTitle] = useState();
-  const [token, setToken] = useState();
-  const [owner, setOwner] = useState();
-  const [noOfToken, setNoOFTokens] = useState();
-  const [price, setPrice] = useState();
-  const [hash, setHash] = useState();
-  const [twitter, setTwitter] = useState();
-  const [medium, setMedium] = useState("a");
-  const [telegram, setTelegram] = useState();
-  const [telegramGroup, setTeleGramGroup] = useState("a");
-  const [Max, setMax] = useState();
-  const [Min, setMin] = useState();
-  const [vesting, setVesting] = useState(0);
-  const [IDOstart, setIDOStart] = useState(
-    dayjs().utc().format("YYYY-MM-DDTHH:mm:ss")
-  );
-  const [IDOEnd, setIDOEnd] = useState(
-    dayjs((dayjs().utc().unix() + 86400) * 1000)
-      .utc()
-      .format("YYYY-MM-DDTHH:mm:ss")
-  );
-  const [currency, setCurrency] = useState(BUSD[chainId]);
-  const [vestingMonths, setVestingMonths] = useState(1);
-  const [symbol, setSymbol] = useState(0);
-  const web3 = new Web3(Web3.givenProvider);
-  const navigate = useNavigate();
-  const [csv, setCSV] = useState([
-    "0xfef5f69FA76f35638Aa3ed77a0644Fa79d31A554",
-  ]);
-  const [team, setTeam] = useState();
-  const [description, setDescription] = useState();
-  const [Allocaiton1, setAllocation1] = useState(0);
-  const [Allocaiton2, setAllocation2] = useState(0);
-  const [Allocaiton3, setAllocation3] = useState(0);
-  const [ListingRate, setListingRate] = useState();
-  const [SoftCap, setSoftCap] = useState();
-  const [hardCap, setHardCap] = useState();
-  const [refund, setRefund] = useState();
-  const [decimals, setDecimals] = useState();
-  const [router, setRouter] = useState(
-    "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-  );
-  const [liquidity, setLiquidity] = useState();
-  const [liquidityLock, setLiquidityLock] = useState();
-  const [status, setStatus] = useState();
-  const [initialVesting, setInitialVesting] = useState(100);
-=========
   const [title,setTitle] = useState()
   const [token,setToken] = useState()
   const [owner,setOwner] = useState()
@@ -147,142 +83,25 @@ const CreateToken = () => {
   const [discord,setDiscord] = useState(" ")
   const [redit,setRedit] = useState(" ")
   const [feePool,setfeePool] = useState(" ")
->>>>>>>>> Temporary merge branch 2
 
   var now = new Date().getTime()/1000
 
-  var now = new Date().getTime() / 1000;
+  const chain = chainId ? chainId : chainIdSelected
 
-<<<<<<<<< Temporary merge branch 1
-  const chain = chainId ? chainId : chainIdSelected;
-
-  const myContract2 = new web3.eth.Contract(
-    LaunchPadABI,
-    LaunchPadAdd[`${chain}`]
-  );
-  console.log(dayjs().format("YYYY-MM-DDTHH:mm:ss"));
-  console.log(
-    dayjs((dayjs().unix() + 86400) * 1000).format("YYYY-MM-DDTHH:mm:ss"),
-    dayjs().unix() + 86400
-  );
-=========
   const myContract2 = new web3.eth.Contract(LaunchPadABI,LaunchPadAdd[`${chain}`])
-  const refundArray = ["Refund","Burn"]
+  
   useEffect(()=>{
     const abc = async()=>{
->>>>>>>>> Temporary merge branch 2
 
-  useEffect(() => {
-    const abc = async () => {
-      if (token && account) {
-        const tokenContract = getTokenContract(library, account, token);
-        const _symbol = await tokenContract.symbol();
-        setSymbol(_symbol);
-        const _name = await tokenContract.name();
-        setTitle(_name);
-        const _decimals = await tokenContract.decimals();
-        setDecimals(_decimals);
+      if(token && account){
+        const tokenContract = getTokenContract(library,account,token)
+        const _symbol = await tokenContract.symbol()
+        setSymbol(_symbol)
+        const _name = await tokenContract.name()
+        setTitle(_name)
+        const _decimals = await tokenContract.decimals()
+        setDecimals(_decimals)
       }
-<<<<<<<<< Temporary merge branch 1
-    };
-
-    abc();
-  }, [token, account, chainId]);
-
-  const array2 = csv && csv.map((v, e) => v[0]);
-
-  csv && array2.pop();
-
-  console.log("string", now);
-  const createPool = async () => {
-    var counter = 0;
-    setOpen(true);
-    setStatus("Creating Pool....");
-    console.log("creat Pool", [
-      [token, account, account, currency, router],
-      [
-        title,
-        symbol,
-        twitter,
-        medium,
-        telegram,
-        telegramGroup,
-        website,
-        discord,
-        facebook,
-        instagram,
-        github,
-        redit,
-      ],
-      [
-        web3.utils.toWei(noOfToken.toString(), "ether"),
-        web3.utils.toWei(price.toString(), "ether"),
-        web3.utils.toWei(Max.toString(), "ether"),
-        web3.utils.toWei(Min.toString(), "ether"),
-        vestingMonths,
-        Date.parse(IDOstart) / 1000,
-        Date.parse(IDOEnd) / 1000,
-        Allocaiton1,
-        Allocaiton2,
-        Allocaiton3,
-        web3.utils.toWei(ListingRate.toString(), "ether"),
-        liquidity,
-        Number(now) + Number(liquidityLock) * 24 * 60 * 60,
-        initialVesting,
-        vesting,
-        web3.utils.toWei(SoftCap.toString(), "ether"),
-        web3.utils.toWei(hardCap.toString(), "ether", refund),
-      ],
-      hash,
-      array2,
-    ]);
-    try {
-      const tx = await myContract2.methods
-        .createPresale(
-          [token, account, account, currency, router],
-          [
-            title,
-            symbol,
-            twitter,
-            medium,
-            telegram,
-            telegramGroup,
-            website,
-            discord,
-            facebook,
-            instagram,
-            github,
-            redit,
-          ],
-          [
-            web3.utils.toWei(noOfToken.toString(), "ether"),
-            web3.utils.toWei(price.toString(), "ether"),
-            web3.utils.toWei(Max.toString(), "ether"),
-            web3.utils.toWei(Min.toString(), "ether"),
-            vestingMonths,
-            Date.parse(IDOstart) / 1000,
-            Date.parse(IDOEnd) / 1000,
-            Allocaiton1,
-            Allocaiton2,
-            Allocaiton3,
-            web3.utils.toWei(ListingRate.toString(), "ether"),
-            liquidity,
-            Number(Math.floor(now) + liquidityLock * 24 * 60 * 60),
-            initialVesting,
-            vesting,
-            web3.utils.toWei(SoftCap.toString(), "ether"),
-            web3.utils.toWei(hardCap.toString(), "ether", refund),
-          ],
-          hash,
-          array2
-        )
-        .send({ from: account })
-        .on("confirmation", (e, r) => {
-          if (counter === 0) {
-            setOpen(false);
-            navigate("/");
-            counter++;
-=========
 
       const _fee = await myContract2.methods.feeForPooCreation().call()
       setfeePool(formatEther(_fee))
@@ -339,9 +158,9 @@ const CreateToken = () => {
     Allocaiton2,
     Allocaiton3,
     web3.utils.toWei(ListingRate.toString(),"ether"),
-    liquidity,(liquidityLock*24*60*60),
+    liquidity,Number(Math.floor(now)+(liquidityLock*24*60*60)),
     initialVesting,vesting,
-    web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether"),refundArray.indexOf(refund)
+    web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether"),refund
   ],
     hash,
     array2).send({from:account,value:parseEther("0.001") }).
@@ -350,7 +169,6 @@ const CreateToken = () => {
             setOpen(false)
             navigate("/")
             counter++  
->>>>>>>>> Temporary merge branch 2
           }
         })
       
@@ -440,15 +258,11 @@ function  updateData(result) {
     } catch (error) {
       console.log("err in approval",error)
     }
-<<<<<<<<< Temporary merge branch 1
-  };
-=========
   }
 
 
-console.log("data in something",refundArray.indexOf(refund))
+console.log("data in something",refund)
 
->>>>>>>>> Temporary merge branch 2
 
   return (
     <Layout>
@@ -688,4 +502,3 @@ description,setDescription,price,listingRate,iDOstart,IDOEnd,Allocaiton1,setAllo
       return <div />;
   }
 };
-
