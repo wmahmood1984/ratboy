@@ -21,20 +21,21 @@ import ResponsiveDialog from "../../Spinner";
 
 const ProjectPreview = () => {
   const {account,library,chainId} = useWeb3React()
-  const web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
+  const web3 = chainId ? new Web3(Web3.givenProvider) :  new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
   var chain = chainId ? chainId : chainIdSelected
+  
   const myContract = new web3.eth.Contract(LaunchPadABI,LaunchPadAdd[`${chain}`])
-  console.log("index",myContract)
+ 
 
 
   let location = useLocation();
-
+  console.log("index",LaunchPadAdd[`${chain}`])
 
   let {params} = useParams()
 
   const getIndex = async ()=>{
     const _ind = await myContract.methods.PresaleMapping(params).call()
-    console.log("index",_ind)
+    console.log("get Index",_ind)
     return _ind
   }
 //  const { Index } = location.state;
@@ -55,9 +56,11 @@ const ProjectPreview = () => {
 
   useEffect(()=>{
     const abc = async()=>{
-      const IndexA = location.state?.Index ? location.state?.Index : await getIndex()
+
+      const IndexA =  location.state?.Index ? location.state?.Index : await getIndex()
       
       const data = await myContract.methods.getPoolDetails().call()
+
       set_Data(data[0][IndexA])
       set_SubData(data[1][IndexA])
       console.log("indexA",data) 
@@ -66,10 +69,10 @@ const ProjectPreview = () => {
       const _alloc = await myContract.methods.getLockContract(data[0][IndexA][2][0]).call()
       setAllocaitons(_alloc)
 
-    const tSupply = await TokenContract.methods.totalSupply().call()
-    const tdecimals = await TokenContract.methods.decimals().call()
-     setTotalSupply(tSupply / (10**tdecimals))
-     setDecimals(tdecimals)
+      const tSupply = await TokenContract.methods.totalSupply().call()
+      const tdecimals = await TokenContract.methods.decimals().call()
+      setTotalSupply(tSupply / (10**tdecimals))
+      setDecimals(tdecimals)
 
      const PreSaleContract = new web3.eth.Contract(IGOAbi,data[0][IndexA][1]) 
      const ent = await PreSaleContract.methods.getEntitlement(account).call()
@@ -78,7 +81,7 @@ const ProjectPreview = () => {
     abc()
   },[toggle,account])
 
-  console.log("data in overview ",sub_data.liquidity)
+
 
 
 const Claim = async ()=>{

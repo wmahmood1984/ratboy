@@ -232,7 +232,7 @@ const CustomInput = ({
   title = "Pay",
   balance = 0,
   icon = Eth,
-  coin = "ETH",
+  coin = window.ethereum?.networkVersion == 97 ? "BNB" : "ETH",
   value,
   disabled,
   setAmount

@@ -51,7 +51,7 @@ const All = ({data}) => {
                 </td>{" "}
                 <td className="py-4 ">
                   <div className="flex r">
-                    <p className="font-medium">{formatEther(token.amount)}</p>
+                    <p className="font-medium">{Number(formatEther(token.amount)).toFixed(4)}</p>
                     <p className="font-normal ml-2">{token.symbol}</p>
                   </div>
                 </td>

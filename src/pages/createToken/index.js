@@ -4,12 +4,12 @@ import { useWeb3React } from "@web3-react/core";
 import React, { useEffect, useState } from "react";
 import { Layout } from "../../components";
 import CustomStepper from "../../components/stepper";
-import { BUSD, chainIdSelected, IERC20, LaunchPadABI, LaunchPadAdd, tokenObj } from "../../config";
+import { BUSD, chainIdSelected, IERC20, LaunchPadABI, LaunchPadAdd, RouterA, tokenObj } from "../../config";
 // import Step1 from "./steps/Step1";
 import { Step1, Step2, Step3 } from "./steps";
 import Step4 from "./steps/Step4";
 import Web3 from "web3";
-import { useNavigate } from "react-router-dom";
+import { Router, useNavigate } from "react-router-dom";
 import Papa from "papaparse"
 import { Contract } from "ethers";
 
@@ -53,7 +53,7 @@ const CreateToken = () => {
   const [vesting,setVesting] = useState(0)
   const [IDOstart,setIDOStart] = useState()
   const [IDOEnd,setIDOEnd] = useState()
-  const [currency,setCurrency] = useState(BUSD[`${chainId}`])
+  const [currency,setCurrency] = useState("0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee")
   const [vestingMonths,setVestingMonths] = useState(1)
   const [symbol,setSymbol] = useState(0)
   const web3 = new Web3(Web3.givenProvider)
@@ -69,7 +69,7 @@ const CreateToken = () => {
   const [hardCap,setHardCap] = useState()
   const [refund,setRefund] = useState()
   const [decimals,setDecimals] = useState()
-  const [router,setRouter] = useState("0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D")
+  const [router,setRouter] = useState(RouterA[`${chainId}`])
   const [liquidity,setLiquidity]= useState()
   const [liquidityLock,setLiquidityLock]= useState()
   const [status,setStatus] = useState()
@@ -89,7 +89,7 @@ const CreateToken = () => {
   const chain = chainId ? chainId : chainIdSelected
 
   const myContract2 = new web3.eth.Contract(LaunchPadABI,LaunchPadAdd[`${chain}`])
-
+  const refundArray = ["Refund","Burn"]
   useEffect(()=>{
     const abc = async()=>{
 
@@ -105,6 +105,7 @@ const CreateToken = () => {
 
       const _fee = await myContract2.methods.feeForPooCreation().call()
       setfeePool(formatEther(_fee))
+      console.log("string",_fee)
     }
 
     abc()
@@ -118,7 +119,7 @@ const CreateToken = () => {
   csv && array2.pop()
 
 
-console.log("string",now)
+
   const createPool = async ()=>{
     var counter = 0 
     setOpen(true)
@@ -136,9 +137,9 @@ console.log("string",now)
     Allocaiton2,
     Allocaiton3,
     web3.utils.toWei(ListingRate.toString(),"ether"),
-    liquidity,(Number(now)+(Number(liquidityLock)*24*60*60)),
+    liquidity,Number(Math.floor(now)+(liquidityLock*24*60*60)),
     initialVesting,vesting,
-    web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether",refund )
+    web3.utils.toWei(SoftCap.toString(),"ether"),web3.utils.toWei(hardCap.toString(),"ether"),refund
   ],
     hash,
     array2])
@@ -157,12 +158,12 @@ console.log("string",now)
     Allocaiton2,
     Allocaiton3,
     web3.utils.toWei(ListingRate.toString(),"ether"),
-    liquidity,Number(Math.floor(now)+(liquidityLock*24*60*60)),
+    liquidity,(liquidityLock*24*60*60),
     initialVesting,vesting,
-    web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether",refund )
+    web3.utils.toWei(SoftCap.toString(),"ether"),    web3.utils.toWei(hardCap.toString(),"ether"),refundArray.indexOf(refund)
   ],
     hash,
-    array2).send({from:account,value:parseEther(feePool) }).
+    array2).send({from:account,value:parseEther("0.001") }).
         on("confirmation",(e,r)=>{
           if(counter===0){
             setOpen(false)
@@ -259,6 +260,8 @@ function  updateData(result) {
     }
   }
 
+
+console.log("data in something",refundArray.indexOf(refund))
 
 
   return (
