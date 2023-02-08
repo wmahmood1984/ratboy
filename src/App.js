@@ -14,6 +14,7 @@ import LockRecordDetails from "./pages/LockRecordDetails";
 import MyTokens from "./pages/MyTokens";
 import LpLockList from "./pages/LpLockList";
 import TokenCreateSuccess from "./pages/tokenCreateSuccess";
+import EditPresale from "./pages/editpresale";
 
 function App() {
   const theme = createTheme({
@@ -56,6 +57,7 @@ function App() {
           <Route path="my_tokens" element={<MyTokens />} />
           <Route path="lp_list" element={<LpLockList />} />
           <Route path="token_create_success" element={<TokenCreateSuccess />} />
+          <Route path="edit_presale" element={<EditPresale />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

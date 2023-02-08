@@ -1,10 +1,13 @@
+import dayjs from "dayjs";
 import React from "react";
 import { Link } from "react-router-dom";
 import ListItem from "../../../components/listItem";
 import StepWrap from "../components/StepWrap";
 
-const Step4 = ({ increaseStep, decreaseStep
-  ,hardCap,
+const Step4 = ({
+  increaseStep,
+  decreaseStep,
+  hardCap,
   decimals,
   symbol,
   price,
@@ -19,30 +22,34 @@ const Step4 = ({ increaseStep, decreaseStep
   facebook,
   twitter,
   telegram,
-  github,  instagram,
+  github,
+  instagram,
   redit,
-  name,noOfToken,
+  name,
+  noOfToken,
   iDOstart,
-  createPool,description
+  createPool,
+  description,
 }) => {
+  const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
-  const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
+  // function dateFormat(stringA) {
+  //   var string = Date.parse(stringA);
+  //   var day = new Date(string).getDay();
+  //   var date = new Date(string).getUTCDate();
+  //   var month = new Date(string).getUTCMonth() + 1;
+  //   var _year1 = new Date(string).getUTCFullYear();
+  //   var hours = new Date(string).getUTCHours();
+  //   var formatedHours = hours / 10 > 1 ? `${hours}` : `0${hours}`;
+  //   var minutes = new Date(string).getUTCMinutes();
+  //   var formatedMinutes = minutes / 10 > 1 ? `${minutes}` : `0${minutes}`;
 
-  function dateFormat(stringA){
-    var string = Date.parse(stringA)
-    var day = new Date(string).getDay()
-    var date = new Date(string).getUTCDate()
-    var month = new Date(string).getUTCMonth()+1
-    var _year1 = new Date(string).getUTCFullYear()
-    var hours = new Date(string).getUTCHours()
-    var formatedHours = hours/10>1? `${hours}` : `0${hours}`
-    var minutes = new Date(string).getUTCMinutes()
-    var formatedMinutes = minutes/10>1? `${minutes}` : `0${minutes}`
-    
-    return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`
-  }
+  //   return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`;
+  // }
+  const dateFormat = (string) => {
+    return dayjs(string).format("YYYY-MM-DD, HH:mm:ss");
+  };
 
-  
   const detailList1 = [
     {
       title: "Total token",
@@ -149,8 +156,6 @@ const Step4 = ({ increaseStep, decreaseStep
     },
   ];
 
-
-
   return (
     <StepWrap>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -172,9 +177,7 @@ const Step4 = ({ increaseStep, decreaseStep
       <div className="text-sm mt-10 flex justify-between pb-2 items-center border-b border-lightDark">
         <p className=" ">Description</p>
       </div>
-      <p className="text-gray-400 text-xs sm:text-sm mt-2">
-        {description}
-      </p>
+      <p className="text-gray-400 text-xs sm:text-sm mt-2">{description}</p>
       <div className="grid grid-flow-col gap-x-8 mt-10 justify-center items-center">
         <button
           onClick={decreaseStep}
@@ -183,13 +186,12 @@ const Step4 = ({ increaseStep, decreaseStep
           BACK
         </button>
 
-          <button
-            onClick={createPool}
-            className=" bg-primary-400 border border-primary-400  py-2 px-8 rounded-md  font-semibold "
-          >
-            NEXT
-          </button>
-
+        <button
+          onClick={createPool}
+          className=" bg-primary-400 border border-primary-400  py-2 px-8 rounded-md  font-semibold "
+        >
+          NEXT
+        </button>
       </div>
     </StepWrap>
   );
