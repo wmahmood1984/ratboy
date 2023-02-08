@@ -8,7 +8,7 @@ import Tag from "../../components/tag";
 const Launchpad = ({ data, keyA, subData }) => {
   var now = new Date().getTime() / 1000;
 
-
+  console.log("Launchpad ",data[4][5],data[4][6],now)
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow">
@@ -22,15 +22,15 @@ const Launchpad = ({ data, keyA, subData }) => {
               {" "}
               {/* <Tag upcoming={now < data[4][6]} end={now > data[4][7]} /> */}
               <div
-                className={`${now < data[4][6] ? 
+                className={`${now < data[4][5] ? 
                   "text-red-400  bg-yellow-400" : 
-                  now > data[4][7] ? " text-red-400  bg-red-400 " : "text-green-400  bg-green-400"
+                  now > data[4][6] ? " text-red-400  bg-red-400 " : "text-green-400  bg-green-400"
                 }  bg-opacity-30 text-yellow max-w-max p-0.5 sm:py-2 mt-2 sm:px-4 ml-auto rounded-md text-xs sm:text-sm`}
               >
                 <p className=" uppercase flex flex-nowrap">
                   {" "}
                   <p className="block">•</p>&nbsp;{" "}
-                  <p>{now < data[4][6] ? "upComing" : now > data[4][7] ? "Ended" : "Live"}</p>
+                  <p>{now < data[4][5] ? "upComing" : now > data[4][6] ? "Ended" : "Live"}</p>
                 </p>
               </div>
             </div>
@@ -43,25 +43,25 @@ const Launchpad = ({ data, keyA, subData }) => {
             </p>
             <div className="sm:hidden">
               <p>
-                <DailyTimer start={data[4][6]} />
+                <DailyTimer start={data[4][5]} end={data[4][6]}/>
               </p>
             </div>
           </div>
         </div>
         <div className="hidden sm:block">
           <p>
-            <DailyTimer start={data[4][6]} />
+            <DailyTimer start={data[4][5]} end={data[4][6]} />
           </p>
           <div
-                className={`${now < data[4][6] ? 
+                className={`${now < data[4][5] ? 
                   "text-red-400  bg-yellow-400" : 
-                  now > data[4][7] ? " text-red-400  bg-red-400 " : "text-green-400  bg-green-400"
+                  now > data[4][6] ? " text-red-400  bg-red-400 " : "text-green-400  bg-green-400"
                 }  bg-opacity-30 text-yellow max-w-max p-0.5 sm:py-2 mt-2 sm:px-4 ml-auto rounded-md text-xs sm:text-sm`}
               >
                 <p className=" uppercase flex flex-nowrap">
                   {" "}
                   <p className="block">•</p>&nbsp;{" "}
-                  <p>{now < data[4][6] ? "upComing" : now > data[4][7] ? "Ended" : "Live"}</p>
+                  <p>{now < data[4][5] ? "upComing" : now > data[4][6] ? "Ended" : "Live"}</p>
                 </p>
               </div>
         </div>
@@ -87,7 +87,7 @@ const Launchpad = ({ data, keyA, subData }) => {
         />
         <div className="font-bold flex justify-between items-center mt-1">
           <p>
-            {subData.investedBUSD} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}
+            {subData?.investedBUSD} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}
           </p>
           <p>{data[4][16] ? formatEther(data[4][16]):10000} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}</p>
         </div>
@@ -98,7 +98,7 @@ const Launchpad = ({ data, keyA, subData }) => {
       </div>
       <div className="flex justify-between items-center mt-2">
         <p className="font-bold">Lockup Time </p>
-        <p>365 Minutes </p>
+        <p>{data[4][12]/(24*60*60)} </p>
       </div>
 
       <button className="bg-primary-400 px-14 mt-6 py-1.5 sm:py-3 mx-auto block rounded-md text-white">

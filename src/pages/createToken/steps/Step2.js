@@ -231,7 +231,7 @@ const Step2 = ({
                       <span className="text-red-400">*</span>
                     </p>
                   </div>
-                  <CustomDatePicker value={IDOEnd} setValue={setIDOEnd} />
+                  <CustomDatePicker value={IDOstart+(24*60*60*1000)} setValue={setIDOEnd} />
                 </div>
               </div>
               <CustomInputWithLabel

@@ -26,7 +26,7 @@ const LockDetails = () => {
   }
 
   const { account,library, chainId} = useWeb3React();
-  const web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
+  const web3 = chainId ? new Web3(Web3.givenProvider) :  new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
   const myContract = chainId ?  new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chainId}`])
   : new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`5`])
 
@@ -43,6 +43,7 @@ const LockDetails = () => {
       }else{
         const data = await myContract.methods.getArray().call()
         const fdata = data.filter(item=>item._contract==params)
+        console.log("data in lp lock",data)
 
         setState(fdata[0])
       }
@@ -80,7 +81,7 @@ const LockDetails = () => {
           <p className="p-4  border-b dark:border-lightDark">Lock Info</p>
           <div className="p-4">
             <div className="grid gap-y-4 mt-4">
-              <ListItem title={" Current Locked Amount"} desc={stateA && `${formatEther(stateA.amount)} ${stateA.symbol} `} />
+              <ListItem title={" Current Locked Amount"} desc={stateA && `${Number(formatEther(stateA.amount)).toFixed(4)} ${stateA.symbol} `} />
               {/* <ListItem title={"Current Values Locked"} desc={"$0"} />{" "} */}
               <ListItem
                 linkable={true}

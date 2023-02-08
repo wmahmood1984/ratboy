@@ -3,13 +3,16 @@ import React, { useEffect,useState } from 'react'
 
 
 
-export default function DailyTimer({start}) {
+export default function DailyTimer({start,end}) {
 
     const [seconds, setSeconds] = useState(60);
 
     const stakeTime = Number(start);
+    const stakeTime2 = Number(end);
     var currentTimeinSeconds = new Date().getTime() / 1000
-    var differenceTimeinSeconds = Math.trunc(stakeTime - currentTimeinSeconds)
+    var startdiff = Math.trunc(stakeTime - currentTimeinSeconds)
+    var enddiff = Math.trunc(stakeTime2 - currentTimeinSeconds)
+    var differenceTimeinSeconds = startdiff > 0 ? startdiff : enddiff
 
 
     var DaysRemaining = Math.trunc((differenceTimeinSeconds /60 /60/24))
@@ -40,7 +43,7 @@ export default function DailyTimer({start}) {
             <div
             >
             {differenceTimeinSeconds > 0 ? <div>
-              Sale Starts In:
+              Sale {`${differenceTimeinSeconds == startdiff ? "Starts" : "Ends"}`} In:
             <span className="custom">{DaysRemaining} : </span>
             <span>{HoursRemaining} :     </span>
             <span>{MinutesRemaining} :     </span>

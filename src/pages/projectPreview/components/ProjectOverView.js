@@ -56,7 +56,7 @@ const ProjectOverView = ({data}) => {
 
 
   const web3 = new Web3(Web3.givenProvider)
-  var now = new Date().getTime()/1000
+  var now = new Date().getTime() / 1000;
   const contract = new web3.eth.Contract(IERC20,data[2][0])
   const [name,setName]=useState()
   const [symbol,setSymbol]=useState()
@@ -137,7 +137,7 @@ const ProjectOverView = ({data}) => {
     },
   ];
 
-  console.log("data in overview",data)
+  console.log("Project Overview ",data[4][5],data[4][6],now)
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl">
@@ -152,7 +152,19 @@ const ProjectOverView = ({data}) => {
           </button>
         </div>
         <div>
-        <Tag upcoming={now < data[4][6]} end={now > data[4][7]} />
+        {/* <Tag upcoming={now < data[4][5]} end={now > data[4][6]} /> */}
+        <div
+                className={`${now < data[4][5] ? 
+                  "text-red-400  bg-yellow-400" : 
+                  now > data[4][6] ? " text-red-400  bg-red-400 " : "text-green-400  bg-green-400"
+                }  bg-opacity-30 text-yellow max-w-max p-0.5 sm:py-2 mt-2 sm:px-4 ml-auto rounded-md text-xs sm:text-sm`}
+              >
+                <p className=" uppercase flex flex-nowrap">
+                  {" "}
+                  <p className="block">•</p>&nbsp;{" "}
+                  <p>{now < data[4][5] ? "upComing" : now > data[4][6] ? "Ended" : "Live"}</p>
+                </p>
+              </div>
         </div>
       </div>
       <div>

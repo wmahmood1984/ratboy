@@ -158,14 +158,14 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
 
 
 
-//  console.log("first",Number(formatEther(data.investedTokens))/Number(formatEther(data[4][0]))*100)
+
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl py-14 h-full flex justify-center items-center  flex-col ">
          
       <div className="w-full">
      
         {/* <Timer /> */}
-        <Timer start={data[4][6]} />
+        <Timer start={data[4][5]}  end={data[4][6]} />
         <div>
           <Progressbar complete={Number(sub_data.investedBUSD) / Number(formatEther(data[4][0]))} />
           <div className="flex items-center justify-between mt-1">
@@ -207,6 +207,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
             </p>
           </div>
           <button 
+          disabled={now<data[4][5] || now > data[4][6]}
           onClick={_Swap}
           className=" text-white rounded-lg py-1.5 sm:py-4 bg-primary-400 w-full text-xl font-bold">
             Buy
@@ -231,7 +232,7 @@ const CustomInput = ({
   title = "Pay",
   balance = 0,
   icon = Eth,
-  coin = "ETH",
+  coin = window.ethereum?.networkVersion == 97 ? "BNB" : "ETH",
   value,
   disabled,
   setAmount

@@ -7,7 +7,7 @@ const Tag = ({ upcoming , end  }) => {
   ? "text-yellow-600  bg-yellow-400"
   : end
   ? " text-red-600  bg-red-400 "
-  : "";
+  : "text-green-400  bg-green-400";
 
   return (
     <div

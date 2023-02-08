@@ -10,22 +10,23 @@ import {
   IERC20,
   LaunchPadABI,
   LaunchPadAdd,
+  RouterA,
   tokenObj,
 } from "../../config";
 // import Step1 from "./steps/Step1";
 import { Step1, Step2, Step3 } from "./steps";
 import Step4 from "./steps/Step4";
 import Web3 from "web3";
-import { useNavigate } from "react-router-dom";
+import { Router, useNavigate } from "react-router-dom";
 import Papa from "papaparse";
 import { Contract } from "ethers";
 
 import { ToastContainer, toast } from "react-toastify";
 import ResponsiveDialog from "../../Spinner";
 import Launchpad from "../home/Launchpad";
+import { formatEther, parseEther } from "@ethersproject/units";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-
 const projectId = "2HdKrtd8GBGyqmO0u1BW2Re1hSK";
 const projectSecret = "624bcf5bf92747f385771188371089f4";
 const auth =
@@ -64,7 +65,9 @@ const CreateToken = () => {
       .utc()
       .format("YYYY-MM-DDTHH:mm:ss")
   );
-  const [currency, setCurrency] = useState(BUSD[chainId]);
+  const [currency, setCurrency] = useState(
+    "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee"
+  );
   const [vestingMonths, setVestingMonths] = useState(1);
   const [symbol, setSymbol] = useState(0);
   const web3 = new Web3(Web3.givenProvider);
@@ -82,9 +85,7 @@ const CreateToken = () => {
   const [hardCap, setHardCap] = useState();
   const [refund, setRefund] = useState();
   const [decimals, setDecimals] = useState();
-  const [router, setRouter] = useState(
-    "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-  );
+  const [router, setRouter] = useState(RouterA[`${chainId}`]);
   const [liquidity, setLiquidity] = useState();
   const [liquidityLock, setLiquidityLock] = useState();
   const [status, setStatus] = useState();
@@ -97,7 +98,7 @@ const CreateToken = () => {
   const [discord, setDiscord] = useState(" ");
   const [redit, setRedit] = useState(" ");
 
-  var now = new Date().getTime() / 1000;
+  const [feePool, setfeePool] = useState(" ");
 
   const chain = chainId ? chainId : chainIdSelected;
 
@@ -111,6 +112,7 @@ const CreateToken = () => {
     dayjs().unix() + 86400
   );
 
+  const refundArray = ["Refund", "Burn"];
   useEffect(() => {
     const abc = async () => {
       if (token && account) {
@@ -122,6 +124,10 @@ const CreateToken = () => {
         const _decimals = await tokenContract.decimals();
         setDecimals(_decimals);
       }
+
+      const _fee = await myContract2.methods.feeForPooCreation().call();
+      setfeePool(formatEther(_fee));
+      console.log("string", _fee);
     };
 
     abc();
@@ -131,7 +137,9 @@ const CreateToken = () => {
 
   csv && array2.pop();
 
-  console.log("string", now);
+  csv && array2.pop();
+  var now = new Date().getTime() / 1000;
+
   const createPool = async () => {
     var counter = 0;
     setOpen(true);
@@ -165,11 +173,12 @@ const CreateToken = () => {
         Allocaiton3,
         web3.utils.toWei(ListingRate.toString(), "ether"),
         liquidity,
-        Number(now) + Number(liquidityLock) * 24 * 60 * 60,
+        Number(Math.floor(now) + liquidityLock * 24 * 60 * 60),
         initialVesting,
         vesting,
         web3.utils.toWei(SoftCap.toString(), "ether"),
-        web3.utils.toWei(hardCap.toString(), "ether", refund),
+        web3.utils.toWei(hardCap.toString(), "ether"),
+        refund,
       ],
       hash,
       array2,
@@ -205,16 +214,17 @@ const CreateToken = () => {
             Allocaiton3,
             web3.utils.toWei(ListingRate.toString(), "ether"),
             liquidity,
-            Number(Math.floor(now) + liquidityLock * 24 * 60 * 60),
+            liquidityLock * 24 * 60 * 60,
             initialVesting,
             vesting,
             web3.utils.toWei(SoftCap.toString(), "ether"),
-            web3.utils.toWei(hardCap.toString(), "ether", refund),
+            web3.utils.toWei(hardCap.toString(), "ether"),
+            refundArray.indexOf(refund),
           ],
           hash,
           array2
         )
-        .send({ from: account })
+        .send({ from: account, value: parseEther("0.001") })
         .on("confirmation", (e, r) => {
           if (counter === 0) {
             setOpen(false);
@@ -307,6 +317,8 @@ const CreateToken = () => {
       console.log("err in approval", error);
     }
   };
+
+  console.log("data in something", refundArray.indexOf(refund));
 
   return (
     <Layout>
