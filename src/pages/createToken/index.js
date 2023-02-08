@@ -47,15 +47,15 @@ const CreateToken = () => {
   const [title, setTitle] = useState();
   const [token, setToken] = useState();
   const [owner, setOwner] = useState();
-  const [noOfToken, setNoOFTokens] = useState();
-  const [price, setPrice] = useState();
+  const [noOfToken, setNoOFTokens] = useState(10000000);
+  const [price, setPrice] = useState(0.001);
   const [hash, setHash] = useState();
   const [twitter, setTwitter] = useState();
   const [medium, setMedium] = useState("a");
   const [telegram, setTelegram] = useState();
   const [telegramGroup, setTeleGramGroup] = useState("a");
-  const [Max, setMax] = useState();
-  const [Min, setMin] = useState();
+  const [Max, setMax] = useState(0.001);
+  const [Min, setMin] = useState(0.003);
   const [vesting, setVesting] = useState(0);
   const [IDOstart, setIDOStart] = useState(
     dayjs().utc().format("YYYY-MM-DDTHH:mm:ss")
@@ -80,9 +80,9 @@ const CreateToken = () => {
   const [Allocaiton1, setAllocation1] = useState(0);
   const [Allocaiton2, setAllocation2] = useState(0);
   const [Allocaiton3, setAllocation3] = useState(0);
-  const [ListingRate, setListingRate] = useState();
-  const [SoftCap, setSoftCap] = useState();
-  const [hardCap, setHardCap] = useState();
+  const [ListingRate, setListingRate] = useState(0.001);
+  const [SoftCap, setSoftCap] = useState(0.001);
+  const [hardCap, setHardCap] = useState(0.003);
   const [refund, setRefund] = useState();
   const [decimals, setDecimals] = useState();
   const [router, setRouter] = useState(RouterA[`${chainId}`]);
@@ -135,6 +135,11 @@ const CreateToken = () => {
   csv && array2.pop();
   var now = new Date().getTime() / 1000;
 
+  const toUnix = (string) => {
+    return dayjs(string).utc(true).unix();
+  };
+
+  console.log(Date.parse(IDOstart) / 1000, toUnix(IDOstart));
   const createPool = async () => {
     var counter = 0;
     setOpen(true);
@@ -202,8 +207,8 @@ const CreateToken = () => {
             web3.utils.toWei(Max.toString(), "ether"),
             web3.utils.toWei(Min.toString(), "ether"),
             vestingMonths,
-            Date.parse(IDOstart) / 1000,
-            Date.parse(IDOEnd) / 1000,
+            toUnix(IDOstart),
+            toUnix(IDOEnd),
             Allocaiton1,
             Allocaiton2,
             Allocaiton3,
