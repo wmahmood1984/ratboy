@@ -67,7 +67,7 @@ const CreateToken = () => {
   const [ListingRate,setListingRate] = useState()
   const [SoftCap,setSoftCap] = useState()
   const [hardCap,setHardCap] = useState()
-  const [refund,setRefund] = useState()
+  const [refund,setRefund] = useState("Refund")
   const [decimals,setDecimals] = useState()
   const [router,setRouter] = useState(RouterA[`${chainId}`])
   const [liquidity,setLiquidity]= useState()
