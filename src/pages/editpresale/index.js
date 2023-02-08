@@ -28,21 +28,21 @@ const web3 = new Web3(Web3.givenProvider)
 const EditPresale = () => {
   const {state} = useLocation()
   const {chainId,account} = useWeb3React()
-  const [website,setWebsite] = useState.strings(`${state.strings[2]}`)
-  const [facebook,setFacebook] = useState.strings(`${state.strings[3]}`)
-  const [twitter,setTwitter] = useState.strings(`${state.strings[4]}`)
-  const [github,setGithub] = useState.strings(`${state.strings[5]}`)
-  const [telegram,setTelegram] = useState.strings(`${state.strings[6]}`)
-  const [instagram,setInstagram] = useState.strings(`${state.strings[7]}`)
-  const [discord,setDiscord] = useState.strings(`${state.strings[8]}`)
-  const [redit,setRedit] = useState.strings(`${state.strings[9]}`)
-  const [desc,setDesc] = useState.strings(`${state.strings[10]}`)
-  const [hash,setHash] = useState.strings(`${state.hash}`)
-  const [open,setOpen] = useState.strings(false)
-  const [status,setStatus] = useState.strings("")
+  const [website,setWebsite] = useState(`${state.strings[2]}`)
+  const [facebook,setFacebook] = useState(`${state.strings[3]}`)
+  const [twitter,setTwitter] = useState(`${state.strings[4]}`)
+  const [github,setGithub] = useState(`${state.strings[5]}`)
+  const [telegram,setTelegram] = useState(`${state.strings[6]}`)
+  const [instagram,setInstagram] = useState(`${state.strings[7]}`)
+  const [discord,setDiscord] = useState(`${state.strings[8]}`)
+  const [redit,setRedit] = useState(`${state.strings[9]}`)
+  const [desc,setDesc] = useState(`${state.strings[10]}`)
+  const [hash,setHash] = useState(`${state.hash}`)
+  const [open,setOpen] = useState(false)
+  const [status,setStatus] = useState("")
   const navigate = useNavigate()
- 
-  const myContract2 = new web3.eth.Contract(IGOAbi,state.strings[1])
+  console.log("data in edit",state) 
+  const myContract2 = new web3.eth.Contract(IGOAbi,state.data[1])
 
 
 
@@ -164,7 +164,7 @@ const EditPresale = () => {
   }
 }
 
-  console.log("data in edit",state.strings)
+
   return (
     <Layout>
       <div className="px-6 mb-10 ">

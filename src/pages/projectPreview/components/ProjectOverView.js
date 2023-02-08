@@ -152,7 +152,7 @@ const ProjectOverView = ({data,strings,hash}) => {
           </div>
           <Link
           to="/edit_presale"
-          state={{strings,hash}}
+          state={{strings,hash,data}}
           className="text-xl sm:text-2xl">
             <FaRegEdit />
           </Link>

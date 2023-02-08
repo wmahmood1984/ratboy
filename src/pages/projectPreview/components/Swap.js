@@ -157,7 +157,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
   }
 
 
-
+  console.log("data in edit",data)
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl py-14 h-full flex justify-center items-center  flex-col ">
@@ -208,7 +208,17 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
           </div>
           <button 
           disabled={now<data[4][5] || now > data[4][6]}
-          onClick={_Swap}
+          onClick={
+            ()=>{
+              if(data[5].length == 0 || data[5].indexOf(account)>=0 ){
+                _Swap()
+              }else{
+                toast.error("You are not in white list")
+              }
+
+            }
+ 
+          }
           className=" text-white rounded-lg py-1.5 sm:py-4 bg-primary-400 w-full text-xl font-bold">
             Buy
           </button>
