@@ -136,7 +136,7 @@ const CustomInputWithIcon = ({
         {label}
         {required && <span className=" text-red-400 ">*</span>}
       </label>
-      <div className="dark:bg-dark-500 border border-lightDark rounded-md flex h-12">
+      <div className="dark:bg-dark-500 border border-lightDark rounded-md flex h-12 overflow-hidden">
         <div className="flex justify-center items-center w-12 text-primary-400 text-xl border border-primary-400 rounded-l-md">
           {icon}
         </div>
