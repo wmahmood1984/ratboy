@@ -33,7 +33,7 @@ const ProjectPreview = () => {
   let {params} = useParams()
 
 
-  console.log("index",location,params.split("="))
+
 
   let splittedParams = params.split("=")
   var chain = chainId ? chainId : splittedParams[1]
@@ -102,7 +102,7 @@ const ProjectPreview = () => {
   },[toggle,account])
 
 
-  console.log("Project Overview ",strings,hash)
+  console.log("Project Overview ",allocations)
 
 const Claim = async ()=>{
   setOpen(true)

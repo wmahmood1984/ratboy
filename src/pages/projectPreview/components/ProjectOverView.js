@@ -49,7 +49,7 @@ const SocialIcons = [
   },
 ];
 
-const ProjectOverView = ({ data, strings, hash }) => {
+const ProjectOverView = ({ data, strings, hash,sub_data }) => {
   const web3 = new Web3(Web3.givenProvider);
   var now = new Date().getTime() / 1000;
   const contract = new web3.eth.Contract(IERC20, data[2][0]);
@@ -315,15 +315,18 @@ const ProjectOverView = ({ data, strings, hash }) => {
             <React.Fragment>
               <ListItem title={"Liquidity Percent"} desc={`${data[4][11]}%`} />
             </React.Fragment>
+            {sub_data.liquidity!=0 ?
             <React.Fragment>
-              <ListItem
-                color={"primary"}
-                linkable={true}
-                refA={"/lp_list"}
-                title={"Liquidity Lockup Time"}
-                desc={`${dateFormat(data[4][12] * 1000)}`}
-              />
-            </React.Fragment>
+            <ListItem
+              color={"primary"}
+              linkable={true}
+              refA={"/lp_list"}
+              title={"Liquidity Lockup Time"}
+              desc={`${dateFormat(sub_data.liquidity * 1000)}`}
+            />
+          </React.Fragment> : null
+            }
+
           </div>
         </div>
       </div>

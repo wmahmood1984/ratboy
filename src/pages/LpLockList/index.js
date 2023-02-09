@@ -11,7 +11,7 @@ const LpLockList = () => {
 
   const [selectedTab, setSelectedTab] = useState(0);
   const tabs = ["All", "My Lock"];
-  const { account,library, chainId} = useWeb3React();
+  const { account, chainId} = useWeb3React();
   const [DataA,setData] = useState()
 
   const web3 = chainId ? new Web3(Web3.givenProvider) :  new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
@@ -38,12 +38,12 @@ const LpLockList = () => {
 }, [account])
 
 
-const Data = DataA && DataA.filter(item=>item.LP==true)
-const MYLock = DataA && Data.filter(item=>item.user==account)
+const Data = DataA && web3 && DataA.filter(item=>item.LP==true)
+const MYLock = DataA && web3 && Data.filter(item=>item.user==account)
 
 
 
-console.log("Launchpad ", DataA);
+console.log("Launchpad ",chainId,web3,myContract,DataA,Data)
 
          
 
