@@ -210,7 +210,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
           disabled={now<data[4][5] || now > data[4][6]}
           onClick={
             ()=>{
-              if(data[5].length == 0 || data[5].indexOf(account)>=0 ){
+              if(data[6].length == 0 || data[6].indexOf(account)>=0 ){
                 _Swap()
               }else{
                 toast.error("You are not in white list")
