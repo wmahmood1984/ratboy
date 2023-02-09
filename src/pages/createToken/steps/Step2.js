@@ -73,12 +73,12 @@ const Step2 = ({
                 <p>
                   Token Address <span className="text-red-400">*</span>
                 </p>
-                <p className="hidden sm:flex  text-violet-500 dark:text-violet-300 text-sm  items-center">
+                {/* <p className="hidden sm:flex  text-violet-500 dark:text-violet-300 text-sm  items-center">
                   <span>If i spent 1 BNB how many tokens i will recieve</span>
                   <span className="ml-1 cursor-pointer">
                     <AiOutlineQuestionCircle />
                   </span>
-                </p>
+                </p> */}
               </div>
               <CustomInput
                 value={token}
@@ -135,6 +135,13 @@ const Step2 = ({
               <div>
                 <div className="flex justify-between items-center">
                   <p>Whitelist</p>
+                  <a
+                    href="/whitelist-sample.csv"
+                    download
+                    className="text-primary-400 text-xs"
+                  >
+                    Download Sample File
+                  </a>
                 </div>
                 <div
                   className="dark:bg-dark-500 border border-lightDark rounded-md"

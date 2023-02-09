@@ -5,18 +5,18 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { convertLength } from "@mui/material/styles/cssUtils";
 dayjs.extend(utc);
 dayjs.extend(customParseFormat);
-const Timer = ({start, end}) => {
+const Timer = ({ start, end }) => {
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
   //   console.log("TIME", dayjs(Date.now()).utc().format());
-  const startDiff = start*1000 - new Date().getTime()
-  const endDiff = end*1000 - new Date().getTime()
-  const difference = startDiff > 0 ? startDiff : endDiff 
-    // +dayjs.utc(`${Date.parse(start*1000)}`, "YYYY-MM-DDTHH:mm:ss.000ZZ") -
-    // +Date.now();
+  const startDiff = start * 1000 - new Date().getTime();
+  const endDiff = end * 1000 - new Date().getTime();
+  const difference = startDiff > 0 ? startDiff : endDiff;
+  // +dayjs.utc(`${Date.parse(start*1000)}`, "YYYY-MM-DDTHH:mm:ss.000ZZ") -
+  // +Date.now();
   useEffect(() => {
     const id = setTimeout(() => {
       if (difference > 0) {
@@ -31,8 +31,6 @@ const Timer = ({start, end}) => {
       clearTimeout(id);
     };
   });
-
-
 
   const timeList = [
     {
@@ -53,21 +51,33 @@ const Timer = ({start, end}) => {
     },
   ];
   return (
-    <div  className=" grid grid-flow-col mt-4 gap-x-4 px-10 justify-center">
-      {difference >0  ? `Sale ${difference == startDiff ? "Starts" :difference == endDiff ? "Ends" : null} In:`: null}
-      {timeList.map((val, i) => (
-        <div
-          key={i}
-          className="text-center dark:bg-dark-700 py-1.5 w-12 sm:w-16"
-        >
-          <p className=" text-xl md:text-3xl font-bold">
-            {String(val.time).padStart(2, 0)}
-          </p>
-          <p className="font-bold text-xs sm:text-base text-gray-600">
-            {val.title}
-          </p>
-        </div>
-      ))}
+    <div className="">
+      <p className="text-center">
+        {difference > 0
+          ? `Sale ${
+              difference == startDiff
+                ? "Starts"
+                : difference == endDiff
+                ? "Ends"
+                : null
+            } In`
+          : null}
+      </p>
+      <div className=" grid grid-flow-col mt-4 gap-x-4 px-10 justify-center">
+        {timeList.map((val, i) => (
+          <div
+            key={i}
+            className="text-center dark:bg-dark-700 py-1.5 w-12 sm:w-16"
+          >
+            <p className=" text-xl md:text-3xl font-bold">
+              {String(val.time).padStart(2, 0)}
+            </p>
+            <p className="font-bold text-xs sm:text-base text-gray-600">
+              {val.title}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
