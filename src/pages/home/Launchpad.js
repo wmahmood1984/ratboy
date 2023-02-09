@@ -12,7 +12,7 @@ const Launchpad = ({ data, keyA, subData }) => {
   const {chainId} = useWeb3React()
   const chain = chainId? chainId : chainIdSelected
 
-  console.log("Launchpad ", data);
+
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow">
@@ -91,9 +91,9 @@ const Launchpad = ({ data, keyA, subData }) => {
       <div className="text-sm sm:text-base font-bold flex justify-between items-center mt-4">
         <p>Soft/Hard Cap:</p>
         <p className=" text-primary-400">
-          {formatEther(data[4][15])}{" "}
+          {data[4][15] &&  formatEther(data[4][15])}{" "}
           {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"} -{" "}
-          {formatEther(data[4][16])}{" "}
+          {data[4][16] && formatEther(data[4][16])}{" "}
           {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}
         </p>
       </div>
