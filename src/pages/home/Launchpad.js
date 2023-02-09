@@ -8,7 +8,7 @@ import Tag from "../../components/tag";
 const Launchpad = ({ data, keyA, subData }) => {
   var now = new Date().getTime() / 1000;
 
-  console.log("Launchpad ", data[4][5], data[4][6], now);
+  console.log("Launchpad ", data);
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow">
