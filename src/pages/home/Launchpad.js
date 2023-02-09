@@ -95,19 +95,19 @@ const Launchpad = ({ data, keyA, subData }) => {
       </div>
       <div className="font-bold flex justify-between items-center mt-4">
         <p>
-          {subData&&  Number(subData.investedBUSD / formatEther(data[4][0])).toFixed(3)}%
+          {subData&&  Number(formatEther(subData.investedBUSD) / formatEther(data[4][0])).toFixed(3)}%
         </p>
         {/* <p className=" text-primary-400">60 BNB - 100 BNB</p> */}
       </div>
       <div className="mt-2">
         <ProgressBar
           complete={
-            Number(formatEther(subData?.investedBUSD)) / Number(formatEther(data[4][0]))
+            Number(formatEther(subData?.investedBUSD)) / Number(formatEther(data[4][0])) * Number(formatEther(data[4][1])) 
           }
         />
         <div className="font-bold flex justify-between items-center mt-1">
           <p>
-            {subData?.investedBUSD}{" "}
+            {formatEther(subData?.investedBUSD)}{" "}
             {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}
           </p>
           <p>
