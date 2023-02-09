@@ -17,6 +17,7 @@ import TokenCreateSuccess from "./pages/tokenCreateSuccess";
 import EditPresale from "./pages/editpresale";
 import utc from "dayjs/plugin/utc";
 import dayjs from "dayjs";
+import LockRecordDetails2 from "./pages/LockRecordDetails2";
 dayjs.extend(utc);
 function App() {
   const theme = createTheme({
@@ -55,6 +56,10 @@ function App() {
           <Route
             path="token_list/lock_record"
             element={<LockRecordDetails />}
+          />{" "}
+          <Route
+            path="token_list/lock_record/:params"
+            element={<LockRecordDetails2 />}
           />{" "}
           <Route path="my_tokens" element={<MyTokens />} />
           <Route path="lp_list" element={<LpLockList />} />

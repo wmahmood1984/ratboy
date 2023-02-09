@@ -49,7 +49,7 @@ const SocialIcons = [
   },
 ];
 
-const ProjectOverView = ({ data, strings, hash,sub_data }) => {
+const ProjectOverView = ({ data, strings, hash,sub_data,chain }) => {
   const web3 = new Web3(Web3.givenProvider);
   var now = new Date().getTime() / 1000;
   const contract = new web3.eth.Contract(IERC20, data[2][0]);
@@ -57,7 +57,7 @@ const ProjectOverView = ({ data, strings, hash,sub_data }) => {
   const [symbol, setSymbol] = useState();
   const [decimals, setDecimals] = useState();
   const [totalSupply, settotalSupply] = useState();
-  const { chainId } = useWeb3React();
+
 
   const navigate = useNavigate();
 
@@ -196,7 +196,7 @@ const ProjectOverView = ({ data, strings, hash,sub_data }) => {
               <ListItem
                 title={"Presale Address"}
                 refA={
-                  chainId == "5"
+                  chain == "5"
                     ? `https://goerli.etherscan.io/address/${data._address}`
                     : `https://testnet.bscscan.com/address/${data._address}`
                 }
@@ -210,7 +210,7 @@ const ProjectOverView = ({ data, strings, hash,sub_data }) => {
               <ListItem
                 title={"Token Address"}
                 refA={
-                  chainId == "5"
+                  chain == "5"
                     ? `https://goerli.etherscan.io/token/${data[2][0]}`
                     : `https://testnet.bscscan.com/token/${data[2][0]}`
                 }
@@ -320,7 +320,7 @@ const ProjectOverView = ({ data, strings, hash,sub_data }) => {
             <ListItem
               color={"primary"}
               linkable={true}
-              refA={"/lp_list"}
+              refA={`/token_list/lock_record/${sub_data.LPTokens}=${chain}`}
               title={"Liquidity Lockup Time"}
               desc={`${dateFormat(sub_data.liquidity * 1000)}`}
             />

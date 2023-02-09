@@ -78,7 +78,7 @@ const ProjectPreview = () => {
       console.log("indexA",data) 
       const TokenContract = new web3.eth.Contract(IERC20,data[0][IndexA][2][0])
 
-      const _alloc = await myContract.methods.getLockContract(data[0][IndexA][2][0]).call()
+      const _alloc = await myContract.methods.getLockContract(data[0][IndexA][1]).call()
       setAllocaitons(_alloc)
 
       const tSupply = await TokenContract.methods.totalSupply().call()
@@ -102,7 +102,7 @@ const ProjectPreview = () => {
   },[toggle,account])
 
 
-  console.log("Project Overview ",allocations)
+  console.log("Project Overview ",_data,sub_data)
 
 const Claim = async ()=>{
   setOpen(true)
@@ -128,7 +128,7 @@ const Claim = async ()=>{
      _data && sub_data && strings && hash && 
            <main className="px-4 pb-10 pt-28 grid grid-cols-1 gap-y-4">
              <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
-             <ProjectOverView data={_data && _data} sub_data={sub_data && sub_data} strings={strings && strings} hash={hash && hash}/>
+             <ProjectOverView chain={chain} data={_data && _data} sub_data={sub_data && sub_data} strings={strings && strings} hash={hash && hash}/>
              <div className=" flex flex-col">
                <div className="flex-1">
  
