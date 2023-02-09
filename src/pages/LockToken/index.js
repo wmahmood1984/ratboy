@@ -4,96 +4,113 @@ import { Contract } from "ethers";
 import { parseEther, parseUnits } from "ethers/lib/utils";
 import React, { useState } from "react";
 import Layout from "../../components/layout";
-import { chainIdSelected, IERC20, tokenLockLauncherAbi, tokenLocklauncherAdd, tokenObj } from "../../config";
+import {
+  chainIdSelected,
+  IERC20,
+  tokenLockLauncherAbi,
+  tokenLocklauncherAdd,
+  tokenObj,
+} from "../../config";
 import ResponsiveDialog from "../../Spinner";
 import CustomDatePicker from "../createToken/components/CustomDatepicker";
 import Web3 from "web3";
 import CustomInput from "../../components/CustomInput";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
-
-export const getLockContract = (library, account,tokenAdd,abi) => {
-	const signer = library?.getSigner(account).connectUnchecked();
-	var contract = new Contract(tokenAdd,abi, signer);
-	return contract;
+export const getLockContract = (library, account, tokenAdd, abi) => {
+  const signer = library?.getSigner(account).connectUnchecked();
+  var contract = new Contract(tokenAdd, abi, signer);
+  return contract;
 };
 
-
 const LockToken = () => {
-  const { account,library, chainId} = useWeb3React();
-  const chain = chainId ? chainId : chainIdSelected
-  const contract = getLockContract(library,account,tokenLocklauncherAdd[`${chain}`],tokenLockLauncherAbi)
-  const web3 = new Web3(Web3.givenProvider)
-  const [token,setToken] = useState()
-  const [title,setTitle] = useState()
-  const [amount,setAmount] = useState()
+  const { account, library, chainId } = useWeb3React();
+  const chain = chainId ? chainId : chainIdSelected;
+  const contract = getLockContract(
+    library,
+    account,
+    tokenLocklauncherAdd[`${chain}`],
+    tokenLockLauncherAbi
+  );
+  const web3 = new Web3(Web3.givenProvider);
+  const [token, setToken] = useState();
+  const [title, setTitle] = useState();
+  const [amount, setAmount] = useState();
   const [date, setDate] = useState();
   const [open, setOpen] = useState();
   const [status, setStatus] = useState("");
   const [LP, setLP] = useState(false);
-  const navigate = useNavigate()
+  const [useAnotherOwner, setUseAnotherOwner] = useState(false);
+  const navigate = useNavigate();
 
-//  console.log("data",token,title,amount,date,open)
+  //  console.log("data",token,title,amount,date,open)
 
-
-  const Approve = async()=>{
-    const Tokencontract = getLockContract(library,account,token,IERC20)
-    if(amount>0 || date!=undefined){
-      setOpen(true)
-      setStatus("Approval in process..")
+  const Approve = async () => {
+    const Tokencontract = getLockContract(library, account, token, IERC20);
+    if (amount > 0 || date != undefined) {
+      setOpen(true);
+      setStatus("Approval in process..");
       try {
-        const tx1 = await Tokencontract.approve(tokenLocklauncherAdd[`${chainId}`],parseEther((amount).toString()),{gasLimit:300000})
-        await tx1.wait()
+        const tx1 = await Tokencontract.approve(
+          tokenLocklauncherAdd[`${chainId}`],
+          parseEther(amount.toString()),
+          { gasLimit: 300000 }
+        );
+        await tx1.wait();
 
-        if(tx1){
-          setOpen(false)
-          Lock()
-          setStatus("Locking tokens...")
+        if (tx1) {
+          setOpen(false);
+          Lock();
+          setStatus("Locking tokens...");
         }
       } catch (error) {
-        console.log("Error in Approve Function",error)
-        setOpen(false)
-        setStatus("")
+        console.log("Error in Approve Function", error);
+        setOpen(false);
+        setStatus("");
       }
-    }else{
-      toast.error("Please check date and amount")
+    } else {
+      toast.error("Please check date and amount");
     }
-  }
-  
-  
-  const Lock = async()=>{
-    if(amount>0 || date!=undefined){
-      setOpen(true)
-      setStatus("Locking tokens...")
+  };
+
+  const Lock = async () => {
+    if (amount > 0 || date != undefined) {
+      setOpen(true);
+      setStatus("Locking tokens...");
       try {
-         var _amount = amount
-         console.log("ether",amount)
+        var _amount = amount;
+        console.log("ether", amount);
 
         const tx1 = await contract.lockToken(
-          token,parseEther(amount.toString()),title,Date.parse(date),LP,{gasLimit:3000000})
-        await tx1.wait()
+          token,
+          parseEther(amount.toString()),
+          title,
+          Date.parse(date),
+          LP,
+          { gasLimit: 3000000 }
+        );
+        await tx1.wait();
 
-        if(tx1){
-          setOpen(false)
-          setStatus("")
-          if(LP){
-            navigate("/lp_list")
-          }else{
-            navigate("/token_list")
+        if (tx1) {
+          setOpen(false);
+          setStatus("");
+          if (LP) {
+            navigate("/lp_list");
+          } else {
+            navigate("/token_list");
           }
-
-
         }
       } catch (error) {
-        console.log("Error in Lock Function",error)
-        setOpen(false)
-        setStatus("")
+        console.log("Error in Lock Function", error);
+        setOpen(false);
+        setStatus("");
       }
-    }else{
-      toast.error("Please check date and amount")
+    } else {
+      toast.error("Please check date and amount");
     }
-  }
+  };
 
   return (
     <Layout>
@@ -103,36 +120,67 @@ const LockToken = () => {
             Create your lock
           </p>
           <div className="sm:p-6 p-4">
-            <CustomInput 
-            value={token}
-            setValue={setToken}
-            label={"Token or LP Token address"} required />
-            <div className="custom-checkbox ">
-              <FormControlLabel
-                control={<Checkbox 
-                  onChange={(e)=>{setLP(e.target.checked)}}
-                  color="primary" />}
-                label="LP Token?"
-              />
+            <CustomInput
+              value={token}
+              setValue={setToken}
+              label={"Token or LP Token address"}
+              required
+            />
+            <div className="grid grid-flow-col gap-2  justify-start items-center">
+              <div className="custom-checkbox ">
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={LP}
+                      onChange={(e) => {
+                        setLP(e.target.checked);
+                      }}
+                      color="primary"
+                    />
+                  }
+                  label="LP Token?"
+                />
+              </div>
+              <div className="custom-checkbox ">
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={useAnotherOwner}
+                      onChange={(e) => {
+                        setUseAnotherOwner(e.target.checked);
+                      }}
+                      color="primary"
+                    />
+                  }
+                  label="use Another Owner?"
+                />
+              </div>
             </div>
+            {useAnotherOwner && (
+              <>
+                <br />
+                <CustomInput
+                  label={"Receiver"}
+                  placeholder="0xb54D5da6150587405ff4d3C9f36d4e279d12f8D4"
+                />
+              </>
+            )}
             <br />
-            <CustomInput 
-            
-            value={title}
-            setValue={setTitle}
-            label={"Title"} />
+            <CustomInput value={title} setValue={setTitle} label={"Title"} />
             <br />
-            <CustomInput 
-            
-            value={amount}
-            setValue={setAmount}
-            label={"Amount"} required />
-            <div className="custom-checkbox ">
+            <CustomInput
+              value={amount}
+              setValue={setAmount}
+              label={"Amount"}
+              required
+            />
+            <br />
+            {/* <div className="custom-checkbox ">
               <FormControlLabel
                 control={<Checkbox color="primary" />}
                 label="use vesting?"
               />
-            </div>
+            </div> */}
             <div>
               <div className="flex justify-between items-center">
                 <p>
@@ -147,9 +195,10 @@ const LockToken = () => {
               0x407993575c91ce7643a4d4cCACc9A98c36eE1BBE from fees, rewards, max
               tx amount to start locking tokens. We don't support rebase tokens.
             </div>
-            <button 
-            onClick={Approve}
-            className="bg-primary-400 text-white block mx-auto rounded-sm mt-4 px-4 py-2">
+            <button
+              onClick={Approve}
+              className="bg-primary-400 text-white block mx-auto rounded-sm mt-4 px-4 py-2"
+            >
               Lock
             </button>
           </div>
@@ -162,7 +211,7 @@ const LockToken = () => {
           provided or published.
         </p>
       </div>
-      <ResponsiveDialog open={open} title={status}/>
+      <ResponsiveDialog open={open} title={status} />
     </Layout>
   );
 };
@@ -173,8 +222,8 @@ export default LockToken;
 //   return (
 //     <div className="w-full">
 //       {label && (
-//         <label 
-      
+//         <label
+
 //         className="mb-1 inline-block">
 //           {label}
 //           {required && <span className="text-red-400">*</span>}

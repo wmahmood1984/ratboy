@@ -61,7 +61,7 @@ const Timer = ({ start, end }) => {
                 ? "Ends"
                 : null
             } In`
-          : null}
+          : "Sale Ended"}
       </p>
       <div className=" grid grid-flow-col mt-4 gap-x-4 px-10 justify-center">
         {timeList.map((val, i) => (

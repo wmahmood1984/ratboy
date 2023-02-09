@@ -58,12 +58,10 @@ const CreateToken = () => {
   const [Min, setMin] = useState();
   const [vesting, setVesting] = useState(0);
   const [IDOstart, setIDOStart] = useState(
-    dayjs().utc().format("YYYY-MM-DDTHH:mm:ss")
+    dayjs().format("YYYY-MM-DDTHH:mm:ss")
   );
   const [IDOEnd, setIDOEnd] = useState(
-    dayjs((dayjs().utc().unix() + 24 * 60 * 60) * 1000)
-      .utc()
-      .format("YYYY-MM-DDTHH:mm:ss")
+    dayjs((dayjs().unix() + 24 * 60 * 60) * 1000).format("YYYY-MM-DDTHH:mm:ss")
   );
   const [currency, setCurrency] = useState(
     "0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee"
@@ -110,7 +108,7 @@ const CreateToken = () => {
 
   const refArray = ["Refund", "Burn"];
   const toUnix = (string) => {
-    return dayjs(string).utc(true).unix();
+    return dayjs(string).unix();
   };
 
   useEffect(() => {

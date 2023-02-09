@@ -24,9 +24,8 @@ import { MdOutlineListAlt } from "react-icons/md";
 import { Collapse } from "@mui/material";
 import { toast } from "react-hot-toast";
 
-
 const Sidebar = ({ show, setShow }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { theme, setTheme } = useContext(ThemeContext);
   const { account } = useWeb3React();
   const [selected, setSelected] = useState(null);
@@ -53,10 +52,9 @@ const Sidebar = ({ show, setShow }) => {
             <React.Fragment key={i}>
               <li>
                 <div
-                style={{cursor:"pointer"}}
-                 // to={account ? `${val.link}` : "#"}
+                  style={{ cursor: "pointer" }}
+                  // to={account ? `${val.link}` : "#"}
                   onClick={(e) => {
-                    navigate(`${val.link}`)
                     if (val.subLink?.length > 0) {
                       e.preventDefault();
                       if (selected === i) {
@@ -64,6 +62,8 @@ const Sidebar = ({ show, setShow }) => {
                       }
 
                       setSelected(i);
+                    } else {
+                      navigate(`${val.link}`);
                     }
                   }}
                   className=" text-sm  py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg font-bold flex items-center justify-between my-1"
@@ -84,11 +84,11 @@ const Sidebar = ({ show, setShow }) => {
                         <li key={i}>
                           <button
                             //to={account ? `${subLink.link}` : "#"}
-                            onClick={()=>{
-                              if(account || !subLink.req){
-                                navigate(`${subLink.link}`)
-                              }else{
-                                toast.error("Wallet not connected")
+                            onClick={() => {
+                              if (account || !subLink.req) {
+                                navigate(`${subLink.link}`);
+                              } else {
+                                toast.error("Wallet not connected");
                               }
                             }}
                             className="grid grid-flow-col text-sm justify-start gap-x-2 items-center py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg my-1 font-bold"
@@ -170,7 +170,7 @@ const menuList = [
     text: "Presale Launches",
     icon: <BiRocket />,
     link: "/",
-    req : false,
+    req: false,
   },
   {
     text: "RatPad Lock",
@@ -181,19 +181,19 @@ const menuList = [
         text: "Create Lock",
         icon: <MdOutlineListAlt />,
         link: "/lockToken",
-        req: true
+        req: true,
       },
       {
         text: "Token Lock",
         icon: <MdOutlineListAlt />,
         link: "/token_list",
-        req: false
+        req: false,
       },
       {
         text: "LP Lock",
         icon: <MdOutlineListAlt />,
         link: "/lp_list",
-        req: false
+        req: false,
       },
     ],
   },
@@ -202,19 +202,20 @@ const menuList = [
   //   icon: <GiAirBalloon />,
   //   link: "/",
   // },
-  {
-    text: "KYC & Audit",
-    icon: <HiOutlineDocumentSearch />,
-    link: "/",
-    req: false
-  },
 
   {
     text: "My Tokens",
     icon: <HiOutlineClipboardList />,
     link: "/my_tokens",
-    req: true
+    req: true,
   },
+  {
+    text: "KYC & Audit",
+    icon: <HiOutlineDocumentSearch />,
+    link: "/",
+    req: false,
+  },
+
   // {
   //   text: "Docs",
   //   icon: <AiOutlineQuestionCircle />,

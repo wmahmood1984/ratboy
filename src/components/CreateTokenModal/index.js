@@ -7,54 +7,72 @@ import CustomInput from "../CustomInput";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { ThemeContext } from "../../context/themeContext";
 import { useWeb3React } from "@web3-react/core";
-import { chainIdSelected, LaunchPadABI, LaunchPadAdd, tokenLauncherAbi, tokenlauncherAdd } from "../../config";
+import {
+  chainIdSelected,
+  LaunchPadABI,
+  LaunchPadAdd,
+  tokenLauncherAbi,
+  tokenlauncherAdd,
+} from "../../config";
 import { Contract } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 import { useNavigate } from "react-router-dom";
-import spinner from "../../Img/spinner.gif"
+import spinner from "../../Img/spinner.gif";
 
-export const getContract = (library, account,abi,tokenAdd) => {
-	const signer = library?.getSigner(account).connectUnchecked();
-	var contract = new Contract(tokenAdd,abi, signer);
-	return contract;
+export const getContract = (library, account, abi, tokenAdd) => {
+  const signer = library?.getSigner(account).connectUnchecked();
+  var contract = new Contract(tokenAdd, abi, signer);
+  return contract;
 };
 
 const CreateTokenModal = ({ open = false, setOpen }) => {
   const [tokenOption, setTokenOption] = React.useState();
-  const [name,setName] = React.useState()
-  const [symbol,setSymbol] = React.useState()
-  const [decimals,setDecimals] = React.useState()
-  const [totalSupply,setTotalSupply] = React.useState()
-  const [openA,setOpenA] = React.useState(false)
+  const [name, setName] = React.useState();
+  const [symbol, setSymbol] = React.useState();
+  const [decimals, setDecimals] = React.useState();
+  const [totalSupply, setTotalSupply] = React.useState();
+  const [openA, setOpenA] = React.useState(false);
 
   const { theme } = React.useContext(ThemeContext);
-  const {account,library,chainId} = useWeb3React()
-  const navigate = useNavigate()
-  const chain = chainId ? chainId: chainIdSelected
+  const { account, library, chainId } = useWeb3React();
+  const navigate = useNavigate();
+  const chain = chainId ? chainId : chainIdSelected;
 
-  const contract = getContract(library,account,tokenLauncherAbi,tokenlauncherAdd[`${chain}`])
+  const contract = getContract(
+    library,
+    account,
+    tokenLauncherAbi,
+    tokenlauncherAdd[`${chain}`]
+  );
 
-  const createToken = async ()=>{
-    setOpenA(true)
+  const createToken = async () => {
+    setOpenA(true);
     try {
-      const tx1 = await contract.launchToken(name,symbol,parseEther(totalSupply),{gasLimit:3000000})
+      const tx1 = await contract.launchToken(
+        name,
+        symbol,
+        parseEther(totalSupply),
+        { gasLimit: 3000000 }
+      );
 
-      var receipt =  await tx1.wait()
+      var receipt = await tx1.wait();
 
-       if(receipt){
-         console.log("response",receipt)
-         navigate("/my_tokens"
-         //,{state:{hash:receipt.transactionHash,address:receipt.events[0].address,name,symbol,decimals,totalSupply}}
-         )
-         setOpenA(false)
-       }
+      if (receipt) {
+        console.log("response", receipt);
+        navigate(
+          "/my_tokens"
+          //,{state:{hash:receipt.transactionHash,address:receipt.events[0].address,name,symbol,decimals,totalSupply}}
+        );
+        setOpenA(false);
+        setOpen(false);
+      }
     } catch (error) {
-      console.log("error in create Token",error)
-      setOpenA(false)
+      console.log("error in create Token", error);
+      setOpenA(false);
     }
-  }
+  };
 
-  console.log("create token",name,symbol,decimals,totalSupply)
+  console.log("create token", name, symbol, decimals, totalSupply);
 
   const optionList = [
     "Standard Token",
@@ -95,11 +113,35 @@ const CreateTokenModal = ({ open = false, setOpen }) => {
               />
               <p className="text-primary-400 text-sm mt-1 ">0.01 BNB</p>
             </div>
-            <CustomInput validation={"text"} value={name} setValue={setName} label={"Name"} required />
+            <CustomInput
+              validation={"text"}
+              value={name}
+              setValue={setName}
+              label={"Name"}
+              required
+            />
 
-            <CustomInput validation={"text"} value={symbol} setValue={setSymbol} label={"Symbol"} required />
-            <CustomInput validation={"number"} value={decimals} setValue={setDecimals} label={"Decimals"} required />
-            <CustomInput validation={"number"} value={totalSupply} setValue={setTotalSupply} label={"Total supply"} required />
+            <CustomInput
+              validation={"text"}
+              value={symbol}
+              setValue={setSymbol}
+              label={"Symbol"}
+              required
+            />
+            <CustomInput
+              validation={"number"}
+              value={decimals}
+              setValue={setDecimals}
+              label={"Decimals"}
+              required
+            />
+            <CustomInput
+              validation={"number"}
+              value={totalSupply}
+              setValue={setTotalSupply}
+              label={"Total supply"}
+              required
+            />
             {/* <div className="custom-checkbox ">
               <FormControlLabel
                 control={<Checkbox color="primary" />}
@@ -107,17 +149,23 @@ const CreateTokenModal = ({ open = false, setOpen }) => {
                 Implement Rat Anti-Bot System?"
               />
             </div> */}
-            <button 
-            disabled={openA}
-            onClick={createToken}
-            className="bg-primary-400 block mx-auto rounded-md mt-4 px-4 py-2">
-              Create Token {" "}{openA? <img style={{marginLeft:"33%"}} width="33px" src={spinner}></img>: null}
+            <button
+              disabled={openA}
+              onClick={createToken}
+              className="bg-primary-400 text-white block mx-auto rounded-md mt-4 px-4 py-2"
+            >
+              Create Token{" "}
+              {openA ? (
+                <img
+                  style={{ marginLeft: "33%" }}
+                  width="33px"
+                  src={spinner}
+                ></img>
+              ) : null}
             </button>
           </div>
         </div>
-
       </Box>
-
     </Modal>
   );
 };
