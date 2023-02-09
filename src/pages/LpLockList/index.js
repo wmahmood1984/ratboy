@@ -27,9 +27,9 @@ const LpLockList = () => {
 
   useEffect(() => {
     const abc = async ()=>{
-   
+      console.log("data in list",myContract)
         const data = await myContract.methods.getArray().call()
-
+   
         setData(data)
 
       
@@ -42,7 +42,7 @@ const Data = DataA && DataA.filter(item=>item.LP==true)
 const MYLock = DataA && Data.filter(item=>item.user==account)
 
 
-console.log("data in list",MYLock)         
+         
 
   return (
     <Layout>
