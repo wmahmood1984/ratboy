@@ -157,7 +157,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
   }
 
 
-  console.log("data in edit",data)
+  console.log("data in edit",sub_data)
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl py-14 h-full flex justify-center items-center  flex-col ">
