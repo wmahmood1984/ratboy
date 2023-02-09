@@ -102,7 +102,7 @@ const Launchpad = ({ data, keyA, subData }) => {
       <div className="mt-2">
         <ProgressBar
           complete={
-            Number(subData?.investedBUSD) / Number(formatEther(data[4][0]))
+            Number(formatEther(subData?.investedBUSD)) / Number(formatEther(data[4][0]))
           }
         />
         <div className="font-bold flex justify-between items-center mt-1">
