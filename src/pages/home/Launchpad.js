@@ -1,3 +1,4 @@
+import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { formatEther } from "ethers/lib/utils";
 import React from "react";
@@ -5,8 +6,11 @@ import { Link } from "react-router-dom";
 import UserImage from "../../assets/user.png";
 import DailyTimer from "../../components/DailyTimer";
 import Tag from "../../components/tag";
+import { chainIdSelected } from "../../config";
 const Launchpad = ({ data, keyA, subData }) => {
   var now = new Date().getTime() / 1000;
+  const {chainId} = useWeb3React()
+  const chain = chainId? chainId : chainIdSelected
 
   console.log("Launchpad ", data);
 
@@ -126,7 +130,7 @@ const Launchpad = ({ data, keyA, subData }) => {
       </div>
 
       <button className="bg-primary-400 px-14 mt-6 py-1.5 sm:py-3 mx-auto block rounded-md text-white">
-        <Link to={`/preview/${data[1]}`} state={{ Index: keyA }}>
+        <Link to={`/preview/${data[1]}=${chain}`} state={{ Index: keyA }}>
           View Pool
         </Link>
       </button>

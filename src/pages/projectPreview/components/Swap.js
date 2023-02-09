@@ -21,30 +21,33 @@ export const getContract = (library, account, poolId) => {
   return contract;
 };
 
-const Swap = ({ data, toggle, setToggle, sub_data }) => {
-  const { account, library } = useWeb3React();
+const Swap = ({ data, toggle, setToggle, sub_data,account }) => {
+  const { library } = useWeb3React();
   const web3 = new Web3(Web3.givenProvider);
   var now = new Date().getTime() / 1000;
   const contract = new web3.eth.Contract(IERC20, data[2][0]);
 
-  const [nBalance, setNbalance] = useState();
-  const [tBalance, setTbalance] = useState();
+  const [nBalance, setNbalance] = useState(0);
+  const [tBalance, setTbalance] = useState(0);
   const [amount, setAmount] = useState(0);
   const [tokenAmount, setTokenAmount] = useState(0);
   const [open, setOpen] = useState();
   const [title, setTitle] = useState();
 
-  const myContract = data && getContract(library, account, data._address);
+  const myContract =  data &&  account ? getContract(library, account, data._address) : null
   useEffect(() => {
     const abc = async () => {
-      const _nBal = await web3.eth.getBalance(account);
-      setNbalance(Number(formatEther(_nBal)).toFixed(2));
-
-      const _tbal = await contract.methods.balanceOf(account).call();
-      setTbalance(formatEther(_tbal));
+      if(account){
+        const _nBal = await web3.eth.getBalance(account);
+        setNbalance(Number(formatEther(_nBal)).toFixed(2));
+  
+        const _tbal = await contract.methods.balanceOf(account).call();
+        setTbalance(formatEther(_tbal));
+      }
+ 
     };
     abc();
-  }, [toggle]);
+  }, [toggle,account]);
 
   const _Swap = async () => {
     if (amount > 0 && account) {

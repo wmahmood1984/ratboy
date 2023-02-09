@@ -5,7 +5,7 @@ import Swap from "./components/Swap";
 import TokenMetrix from "./components/TokenMetrix";
 import Ownerzone from "./components/Ownerzone";
 import Information from "./components/Information";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
 import {Contract, ethers, providers, utils} from "ethers"
 import { chainIdSelected, IERC20, IGOAbi, LaunchPadABI, LaunchPadAdd } from "../../config";
@@ -21,20 +21,30 @@ import ResponsiveDialog from "../../Spinner";
 
 const ProjectPreview = () => {
   const {account,library,chainId} = useWeb3React()
-  const web3 = chainId ? new Web3(Web3.givenProvider) :  new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
-  var chain = chainId ? chainId : chainIdSelected
+
+
   
-  const myContract = new web3.eth.Contract(LaunchPadABI,LaunchPadAdd[`${chain}`])
- 
+  
 
 
   let location = useLocation();
-  console.log("index",LaunchPadAdd[`${chain}`])
+
 
   let {params} = useParams()
 
+
+  console.log("index",location,params.split("="))
+
+  let splittedParams = params.split("=")
+  var chain = chainId ? chainId : splittedParams[1]
+
+  const web3 = chainId ? new Web3(Web3.givenProvider) : 
+            splittedParams[1] = "5"? new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
+             : new Web3(new Web3.providers.HttpProvider("https://data-seed-prebsc-2-s3.binance.org:8545/"))  
+  const myContract = new web3.eth.Contract(LaunchPadABI,LaunchPadAdd[`${chain}`])
+ 
   const getIndex = async ()=>{
-    const _ind = await myContract.methods.PresaleMapping(params).call()
+    const _ind = await myContract.methods.PresaleMapping(splittedParams[0]).call()
     console.log("get Index",_ind)
     return _ind
   }
@@ -77,8 +87,8 @@ const ProjectPreview = () => {
       setDecimals(tdecimals)
 
      const PreSaleContract = new web3.eth.Contract(IGOAbi,data[0][IndexA][1]) 
-     const ent = await PreSaleContract.methods.getEntitlement(account).call()
-      setEntitlement(ent / (10**tdecimals))
+    //  const ent = await PreSaleContract.methods.getEntitlement(account).call()
+    //   setEntitlement(ent / (10**tdecimals))
      const _string = await PreSaleContract.methods.getDetails().call()
 
      setStrings(_string[2])
@@ -118,7 +128,10 @@ const Claim = async ()=>{
              <ProjectOverView data={_data && _data} sub_data={sub_data && sub_data} strings={strings && strings} hash={hash && hash}/>
              <div className=" flex flex-col">
                <div className="flex-1">
-                 <Swap data={_data && _data} toggle={toggle} sub_data={sub_data && sub_data} setToggle={setToggle}/>
+ 
+                <Swap data={_data && _data} toggle={toggle} sub_data={sub_data && sub_data} account={account} setToggle={setToggle}/>: null 
+                 
+
                </div>
                <div className="mt-6">
                  <TokenMetrix allocations={allocations} decimals={decimals} totalSupply={totalSupply} dataA={_data && _data} sub_data={sub_data && sub_data}/>
