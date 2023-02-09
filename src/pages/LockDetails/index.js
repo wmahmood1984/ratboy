@@ -64,15 +64,15 @@ const LockDetails = () => {
   const lockList = [
     {
       wallet: `${stateA&&  stateA.user}`,
-      amount: `${stateA&&  formatEther(stateA.amount)}`,
+      amount: `${stateA&&  Number(formatEther(stateA.amount)).toFixed(4)}`,
       cycle: "729",
       cycleRealese: "1",
       tge: "10",
-      unlock: `${stateA&&  dateFormat(Number(stateA.time))}`,
+      unlock: `${stateA&&  dateFormat(Number(stateA.time*1000))}`,
     },
   ];
 
-
+  console.log("data in list",stateA)
 
   return (
     <Layout>

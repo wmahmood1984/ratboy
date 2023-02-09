@@ -27,7 +27,7 @@ const LpLockList = () => {
 
   useEffect(() => {
     const abc = async ()=>{
-      console.log("data in list",myContract)
+
         const data = await myContract.methods.getArray().call()
    
         setData(data)
