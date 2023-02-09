@@ -90,10 +90,10 @@ const LockRecordDetails = () => {
                   state.user
                 )}
               />
-              <ListItem title={"Lock Date"} desc={state.now?dateFormat(state.now/1000): dateFormat(state.time/1000) } />{" "}
+              <ListItem title={"Lock Date"} desc={state.now?dateFormat(state.now*1000): dateFormat(state.time*1000) } />{" "}
               <ListItem
                 title={"Unlock Date"}
-                desc={dateFormat(state.time/1000)}
+                desc={dateFormat(state.time*1000)}
               />
               {/* <div className="text-xs sm:text-sm flex justify-between pb-2 items-center border-b border-lightDark">
                 <p className=" ">{"Vesting Info"}</p>
