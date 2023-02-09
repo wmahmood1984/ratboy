@@ -167,7 +167,7 @@ const Swap = ({data,toggle,setToggle,sub_data}) => {
         {/* <Timer /> */}
         <Timer start={data[4][5]}  end={data[4][6]} />
         <div>
-          <Progressbar complete={Number(sub_data.investedBUSD) / Number(formatEther(data[4][0]))} />
+          <Progressbar complete={Number(formatEther(sub_data.investedBUSD)) / Number(formatEther(data[4][0]))} />
           <div className="flex items-center justify-between mt-1">
             <p>{sub_data.investedBUSD} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}</p>
             <p>{data[4][16] ? formatEther(data[4][16]):10000} {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}</p>
