@@ -15,7 +15,9 @@ import MyTokens from "./pages/MyTokens";
 import LpLockList from "./pages/LpLockList";
 import TokenCreateSuccess from "./pages/tokenCreateSuccess";
 import EditPresale from "./pages/editpresale";
-
+import utc from "dayjs/plugin/utc";
+import dayjs from "dayjs";
+dayjs.extend(utc);
 function App() {
   const theme = createTheme({
     palette: {
