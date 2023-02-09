@@ -1477,6 +1477,11 @@ export const tokenLockLauncherAbi = [
 				"internalType": "bool",
 				"name": "LP",
 				"type": "bool"
+			},
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
 			}
 		],
 		"name": "lockToken",

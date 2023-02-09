@@ -86,9 +86,12 @@ const ProjectPreview = () => {
       setTotalSupply(tSupply / (10**tdecimals))
       setDecimals(tdecimals)
 
-     const PreSaleContract = new web3.eth.Contract(IGOAbi,data[0][IndexA][1]) 
-    //  const ent = await PreSaleContract.methods.getEntitlement(account).call()
-    //   setEntitlement(ent / (10**tdecimals))
+     const PreSaleContract = new web3.eth.Contract(IGOAbi,data[0][IndexA][1])
+     if(account){
+    const ent = await PreSaleContract.methods.getEntitlement(account).call()
+      setEntitlement(ent / (10**tdecimals))
+     } 
+ 
      const _string = await PreSaleContract.methods.getDetails().call()
 
      setStrings(_string[2])
@@ -145,7 +148,7 @@ const Claim = async ()=>{
              <Information data={_data && _data} sub_data={sub_data && sub_data}/>
              {_data && _data[2][2]===account?
               <Ownerzone2 data={_data && _data} sub_data={sub_data && sub_data}/>:null
-             }{sub_data.liquidity == "0" ? 
+             }{sub_data.liquidity != "0" ? 
               <Information2 Claim={Claim} data={_data && _data} sub_data={sub_data && sub_data} ent={entitlement}/> : null
 
              }

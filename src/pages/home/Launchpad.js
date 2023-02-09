@@ -91,9 +91,9 @@ const Launchpad = ({ data, keyA, subData }) => {
       <div className="text-sm sm:text-base font-bold flex justify-between items-center mt-4">
         <p>Soft/Hard Cap:</p>
         <p className=" text-primary-400">
-          {formatEther(data[4][3])}{" "}
+          {formatEther(data[4][15])}{" "}
           {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"} -{" "}
-          {formatEther(data[4][2])}{" "}
+          {formatEther(data[4][16])}{" "}
           {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}
         </p>
       </div>
@@ -106,7 +106,8 @@ const Launchpad = ({ data, keyA, subData }) => {
       <div className="mt-2">
         <ProgressBar
           complete={
-            Number(formatEther(subData?.investedBUSD)) / Number(formatEther(data[4][0])) * Number(formatEther(data[4][1])) 
+             Number(formatEther(subData?.investedBUSD)) / Number(formatEther(data[4][0])) 
+          
           }
         />
         <div className="font-bold flex justify-between items-center mt-1">
@@ -142,9 +143,6 @@ export default Launchpad;
 
 const ProgressBar = ({ complete }) => (
   <div className="progressbar bg-gray-300 dark:bg-dark-600 rounded-md h-3 relative overflow-hidden">
-    <div
-      style={{ width: `${complete}` }}
-      className="progress-inner absolute top-0 left-0 h-full bg-primary-400 w-1/2"
-    ></div>
+    <div style={{width:`${complete*100}%`}} className={` bg-primary-400 h-full rounded-full`}></div>
   </div>
 );
