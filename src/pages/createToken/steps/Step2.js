@@ -457,19 +457,19 @@ const CustomSelect = ({ list, id, label, value, setValue }) => {
           : "dark:bg-dark-500 border border-lightDark rounded-md"
       }`}
     >
-      <FormControl size="small" fullWidth>
-        <InputLabel id={id}>{label}</InputLabel>
+      <FormControl size="small" fullWidth hiddenLabel>
+        {/* <InputLabel id={id}>{label}</InputLabel> */}
         <Select
-          className=" bg-transparent  w-full h-full text-gray-500 p-2 py-2 focus:outline-none"
+          className=" bg-transparent text-black dark:text-white w-full h-full p-2 py-2 focus:outline-none"
           labelId={id}
           // id="demo-simple-select"
           value={value}
-          label={label}
+          // label={label}
           onChange={(e) => setValue(e.target.value)}
         >
           {list.map((item, i) => (
             <MenuItem key={i} value={item}>
-              {item}
+              <p className="">{item}</p>
             </MenuItem>
           ))}
         </Select>
