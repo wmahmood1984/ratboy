@@ -1,8 +1,9 @@
 import { useWeb3React } from "@web3-react/core";
 import React from "react";
 import { FaCopy } from "react-icons/fa";
-import { copyToClipBoard } from "../../helpers";
-
+// import { copyToClipBoard } from "../../helpers";
+import Clipboard from "react-clipboard.js";
+import { toast } from "react-hot-toast";
 const ListItem = ({
   title = "",
   desc = "",
@@ -28,9 +29,14 @@ const ListItem = ({
           `${desc}`
         )}
         {address && (
-          <button onClick={() => copyToClipBoard(address)}>
-            <FaCopy />
-          </button>
+          <Clipboard
+            data-clipboard-text={address}
+            onSuccess={() => console.log("Copied to clipboard!")}
+          >
+            <button>
+              <FaCopy />
+            </button>
+          </Clipboard>
         )}
       </p>
     </div>

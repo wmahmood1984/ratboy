@@ -80,7 +80,7 @@ const LockToken = () => {
       setOpen(true);
       setStatus("Locking tokens...");
       try {
-        var _amount = amount;
+        // var _amount = amount;
         console.log("ether", amount);
 
         const tx1 = await contract.lockToken(
