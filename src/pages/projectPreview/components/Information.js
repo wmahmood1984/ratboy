@@ -1,7 +1,7 @@
 import { formatEther } from "ethers/lib/utils";
 import React from "react";
 import ListItem from "../../../components/listItem";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 const Information = ({ data }) => {
   const informationList = [
