@@ -30,6 +30,6 @@ body .MuiRadio-root {
   max-width: 10px;
 } */
 
-.MuiBackdrop-root {
+.custom-backdrop .MuiBackdrop-root {
   background-color: transparent !important;
 }

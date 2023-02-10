@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Layout } from "../../components";
 import ListItem from "../../components/listItem";
-import { shortAddress } from "../../helpers";
+import { shortAddress } from "../../web3/helpers";
 // import { FiChevronRight } from "react-icons/fi";
 import { Collapse } from "@mui/material";
 import Timer from "./Timer";
 import { useWeb3React } from "@web3-react/core";
 import { formatEther } from "@ethersproject/units";
 const LockRecordDetails = () => {
-  const {chainId} = useWeb3React()
+  const { chainId } = useWeb3React();
   const { state } = useLocation();
   const [show, setShow] = useState(false);
   const head = ["Unlock #", "Time (UTC)", "Unlocked tokens"];
@@ -26,23 +26,22 @@ const LockRecordDetails = () => {
     },
   ];
 
+  const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
-  const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
+  function dateFormat(string) {
+    var day = new Date(string).getDay();
+    var date = new Date(string).getUTCDate();
+    var month = new Date(string).getUTCMonth() + 1;
+    var _year1 = new Date(string).getUTCFullYear();
+    var hours = new Date(string).getUTCHours();
+    var formatedHours = hours / 10 > 1 ? `${hours}` : `0${hours}`;
+    var minutes = new Date(string).getUTCMinutes();
+    var formatedMinutes = minutes / 10 > 1 ? `${minutes}` : `0${minutes}`;
 
-  function dateFormat(string){
-    var day = new Date(string).getDay()
-    var date = new Date(string).getUTCDate()
-    var month = new Date(string).getUTCMonth()+1
-    var _year1 = new Date(string).getUTCFullYear()
-    var hours = new Date(string).getUTCHours()
-    var formatedHours = hours/10>1? `${hours}` : `0${hours}`
-    var minutes = new Date(string).getUTCMinutes()
-    var formatedMinutes = minutes/10>1? `${minutes}` : `0${minutes}`
-    
-    return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`
+    return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`;
   }
 
-  console.log("data in array",state)
+  console.log("data in array", state);
   return (
     <Layout>
       <div className=" px-6 mt-28  mb-20 ">
@@ -50,7 +49,7 @@ const LockRecordDetails = () => {
           <p className=" font-semibold text-lg text-center text-primary-400 ">
             Unlock In
           </p>
-          <Timer start={state.time/1000} />
+          <Timer start={state.time / 1000} />
         </div>{" "}
         <div className="bg-white dark:bg-dark-400 border dark:border-lightDark   rounded-md shadow grid grid-cols-1  ">
           <p className="p-4  border-b dark:border-lightDark">Token Info</p>
@@ -59,10 +58,9 @@ const LockRecordDetails = () => {
               <ListItem
                 linkable={true}
                 refA={
-                  chainId == "97" ? 
-                  `https://testnet.bscscan.com/token/${state.token}` :
-                  `https://goerli.etherscan.io/token/${state.token}`
-                    
+                  chainId == "97"
+                    ? `https://testnet.bscscan.com/token/${state.token}`
+                    : `https://goerli.etherscan.io/token/${state.token}`
                 }
                 title={"Token Address"}
                 desc={shortAddress(state.token)}
@@ -84,16 +82,18 @@ const LockRecordDetails = () => {
                 color={"primary"}
               />{" "}
               {/* <ListItem title={"Total Values Locked"} desc={`0`} /> */}
+              <ListItem title={"Owner"} desc={shortAddress(state.user)} />
               <ListItem
-                title={"Owner"}
-                desc={shortAddress(
-                  state.user
-                )}
-              />
-              <ListItem title={"Lock Date"} desc={state.now?dateFormat(state.now*1000): dateFormat(state.time*1000) } />{" "}
+                title={"Lock Date"}
+                desc={
+                  state.now
+                    ? dateFormat(state.now * 1000)
+                    : dateFormat(state.time * 1000)
+                }
+              />{" "}
               <ListItem
                 title={"Unlock Date"}
-                desc={dateFormat(state.time*1000)}
+                desc={dateFormat(state.time * 1000)}
               />
               {/* <div className="text-xs sm:text-sm flex justify-between pb-2 items-center border-b border-lightDark">
                 <p className=" ">{"Vesting Info"}</p>

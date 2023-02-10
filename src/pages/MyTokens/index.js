@@ -12,7 +12,7 @@ import {
   tokenlauncherAdd,
 } from "../../config";
 
-import { shortAddress } from "../../helpers";
+import { shortAddress } from "../../web3/helpers";
 
 export const getContract = (library, account, abi, tokenAdd) => {
   const signer = library?.getSigner(account).connectUnchecked();

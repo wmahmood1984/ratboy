@@ -1,17 +1,23 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../components/layout";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
 import Launchpad from "./Launchpad";
-import { Link, useNavigate } from "react-router-dom";
-import { Contract, ethers, providers, utils } from "ethers";
+import { useNavigate } from "react-router-dom";
 import { LaunchPadABI, LaunchPadAdd, rpcObj } from "../../config";
 import { useWeb3React } from "@web3-react/core";
 import Web3 from "web3";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Box } from "@mui/system";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { ThemeContext } from "@emotion/react";
 import CustomSelect from "../../components/CustomSelect";
+import { ChainChangeContext } from "../../context/chainChangeContext";
+import {
+  getContract,
+  getContractWEB3,
+  getProvider,
+  getProviderWEB3,
+} from "../../web3/helpers";
 
 // export const getContract = (library, account,chainId) => {
 // 	const signer = library?.getSigner(account).connectUnchecked();
@@ -23,39 +29,46 @@ const Home = () => {
   const { account, library, chainId } = useWeb3React();
   const [Data, setData] = useState();
   const [subData, setSubtData] = useState();
-  const web3 = chainId ?  new Web3(
-    new Web3.providers.HttpProvider(
-      rpcObj[`${chainId}`]
-    )
-  ) : new Web3(
-    new Web3.providers.HttpProvider(
-      "https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"
-    )
-  );
+  const { currentChain } = useContext(ChainChangeContext);
+  // const web3 = chainId
+  //   ? new Web3(new Web3.providers.HttpProvider(rpcObj[`${chainId}`]))
+  //   : new Web3(
+  //       new Web3.providers.HttpProvider(
+  //         "https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"
+  //       )
+  //     );
   const navigate = useNavigate();
   const [filter, setFilter] = useState();
   const [sort, setSort] = useState();
 
+  // const myContract = chainId
+  //   ? new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chainId}`])
+  //   : new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`5`]);
 
-  
-  const myContract = chainId
-    ? new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chainId}`])
-    : new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`5`]);
- 
   useEffect(() => {
     const abc = async () => {
-      const data = await myContract.methods.getPoolDetails().call();
-
-      setData(data[0]);
-      setSubtData(data[1]);
-      console.log("live",data[1]);
+      console.log(LaunchPadAdd[currentChain.chain]);
+      const provider = getProviderWEB3(rpcObj[currentChain.chain]);
+      console.log(provider);
+      const { contract } = getContractWEB3(
+        LaunchPadABI,
+        LaunchPadAdd[currentChain.chain],
+        provider
+      );
+      console.log(contract);
+      if (!contract) return;
+      try {
+        const data = await contract.methods.getPoolDetails().call();
+        console.log(data);
+        setData(data[0]);
+        setSubtData(data[1]);
+        console.log("live", data[1]);
+      } catch (error) {
+        console.log(error.message);
+      }
     };
     abc();
-  }, [account]);
-
-
-
-
+  }, [currentChain]);
 
   const filterArray = ["upComing", "InProgress", "Filled", "Cancelled"];
   const sortArray = ["HardCap", "SoftCap", "LPPercent", "Start Time"];
@@ -104,7 +117,7 @@ const Home = () => {
     setData(sortedArray);
   };
 
-   return (
+  return (
     <Layout>
       <main className="px-4 pb-10 pt-20">
         <h1 className="text-center mt-10 font-medium text-3xl ">
@@ -175,7 +188,11 @@ const Home = () => {
                     now)
             ).map((val, i) => (
               <React.Fragment key={i}>
-                <Launchpad keyA={i} data={val} subData={subData &&  subData[i]} />
+                <Launchpad
+                  keyA={i}
+                  data={val}
+                  subData={subData && subData[i]}
+                />
               </React.Fragment>
             ))}
         </div>

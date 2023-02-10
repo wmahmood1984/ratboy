@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
-import { injected, walletconnect, CoinbaseWallet } from "../wallet/connector";
+import {
+  injected,
+  walletconnect,
+  CoinbaseWallet,
+} from "../web3/wallet/connector";
 import toast from "react-hot-toast";
 import WalletModal from "../components/walletModal";
 export const WalletModalContext = React.createContext();
 
-export const WalletModalProvider = ({ initialTheme, children }) => {
+export const WalletModalProvider = ({ children }) => {
   const { account, activate, deactivate, error } = useWeb3React();
   const [open, setOpen] = useState(false);
 

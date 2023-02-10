@@ -3,24 +3,12 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { FaTimes } from "react-icons/fa";
 import { chains } from "./chaindata";
-import { toHex } from "../../helpers/index";
+import { toHex } from "../../web3/helpers/index";
 import { useWeb3React } from "@web3-react/core";
-import { RPC_URLS, POLLING_INTERVAL } from "../../wallet/connector";
+import { RPC_URLS, POLLING_INTERVAL } from "../../web3/wallet/connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { WalletModalContext } from "../../context/walletModalContext";
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 300,
-  bgcolor: "#111721",
-  //   border: "2px solid #000",
-  boxShadow: 24,
-  p: 2,
-  color: "#fff",
-  borderRadius: 2,
-};
+import { ThemeContext } from "../../context/themeContext";
 
 export default function ChainChangeModal({
   open,
@@ -30,15 +18,27 @@ export default function ChainChangeModal({
   currentChain,
   setCurrentChain,
 }) {
-  const { account, library, chainId, connector, deactivate, activate } =
-    useWeb3React();
+  const { account, library, chainId, deactivate, activate } = useWeb3React();
   const { connectHandler } = React.useContext(WalletModalContext);
+  const { theme } = React.useContext(ThemeContext);
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 300,
+    bgcolor: theme === "dark" ? "#111721" : "#fff",
+    //   border: "2px solid #000",
+    boxShadow: 24,
+    p: 2,
+    color: theme === "light" ? "#111721" : "#fff",
+    borderRadius: 2,
+  };
   const currentProvider = window.localStorage.getItem(
     "WEB3_REACT_CURRENT_PROVIDER"
   );
   const switchNetwork = async (network) => {
     if (!account) connectHandler();
-    console.log(library);
     if (chainId === network) return;
     try {
       if (currentProvider === "WalletConnect") {
@@ -102,6 +102,7 @@ export default function ChainChangeModal({
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        classes={""}
       >
         <Box sx={style}>
           <div className="flex justify-between items-center mb-10">
@@ -116,8 +117,8 @@ export default function ChainChangeModal({
                 key={index}
                 className={`${
                   value.disabled
-                    ? " pointer-events-none bg-gray-800 opacity-50"
-                    : "bg-[#202734]"
+                    ? " pointer-events-none dark:bg-gray-800 opacity-50"
+                    : "bg-light dark:bg-[#202734]"
                 } grid  grid-flow-col justify-start gap-3 items-center  p-2 rounded-lg`}
                 onClick={() => setChain(value)}
               >
