@@ -31,7 +31,7 @@ const ListItem = ({
         {address && (
           <Clipboard
             data-clipboard-text={address}
-            onSuccess={() => console.log("Copied to clipboard!")}
+            onSuccess={() => toast.success("Copied to clipboard!")}
           >
             <button>
               <FaCopy />
