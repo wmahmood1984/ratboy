@@ -149,7 +149,7 @@ const Header = ({ show, setShow }) => {
           className="font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base"
         >
           <img
-            className=" w-4 md:w-5"
+            className=" w-3.5 md:w-5"
             src={window.ethereum?.networkVersion == 97 ? BSC : ETH}
             alt=""
           />
