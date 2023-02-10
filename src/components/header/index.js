@@ -131,10 +131,10 @@ const Header = ({ show, setShow }) => {
           {show ? <FaTimes /> : <HiOutlineMenuAlt2 />}
         </button>
       </>
-      <div className="grid grid-flow-col justify-end items-center gap-x-2  px-4 py-4">
+      <div className="grid grid-flow-col justify-end items-center gap-x-2  py-4">
         {account ? (
           <div className="font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base">
-            <span>Your Tier: </span>
+            <span className=" md:inline-block  hidden">Your Tier: </span>
             <span>
               {tier == "1" ? "Tier 0" : tier == 2 ? "Tier 2" : "Tier 3"}
             </span>
@@ -149,7 +149,7 @@ const Header = ({ show, setShow }) => {
           className="font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base"
         >
           <img
-            width={"25px"}
+            className=" w-4 md:w-5"
             src={window.ethereum?.networkVersion == 97 ? BSC : ETH}
             alt=""
           />
@@ -167,19 +167,19 @@ const Header = ({ show, setShow }) => {
             ? `${account.slice(0, 7)}...${account.slice(-4)}`
             : "CONNECT WALLET"}
         </button>
+        <ResponsiveDialogWallet
+          open={open}
+          setOpen={setOpen}
+          network={network}
+          setNetwork={setNetwork}
+        />
+        <ResponsiveDialogChain
+          open={openA}
+          setOpen={setOpenA}
+          network={network}
+          setNetwork={setNetwork}
+        />
       </div>
-      <ResponsiveDialogWallet
-        open={open}
-        setOpen={setOpen}
-        network={network}
-        setNetwork={setNetwork}
-      />
-      <ResponsiveDialogChain
-        open={openA}
-        setOpen={setOpenA}
-        network={network}
-        setNetwork={setNetwork}
-      />
     </div>
   );
 };
