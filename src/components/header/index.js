@@ -58,15 +58,15 @@ const Header = ({ show, setShow }) => {
   const [openA, setOpenA] = useState(false);
   const [network, setNetwork] = useState(localNet);
   const web3 = new Web3(Web3.givenProvider);
-  const { account, library, chainId,activate } = useWeb3React();
+  const { account, library, chainId, activate } = useWeb3React();
   const [tier, setTier] = useState();
   const chain = chainId ? chainId : chainIdSelected;
 
   const myContract = getContract(library, account, LaunchPadAdd[`${chain}`]);
 
   useEffect(() => {
-    if(localStorage.getItem("Connected")){
-      activate(Injected)
+    if (localStorage.getItem("Connected")) {
+      activate(Injected);
     }
     const abc = async () => {
       if (account) {
@@ -77,7 +77,12 @@ const Header = ({ show, setShow }) => {
     abc();
   }, [account, network]);
 
-  console.log("tier", window.ethereum?.networkVersion !== network, network,window.ethereum?.networkVersion);
+  console.log(
+    "tier",
+    window.ethereum?.networkVersion !== network,
+    network,
+    window.ethereum?.networkVersion
+  );
 
   // window.ethereum?.on("accountsChanged", (e, r) => {
   //   window.location.reload();
@@ -93,7 +98,7 @@ const Header = ({ show, setShow }) => {
         method: "wallet_switchEthereumChain",
         params: [{ chainId: web3.utils.toHex(network) }],
       });
-    } catch  (err) {
+    } catch (err) {
       // This error code indicates that the chain has not been added to MetaMask
       if (err.code === 4902) {
         // await window.ethereum.request({
@@ -118,18 +123,14 @@ const Header = ({ show, setShow }) => {
 
   return (
     <div className="text-white bg-white border-gray-300  dark:bg-dark-400 items-center flex justify-between md:justify-end  border-b dark:border-lightDark header">
-      <OutsideClickHandler
-        onOutsideClick={() => {
-          setShow(false);
-        }}
-      >
+      <>
         <button
           className="px-2 text-2xl  md:hidden toggle-bar relative z-50 transition-all duration-300 dark:text-white text-black"
           onClick={() => setShow((prev) => !prev)}
         >
           {show ? <FaTimes /> : <HiOutlineMenuAlt2 />}
         </button>
-      </OutsideClickHandler>
+      </>
       <div className="grid grid-flow-col justify-end items-center gap-x-2  px-4 py-4">
         {account ? (
           <div className="font-medium uppercase bg-primary-400 border border-primary-400 dark:bg-opacity-50 p-2 px-4 rounded-md text-xs md:text-base">
@@ -196,7 +197,6 @@ function ResponsiveDialogWallet({ open, setOpen, network, setNetwork }) {
     setOpen(false);
     activate(Injected);
     localStorage.setItem("Connected", true);
-
   };
 
   const handleDeactivate = () => {

@@ -23,143 +23,148 @@ import { useWeb3React } from "@web3-react/core";
 import { MdOutlineListAlt } from "react-icons/md";
 import { Collapse } from "@mui/material";
 import { toast } from "react-hot-toast";
-
+import { Backdrop } from "@mui/material";
 const Sidebar = ({ show, setShow }) => {
   const navigate = useNavigate();
   const { theme, setTheme } = useContext(ThemeContext);
   const { account } = useWeb3React();
   const [selected, setSelected] = useState(null);
   return (
-    <div
-      className={`sidebar ${
-        show && "active"
-      } bg-white dark:bg-dark-400 border-r dark:border-lightDark border-gray-300 flex flex-col text-black dark:text-white`}
-    >
+    <>
+      <Backdrop in={show} onClick={() => setShow(false)} />
       <div
-        className=" border-b border-gray-300  dark:border-lightDark flex pl-6 items-center sidebar-logo"
-        style={{ minHeight: "75px" }}
+        className={`sidebar ${
+          show && "active"
+        } bg-white dark:bg-dark-400 border-r dark:border-lightDark border-gray-300 flex flex-col text-black dark:text-white`}
       >
-        <Link to={"/"} className="grid grid-flow-col gap-2 items-center">
-          <>
-            <img src={Logo} className="w-14" alt="" />
-            <p className="font-medium text-lg">Ratpad</p>
-          </>
-        </Link>
-      </div>
-      <div className="flex flex-col justify-between flex-1 px-6 py-4">
-        <ul className="">
-          {menuList.map((val, i) => (
-            <React.Fragment key={i}>
-              <li>
-                <div
-                  style={{ cursor: "pointer" }}
-                  // to={account ? `${val.link}` : "#"}
-                  onClick={(e) => {
-                    if (val.subLink?.length > 0) {
-                      e.preventDefault();
-                      if (selected === i) {
-                        return setSelected(null);
-                      }
+        <div
+          className=" border-b border-gray-300  dark:border-lightDark flex pl-6 items-center sidebar-logo"
+          style={{ minHeight: "75px" }}
+        >
+          <Link to={"/"} className="grid grid-flow-col gap-2 items-center">
+            <>
+              <img src={Logo} className="w-14" alt="" />
+              <p className="font-medium text-lg">Ratpad</p>
+            </>
+          </Link>
+        </div>
+        <div className="flex flex-col justify-between flex-1 px-6 py-4">
+          <ul className="">
+            {menuList.map((val, i) => (
+              <React.Fragment key={i}>
+                <li>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    // to={account ? `${val.link}` : "#"}
+                    onClick={(e) => {
+                      if (val.subLink?.length > 0) {
+                        e.preventDefault();
+                        if (selected === i) {
+                          return setSelected(null);
+                        }
 
-                      setSelected(i);
-                    } else {
-                      navigate(`${val.link}`);
-                    }
-                  }}
-                  className=" text-sm  py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg font-bold flex items-center justify-between my-1"
-                >
-                  <div className="grid grid-flow-col justify-start gap-x-2 items-center ">
-                    <p className="text-lg">{val.icon}</p> <p>{val.text}</p>
+                        setSelected(i);
+                      } else {
+                        navigate(`${val.link}`);
+                        setShow(false);
+                      }
+                    }}
+                    className=" text-sm  py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg font-bold flex items-center justify-between my-1"
+                  >
+                    <div className="grid grid-flow-col justify-start gap-x-2 items-center ">
+                      <p className="text-lg">{val.icon}</p> <p>{val.text}</p>
+                    </div>
+                    {val.subLink?.length > 0 && (
+                      <button className="text-xl">
+                        <BiChevronDown />
+                      </button>
+                    )}
                   </div>
                   {val.subLink?.length > 0 && (
-                    <button className="text-xl">
-                      <BiChevronDown />
-                    </button>
+                    <Collapse in={i === selected}>
+                      <ul className="ml-4">
+                        {val.subLink?.map((subLink, i) => (
+                          <li key={i}>
+                            <button
+                              //to={account ? `${subLink.link}` : "#"}
+                              onClick={() => {
+                                if (account || !subLink.req) {
+                                  navigate(`${subLink.link}`);
+                                  setShow(false);
+                                } else {
+                                  toast.error("Wallet not connected");
+                                }
+                              }}
+                              className="grid grid-flow-col text-sm justify-start gap-x-2 items-center py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg my-1 font-bold"
+                            >
+                              {/* <span className="text-lg">{subLink.icon}</span>{" "} */}
+                              <span>{subLink.text}</span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </Collapse>
                   )}
-                </div>
-                {val.subLink?.length > 0 && (
-                  <Collapse in={i === selected}>
-                    <ul className="ml-4">
-                      {val.subLink?.map((subLink, i) => (
-                        <li key={i}>
-                          <button
-                            //to={account ? `${subLink.link}` : "#"}
-                            onClick={() => {
-                              if (account || !subLink.req) {
-                                navigate(`${subLink.link}`);
-                              } else {
-                                toast.error("Wallet not connected");
-                              }
-                            }}
-                            className="grid grid-flow-col text-sm justify-start gap-x-2 items-center py-2 px-2 hover:bg-primary-400 hover:text-white rounded-lg my-1 font-bold"
-                          >
-                            {/* <span className="text-lg">{subLink.icon}</span>{" "} */}
-                            <span>{subLink.text}</span>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </Collapse>
-                )}
-              </li>
-              {i === 4 && (
-                <div className="border-b border-lightDark my-4"></div>
-              )}
-            </React.Fragment>
-          ))}
-          <li className="mt-6">
-            <a href="#" className="font-light text-sm ">
-              Terms & Conditions
-            </a>
-          </li>
-          <li className="mt-2">
-            <a href="#" className="font-light text-sm ">
-              Privacy Policy
-            </a>
-          </li>
-          <li>
-            <ul className="grid grid-flow-col gap-2 justify-start items-center mt-2">
-              {socialList.map((val, i) => (
-                <li key={i}>
-                  <a href={val.link} className="text-lg">
-                    {val.icon}
-                  </a>
                 </li>
-              ))}
-            </ul>
-          </li>
-        </ul>
-        <div>
-          <div className="justify-start items-center">
-            <Link
-              to="/"
-              className="grid grid-flow-col gap-2 justify-start items-center"
-            >
-              <>
-                <img src={Logo} className="w-14" alt="" />
-                <p className="font-medium text-lg">Ratpad</p>
-              </>
-            </Link>
-            {/* <div className="flex justify-between items-center mt-4 font-bold">
+                {i === 4 && (
+                  <div className="border-b border-lightDark my-4"></div>
+                )}
+              </React.Fragment>
+            ))}
+            <li className="mt-6">
+              <a href="#" className="font-light text-sm ">
+                Terms & Conditions
+              </a>
+            </li>
+            <li className="mt-2">
+              <a href="#" className="font-light text-sm ">
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <ul className="grid grid-flow-col gap-2 justify-start items-center mt-2">
+                {socialList.map((val, i) => (
+                  <li key={i}>
+                    <a href={val.link} className="text-lg">
+                      {val.icon}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          </ul>
+          <div>
+            <div className="justify-start items-center">
+              <Link
+                to="/"
+                className="grid grid-flow-col gap-2 justify-start items-center"
+              >
+                <>
+                  <img src={Logo} className="w-14" alt="" />
+                  <p className="font-medium text-lg">Ratpad</p>
+                </>
+              </Link>
+              {/* <div className="flex justify-between items-center mt-4 font-bold">
             <p>Balance:</p>
             <p>$0.00</p>
           </div> */}
-            <div className="mt-2">
-              {/* <button
+              <div className="mt-2">
+                {/* <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
               {theme === "dark" ? <FaSun /> : <FaMoon />}
             </button> */}
-              <DarkModeToggle
-                onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-                checked={theme === "dark"}
-                size={50}
-              />
+                <DarkModeToggle
+                  onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  checked={theme === "dark"}
+                  size={50}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
