@@ -23,8 +23,8 @@
     bottom: auto;
     left: -100%;
     z-index: 99999999;
-    height: calc(100% - 75px);
-    top: 75px;
+    height: calc(100% - 67px);
+    top: 67px;
   }
   .sidebar.active {
     left: 0%;
