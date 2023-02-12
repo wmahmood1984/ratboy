@@ -204,6 +204,7 @@ const Step2 = ({
 
             <CustomInputWithLabel
               validation={"number"}
+
               value={hardCap}
               setValue={setHardCap}
               required
@@ -212,7 +213,8 @@ const Step2 = ({
               }`}`}
             />
             <CustomInputWithLabel
-              validation={"number"}
+              validation={"min"}
+              limit={hardCap}
               value={min}
               setValue={setMin}
               required
@@ -384,6 +386,7 @@ const CustomInput = ({
   value,
   setValue,
   validation,
+  limit,
   ...props
 }) => {
   return (
@@ -403,7 +406,16 @@ const CustomInput = ({
             } else {
               toast.error("not a valid number");
             }
-          } else if (validation == "address") {
+          }else if(validation =="min"){
+            console.log( "min",e.target.value, limit ,e.target.value < limit )
+            if (!isNaN(e.target.value) && e.target.value < limit) {
+              setValue(e.target.value);
+            } else {
+              toast.error("HardCap must be higher than the min buy");
+            }
+          } 
+          
+          else if (validation == "address") {
             if (
               e.target.value.slice(0, 2) == "0x" &&
               e.target.value.length == 42
@@ -430,6 +442,7 @@ const CustomInputWithLabel = ({
   value,
   setValue,
   validation,
+  limit
 }) => {
   return (
     <div>
@@ -438,6 +451,7 @@ const CustomInputWithLabel = ({
         {required && <span className="text-red-400">*</span>}
       </p>
       <CustomInput
+        limit={limit}
         value={value}
         setValue={setValue}
         placeholder={placeholder}

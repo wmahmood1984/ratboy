@@ -12,7 +12,8 @@ const Launchpad = ({ data, keyA, subData }) => {
   const {chainId} = useWeb3React()
   const chain = chainId? chainId : chainIdSelected
 
-
+  var _progress =  Number(formatEther(subData.investedBUSD)) / Number(formatEther(data[4][16]))*100
+  console.log("progress",_progress)
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow">
@@ -106,7 +107,7 @@ const Launchpad = ({ data, keyA, subData }) => {
       <div className="mt-2">
         <ProgressBar
           complete={
-             Number(formatEther(subData?.investedBUSD)) / Number(formatEther(data[4][0])) 
+             _progress 
           
           }
         />
@@ -143,6 +144,6 @@ export default Launchpad;
 
 const ProgressBar = ({ complete }) => (
   <div className="progressbar bg-gray-300 dark:bg-dark-600 rounded-md h-3 relative overflow-hidden">
-    <div style={{width:`${complete*100}%`}} className={` bg-primary-400 h-full rounded-full`}></div>
+    <div style={{width:`${complete}%`}} className={` bg-primary-400 h-full rounded-full`}></div>
   </div>
 );

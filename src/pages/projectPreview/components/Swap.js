@@ -169,6 +169,8 @@ const Swap = ({ data, toggle, setToggle, sub_data,account }) => {
     setAmount(Number(value * formatEther(data[4][1])).toFixed(4));
   };
 
+  var progress_ =  Number(formatEther(sub_data.investedBUSD)) / Number(formatEther(data[4][16]))*100
+console.log("progress",progress_,Number(formatEther(sub_data.investedBUSD)),Number(formatEther(data[4][0])))
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow-xl py-14 h-full flex justify-center items-center  flex-col ">
       <div className="w-full">
@@ -177,8 +179,7 @@ const Swap = ({ data, toggle, setToggle, sub_data,account }) => {
         <div>
           <Progressbar
             complete={
-              Number(formatEther(sub_data.investedBUSD)) /
-              Number(formatEther(data[4][0]))
+             progress_
             }
           />
           <div className="flex items-center justify-between mt-1">
