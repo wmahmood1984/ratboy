@@ -177,6 +177,12 @@ console.log("progress",progress_,Number(formatEther(sub_data.investedBUSD)),Numb
         {/* <Timer /> */}
         <Timer start={data[4][5]} end={data[4][6]} />
         <div>
+        <div className="font-bold flex justify-between items-center mt-4">
+        
+          {Number(progress_).toFixed(2)}% || {Number(formatEther(sub_data.investedBUSD))}{" "}{window.ethereum?.networkVersion == 97 ? "BNB": "ETH"}
+        
+ 
+      </div>
           <Progressbar
             complete={
              progress_

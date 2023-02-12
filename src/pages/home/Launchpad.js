@@ -100,7 +100,7 @@ const Launchpad = ({ data, keyA, subData }) => {
       </div>
       <div className="font-bold flex justify-between items-center mt-4">
         <p>
-          {subData&&  Number(formatEther(subData.investedBUSD) / formatEther(data[4][0])).toFixed(3)}%
+          {Number(_progress).toFixed(2)}% || {Number(formatEther(subData.investedBUSD))}{" "}{window.ethereum?.networkVersion == 97 ? "BNB": "ETH"}
         </p>
         {/* <p className=" text-primary-400">60 BNB - 100 BNB</p> */}
       </div>
