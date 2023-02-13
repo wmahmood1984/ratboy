@@ -2,7 +2,7 @@ import { formatEther } from "ethers/lib/utils";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const All = ({data}) => {
+const All = ({data,chain}) => {
   const tokenList = [
     {
       name: "QJT",
@@ -57,7 +57,7 @@ const All = ({data}) => {
                 </td>
                 <td className="py-4 text-right">
                   <Link 
-                  to={`/token_list/details/${token._contract}`}
+                  to={`/token_list/details/${token._contract}=${chain}`}
                   state={data[index]} 
                   className="text-primary-400">
                     View

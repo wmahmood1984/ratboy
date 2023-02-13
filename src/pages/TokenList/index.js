@@ -3,7 +3,7 @@ import { Layout } from "../../components";
 import All from "./components/All";
 import MyLock from "./components/MyLock";
 import Web3 from "web3"
-import { LaunchPadABI, LaunchPadAdd, rpcObj, tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
+import { chainIdSelected, LaunchPadABI, LaunchPadAdd, rpcObj, tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import { useWeb3React } from "@web3-react/core";
 
@@ -15,22 +15,18 @@ const TokenList = () => {
   const tabs = ["All", "My Lock"];
   const { account,library, chainId} = useWeb3React();
   const [DataA,setData] = useState()
-
-  const web3 = chainId ?  new Web3(
+  const chain = chainId? chainId : chainIdSelected
+  const web3 =  new Web3(
     new Web3.providers.HttpProvider(
-      rpcObj[`${chainId}`]
+      rpcObj[`${chain}`]
     )
-  ) : new Web3(
-    new Web3.providers.HttpProvider(
-      rpcObj[`${5}`]
-    )
-  );
+  ) 
  // const navigate = useNavigate()
   const [filter,setFilter] = useState()
   const [sort,setSort] = useState()
 
-  const myContract = chainId ?  new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chainId}`])
-  : new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`5`])
+  const myContract = new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chain}`])
+ 
 
 
 
@@ -83,9 +79,11 @@ console.log("data in list",MYLock)
 
           {selectedTab === 0 ? <All 
           data={Data &&Data}
+          chain={chain}
           /> 
           : <MyLock  
           data={Data && MYLock}
+          chain={chain}
           />}
         </div>
       </div>

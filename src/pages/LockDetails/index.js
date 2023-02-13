@@ -6,11 +6,18 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import Web3 from "web3";
 import { Layout } from "../../components";
 import ListItem from "../../components/listItem";
-import { tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
+import { chainIdSelected, rpcObj, tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
 import { shortAddress } from "../../helpers";
 
 const LockDetails = () => {
-   const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
+  const { account,library, chainId} = useWeb3React();
+  const {params} = useParams()
+  const {state} = useLocation()
+  const [stateA,setState] = useState()
+  const splittedParams = params.split("=")
+  const chain = chainId ? chainId : splittedParams[1] ? splittedParams[1] : chainIdSelected  
+
+  const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
 
   function dateFormat(string){
     var day = new Date(string).getDay()
@@ -25,14 +32,11 @@ const LockDetails = () => {
     return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`
   }
 
-  const { account,library, chainId} = useWeb3React();
-  const web3 = chainId ? new Web3(Web3.givenProvider) :  new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
-  const myContract = chainId ?  new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chainId}`])
-  : new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`5`])
 
-  const {params} = useParams()
-  const {state} = useLocation()
-  const [stateA,setState] = useState()
+  const web3 = new Web3(new Web3.providers.HttpProvider(`${rpcObj[`${chain}`]}`))
+  const myContract = new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chain}`])
+ 
+
 
 
   
@@ -42,7 +46,7 @@ const LockDetails = () => {
         setState(state)
       }else{
         const data = await myContract.methods.getArray().call()
-        const fdata = data.filter(item=>item._contract==params)
+        const fdata = data.filter(item=>item._contract==splittedParams[0])
         console.log("data in lp lock",data)
 
         setState(fdata[0])

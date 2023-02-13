@@ -4,24 +4,26 @@ import All from "./components/All";
 import MyLock from "./components/MyLock";
 import Web3 from "web3"
 import { useWeb3React } from "@web3-react/core";
-import { tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
+import { chainIdSelected, rpcObj, tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
 
 const LpLockList = () => {
 
 
   const [selectedTab, setSelectedTab] = useState(0);
   const tabs = ["All", "My Lock"];
-  const { account, chainId} = useWeb3React();
+  const { account,library, chainId} = useWeb3React();
   const [DataA,setData] = useState()
-
-  const web3 = chainId ? new Web3(Web3.givenProvider) :  new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
+  const chain = chainId? chainId : chainIdSelected
+  const web3 =  new Web3(
+    new Web3.providers.HttpProvider(
+      rpcObj[`${chain}`]
+    )
+  ) 
  // const navigate = useNavigate()
   const [filter,setFilter] = useState()
   const [sort,setSort] = useState()
 
-  const myContract = chainId ?  new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chainId}`])
-  : new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`5`])
-
+  const myContract = new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chain}`])
 
 
 
@@ -76,7 +78,9 @@ console.log("Launchpad ",chainId,web3,myContract,DataA,Data)
 
           {selectedTab === 0 ? <All 
           data={Data}
-          /> : <MyLock 
+          chain={chain}
+          /> : <MyLock
+          chain={chain} 
           data={MYLock}
           />}
         </div>
