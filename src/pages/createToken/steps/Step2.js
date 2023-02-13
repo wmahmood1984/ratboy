@@ -85,13 +85,13 @@ const Step2 = ({
                 placeholder="234mknjknfgj453456jmngjf87485hjb435nn23k"
               />
             </div>
-            <CustomInputWithLabel
+            {/* <CustomInputWithLabel
               validation={"number"}
               value={noOfToken}
               setValue={setNoOFTokens}
               required
               label={"No of Tokens"}
-            />
+            /> */}
             <div>
               <FormControl fullWidth>
                 {/* <FormLabel id="demo-row-radio-buttons-group-label">

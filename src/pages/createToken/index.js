@@ -135,9 +135,13 @@ const CreateToken = () => {
 
   csv && array2.pop();
 
+
+
+
   const createPool = async () => {
     var counter = 0;
     setOpen(true);
+    var maxtokens = (hardCap / ListingRate*2)
     setStatus("Creating Pool....");
     console.log("creat Pool", [
       [token, account, account, currency, router],
@@ -156,7 +160,7 @@ const CreateToken = () => {
         redit,
       ],
       [
-        web3.utils.toWei(noOfToken.toString(), "ether"),
+        web3.utils.toWei(maxtokens.toString(), "ether"),
         web3.utils.toWei(price.toString(), "ether"),
         web3.utils.toWei(Max.toString(), "ether"),
         web3.utils.toWei(Min.toString(), "ether"),
@@ -197,7 +201,7 @@ const CreateToken = () => {
             redit,
           ],
           [
-            web3.utils.toWei(noOfToken.toString(), "ether"),
+            web3.utils.toWei(maxtokens.toString(), "ether"),
             web3.utils.toWei(price.toString(), "ether"),
             web3.utils.toWei(Max.toString(), "ether"),
             web3.utils.toWei(Min.toString(), "ether"),
@@ -294,12 +298,13 @@ const CreateToken = () => {
     setOpen(true);
     setStatus("Approving tokens....");
     var counter = 0;
+    var maxtokens = (hardCap / ListingRate*2)
     try {
       const contract = new web3.eth.Contract(IERC20, token);
       contract.methods
         .approve(
           LaunchPadAdd[`${chainId}`],
-          web3.utils.toWei(noOfToken.toString(), "ether")
+          web3.utils.toWei(maxtokens.toString(), "ether")
         )
         .send({ from: account })
         .on("confirmation", (e, r) => {
