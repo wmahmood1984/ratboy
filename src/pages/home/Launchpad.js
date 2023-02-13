@@ -6,14 +6,13 @@ import { Link } from "react-router-dom";
 import UserImage from "../../assets/user.png";
 import DailyTimer from "../../components/DailyTimer";
 import Tag from "../../components/tag";
-import { chainIdSelected } from "../../config";
-const Launchpad = ({ data, keyA, subData }) => {
+
+const Launchpad = ({ data, keyA, subData,chain }) => {
   var now = new Date().getTime() / 1000;
-  const {chainId} = useWeb3React()
-  const chain = chainId? chainId : chainIdSelected
+ 
 
   var _progress =  Number(formatEther(subData.investedBUSD)) / Number(formatEther(data[4][16]))*100
-  console.log("progress",_progress)
+
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow">

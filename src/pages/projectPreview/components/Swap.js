@@ -15,6 +15,7 @@ import ResponsiveDialog from "../../../Spinner";
 import { Contract } from "ethers";
 import { toast } from "react-hot-toast";
 
+
 export const getContract = (library, account, poolId) => {
   const signer = library?.getSigner(account).connectUnchecked();
   var contract = new Contract(poolId, IGOAbi, signer);
@@ -50,7 +51,7 @@ const Swap = ({ data, toggle, setToggle, sub_data,account }) => {
   }, [toggle,account]);
 
   const _Swap = async () => {
-    if (amount > 0 && account) {
+    if (amount > 0 && account && library) {
       var counter = 0;
       setOpen(true);
       setAmount("");
@@ -105,8 +106,7 @@ const Swap = ({ data, toggle, setToggle, sub_data,account }) => {
 
       toast.error("please enter valid amount");
     } else {
-      // toast("Please connect your wallet", {
-      //   })
+      toast.error("Please connect your wallet")
     }
   };
 

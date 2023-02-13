@@ -60,7 +60,7 @@ const Header = ({ show, setShow }) => {
   const web3 = new Web3(Web3.givenProvider);
   const { account, library, chainId, activate } = useWeb3React();
   const [tier, setTier] = useState();
-  const chain = chainId ? chainId : chainIdSelected;
+  const chain = network;
 
   const myContract = getContract(library, account, LaunchPadAdd[`${chain}`]);
 
@@ -77,12 +77,7 @@ const Header = ({ show, setShow }) => {
     abc();
   }, [account, network]);
 
-  console.log(
-    "tier",
-    window.ethereum?.networkVersion !== network,
-    network,
-    window.ethereum?.networkVersion
-  );
+
 
   // window.ethereum?.on("accountsChanged", (e, r) => {
   //   window.location.reload();
@@ -121,6 +116,8 @@ const Header = ({ show, setShow }) => {
     }
   }
 
+
+
   return (
     <div className="text-white bg-white border-gray-300  dark:bg-dark-400 items-center flex justify-between md:justify-end  border-b dark:border-lightDark header">
       <>
@@ -150,11 +147,11 @@ const Header = ({ show, setShow }) => {
         >
           <img
             className=" w-3.5 md:w-5"
-            src={window.ethereum?.networkVersion == 97 ? BSC : ETH}
+            src={network == 97 ? BSC : ETH}
             alt=""
           />
           <span style={{ marginLeft: "15px" }} className="hidden sm:block">
-            {window.ethereum?.networkVersion == 97 ? "BSC Testnet" : "Goerli"}
+            {network == 97 ? "BSC Testnet" : "Goerli"}
           </span>
         </button>
         <button

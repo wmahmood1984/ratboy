@@ -14,6 +14,7 @@ import {
   IGOAbi,
   LaunchPadABI,
   LaunchPadAdd,
+  rpcObj,
 } from "../../config";
 import Web3 from "web3";
 import Ownerzone2 from "./components/Ownerzone2";
@@ -31,19 +32,8 @@ const ProjectPreview = () => {
   let splittedParams = params.split("=");
   var chain = chainId ? chainId : splittedParams[1];
 
-  const web3 = chainId
-    ? new Web3(Web3.givenProvider)
-    : (splittedParams[1] = "5"
-        ? new Web3(
-            new Web3.providers.HttpProvider(
-              "https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"
-            )
-          )
-        : new Web3(
-            new Web3.providers.HttpProvider(
-              "https://data-seed-prebsc-2-s3.binance.org:8545/"
-            )
-          ));
+  const web3 = new Web3(new Web3.providers.HttpProvider(`${rpcObj[`${chain}`]}`))
+  
   const myContract = new web3.eth.Contract(
     LaunchPadABI,
     LaunchPadAdd[`${chain}`]
@@ -110,7 +100,7 @@ const ProjectPreview = () => {
       setHash(_string[4]);
     };
     abc();
-  }, [toggle, account]);
+  }, [toggle, account,chainId]);
 
 
 
