@@ -8,7 +8,7 @@ import {
   injected,
   walletconnect,
   // CoinbaseWallet,
-} from "../../wallet/connector";
+} from "../../web3/wallet/connector";
 const style = {
   position: "absolute",
   top: "50%",

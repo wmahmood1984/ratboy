@@ -2,21 +2,15 @@
 import React, { useContext, useState } from "react";
 import "./style.css";
 import { BiChevronDown, BiRocket } from "react-icons/bi";
-import { AiOutlineUnlock, AiOutlineQuestionCircle } from "react-icons/ai";
+import { AiOutlineUnlock } from "react-icons/ai";
 import DarkModeToggle from "react-dark-mode-toggle";
-import { GiAirBalloon } from "react-icons/gi";
+// import { GiAirBalloon } from "react-icons/gi";
 import {
   HiOutlineDocumentSearch,
-  HiOutlineDocumentReport,
   HiOutlineClipboardList,
 } from "react-icons/hi";
 import { ThemeContext } from "../../context/themeContext";
-import {
-  FaArrowDown,
-  FaClipboardList,
-  FaTelegramPlane,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaTelegramPlane, FaTwitter } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Img/Ratpad logo compressed.png";
 import { useWeb3React } from "@web3-react/core";
@@ -31,7 +25,9 @@ const Sidebar = ({ show, setShow }) => {
   const [selected, setSelected] = useState(null);
   return (
     <>
-      <Backdrop in={show} onClick={() => setShow(false)} />
+      <div className="custom-backdrop">
+        <Backdrop in={show} onClick={() => setShow(false)} />
+      </div>
       <div
         className={`sidebar ${
           show && "active"

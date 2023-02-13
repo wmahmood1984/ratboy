@@ -1,5 +1,5 @@
-import  Eth from  "../../assets/icon/eth.svg";
-const BNB = "../../assets/BSC.png";
+const Eth = "assets/icon/ethereum.svg";
+const BNB = "assets/icon/binance.svg";
 // const POLYGON = "assets/icon/polygon.svg";
 // const OPTIMISM = "/assets/icon/optimism.jpg";
 // const GNOSIS = "/assets/icon/gnosis.svg";
@@ -17,18 +17,18 @@ export const chains = [
     chain: 97,
     disabled: false,
   },
-  // {
-  //   icon: Eth,
-  //   name: "ETHEREUM",
-  //   chain: 1,
-  //   disabled: false,
-  // },
-  // {
-  //   icon: BNB,
-  //   name: "Binance",
-  //   chain: 56,
-  //   disabled: false,
-  // },
+  {
+    icon: Eth,
+    name: "ETHEREUM",
+    chain: 1,
+    disabled: false,
+  },
+  {
+    icon: BNB,
+    name: "Binance",
+    chain: 56,
+    disabled: false,
+  },
   // {
   //   icon: POLYGON,
   //   name: "Polygon (Matic) Network",

@@ -6,37 +6,33 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import Web3 from "web3";
 import { Layout } from "../../components";
 import ListItem from "../../components/listItem";
-import { chainIdSelected, rpcObj, tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
+import { tokenLockLauncherAbi, tokenLocklauncherAdd } from "../../config";
 import { shortAddress } from "../../helpers";
 
 const LockDetails = () => {
+   const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
+
+  function dateFormat(string) {
+    var day = new Date(string).getDay();
+    var date = new Date(string).getUTCDate();
+    var month = new Date(string).getUTCMonth() + 1;
+    var _year1 = new Date(string).getUTCFullYear();
+    var hours = new Date(string).getUTCHours();
+    var formatedHours = hours / 10 > 1 ? `${hours}` : `0${hours}`;
+    var minutes = new Date(string).getUTCMinutes();
+    var formatedMinutes = minutes / 10 > 1 ? `${hours}` : `0${hours}`;
+    console.log("string", day);
+    return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`;
+  }
+
   const { account,library, chainId} = useWeb3React();
+  const web3 = chainId ? new Web3(Web3.givenProvider) :  new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/2d0256aba07e4704add58fd0713e24d5"))
+  const myContract = chainId ?  new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chainId}`])
+  : new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`5`])
+
   const {params} = useParams()
   const {state} = useLocation()
   const [stateA,setState] = useState()
-  const splittedParams = params.split("=")
-  const chain = chainId ? chainId : splittedParams[1] ? splittedParams[1] : chainIdSelected  
-
-  const days = ["Sun","Mon","Tues","Wed","Thu","Fri","Sat"]
-
-  function dateFormat(string){
-    var day = new Date(string).getDay()
-    var date = new Date(string).getUTCDate()
-    var month = new Date(string).getUTCMonth()+1
-    var _year1 = new Date(string).getUTCFullYear()
-    var hours = new Date(string).getUTCHours()
-    var formatedHours = hours/10>1? `${hours}` : `0${hours}`
-    var minutes = new Date(string).getUTCMinutes()
-    var formatedMinutes = minutes/10>1? `${hours}` : `0${hours}`
-    console.log("string",day)
-    return `${days[day]} ${date}:${month}:${_year1}  UTC ${formatedHours}:${formatedMinutes}`
-  }
-
-
-  const web3 = new Web3(new Web3.providers.HttpProvider(`${rpcObj[`${chain}`]}`))
-  const myContract = new web3.eth.Contract(tokenLockLauncherAbi, tokenLocklauncherAdd[`${chain}`])
- 
-
 
 
   
@@ -46,16 +42,15 @@ const LockDetails = () => {
         setState(state)
       }else{
         const data = await myContract.methods.getArray().call()
-        const fdata = data.filter(item=>item._contract==splittedParams[0])
+        const fdata = data.filter(item=>item._contract==params)
         console.log("data in lp lock",data)
 
         setState(fdata[0])
       }
+    };
+    abc();
+  }, []);
 
-    }
-    abc()
-  },[])
-  
   const tableHead = [
     "Wallet",
     "Amount",
@@ -67,16 +62,16 @@ const LockDetails = () => {
   ];
   const lockList = [
     {
-      wallet: `${stateA&&  stateA.user}`,
-      amount: `${stateA&&  Number(formatEther(stateA.amount)).toFixed(4)}`,
+      wallet: `${stateA && stateA.user}`,
+      amount: `${stateA && Number(formatEther(stateA.amount)).toFixed(4)}`,
       cycle: "729",
       cycleRealese: "1",
       tge: "10",
-      unlock: `${stateA&&  dateFormat(Number(stateA.time*1000))}`,
+      unlock: `${stateA && dateFormat(Number(stateA.time * 1000))}`,
     },
   ];
 
-  console.log("data in list",stateA)
+  console.log("data in list", stateA);
 
   return (
     <Layout>
@@ -85,24 +80,39 @@ const LockDetails = () => {
           <p className="p-4  border-b dark:border-lightDark">Lock Info</p>
           <div className="p-4">
             <div className="grid gap-y-4 mt-4">
-              <ListItem title={" Current Locked Amount"} desc={stateA && `${Number(formatEther(stateA.amount)).toFixed(4)} ${stateA.symbol} `} />
+              <ListItem
+                title={" Current Locked Amount"}
+                desc={
+                  stateA &&
+                  `${Number(formatEther(stateA.amount)).toFixed(4)} ${
+                    stateA.symbol
+                  } `
+                }
+              />
               {/* <ListItem title={"Current Values Locked"} desc={"$0"} />{" "} */}
               <ListItem
                 linkable={true}
-                refA={stateA &&
-                  chainId == "97" ? 
-                  `https://testnet.bscscan.com/token/${stateA&& stateA.token}` :
-                  `https://goerli.etherscan.io/token/${stateA&& stateA.token}`
-                   
+                refA={
+                  stateA && chainId == "97"
+                    ? `https://testnet.bscscan.com/token/${
+                        stateA && stateA.token
+                      }`
+                    : `https://goerli.etherscan.io/token/${
+                        stateA && stateA.token
+                      }`
                 }
                 title={"Token Address"}
-                desc={stateA&& shortAddress(
-                  stateA.token
-                )}
+                desc={stateA && shortAddress(stateA.token)}
                 color={"primary"}
               />{" "}
-              <ListItem title={"Token Name"} desc={`${stateA &&stateA.name}`} />
-              <ListItem title={"Token Symbol"} desc={`${stateA &&stateA.symbol}`} />
+              <ListItem
+                title={"Token Name"}
+                desc={`${stateA && stateA.name}`}
+              />
+              <ListItem
+                title={"Token Symbol"}
+                desc={`${stateA && stateA.symbol}`}
+              />
               {/* <ListItem title={"Token Decimal"} desc={"18"} /> */}
             </div>
           </div>

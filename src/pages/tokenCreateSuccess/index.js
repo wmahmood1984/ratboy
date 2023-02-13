@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "../../components";
 // import ListItem from "../../components/listItem";
-import { shortAddress } from "../../helpers";
+import { shortAddress } from "../../web3/helpers";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-hot-toast";
 const TokenCreateSuccess = () => {
