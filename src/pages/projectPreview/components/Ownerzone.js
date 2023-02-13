@@ -16,7 +16,7 @@ export const getContract = (library, account, tokenAdd) => {
   return contract;
 };
 
-const Ownerzone = ({data}) => {
+const Ownerzone = ({data,toggle,setToggle}) => {
   const { library, account} = useWeb3React();
 
   const [open, setOpen] = useState();
@@ -36,6 +36,7 @@ const Ownerzone = ({data}) => {
 
       if (tx1) {
         setOpen(false);
+        setToggle(!toggle)
       }
     } catch (error) {
       console.log("error in authorize", error);

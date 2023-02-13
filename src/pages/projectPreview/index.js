@@ -100,7 +100,7 @@ const ProjectPreview = () => {
       if (account) {
         const ent = await PreSaleContract.methods
           .getEntitlement(account)
-          .call();
+          .call({from:account});
         setEntitlement(ent / 10 ** tdecimals);
       }
 
@@ -112,7 +112,7 @@ const ProjectPreview = () => {
     abc();
   }, [toggle, account]);
 
-  console.log("Project Overview ", _data, sub_data);
+
 
   const Claim = async () => {
     setOpen(true);
@@ -148,9 +148,10 @@ const ProjectPreview = () => {
               <div className="flex-1">
                 <Swap
                   data={_data && _data}
-                  toggle={toggle}
+                  
                   sub_data={sub_data && sub_data}
                   account={account}
+                  toggle={toggle}
                   setToggle={setToggle}
                 />
               </div>
@@ -171,6 +172,8 @@ const ProjectPreview = () => {
 
             {_data && _data[2][1] === account ? (
               <Ownerzone
+              toggle={toggle}
+              setToggle={setToggle}
                 data={_data && _data}
                 sub_data={sub_data && sub_data}
               />

@@ -455,127 +455,6 @@ export const IGOAbi = [
 	{
 		"inputs": [
 			{
-				"internalType": "address[]",
-				"name": "_token_owner_admin_currency",
-				"type": "address[]"
-			},
-			{
-				"internalType": "string[]",
-				"name": "_title_symbol_SocialMedia",
-				"type": "string[]"
-			},
-			{
-				"internalType": "uint256[]",
-				"name": "_noOfTokens_price_max_min_vesting_month_start_end",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "string",
-				"name": "_hash",
-				"type": "string"
-			},
-			{
-				"internalType": "address[]",
-				"name": "_whitelist",
-				"type": "address[]"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [],
-		"name": "AdminAllowed",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "Badges",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "Buy",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "Router",
-		"outputs": [
-			{
-				"internalType": "contract IUniswapV2Router02",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "UserClaimedTokens",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "WhitelistMapping",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "bool[]",
 				"name": "_badges",
 				"type": "bool[]"
@@ -642,19 +521,6 @@ export const IGOAbi = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "admin",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "bool",
@@ -665,6 +531,13 @@ export const IGOAbi = [
 		"name": "adminAllowance",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "Buy",
+		"outputs": [],
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -712,7 +585,78 @@ export const IGOAbi = [
 	},
 	{
 		"inputs": [],
-		"name": "factory",
+		"name": "finalize",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_users",
+				"type": "address[]"
+			}
+		],
+		"name": "removeWhiteListBulk",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "removeWhiteListSingle",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_token_owner_admin_currency",
+				"type": "address[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "_title_symbol_SocialMedia",
+				"type": "string[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_noOfTokens_price_max_min_vesting_month_start_end",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "string",
+				"name": "_hash",
+				"type": "string"
+			},
+			{
+				"internalType": "address[]",
+				"name": "_whitelist",
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -725,9 +669,47 @@ export const IGOAbi = [
 	},
 	{
 		"inputs": [],
-		"name": "finalize",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"name": "AdminAllowed",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "Badges",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "factory",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -847,29 +829,16 @@ export const IGOAbi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "Router",
+		"outputs": [
 			{
-				"internalType": "address[]",
-				"name": "_users",
-				"type": "address[]"
-			}
-		],
-		"name": "removeWhiteListBulk",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_user",
+				"internalType": "contract IUniswapV2Router02",
+				"name": "",
 				"type": "address"
 			}
 		],
-		"name": "removeWhiteListSingle",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -905,6 +874,25 @@ export const IGOAbi = [
 				"internalType": "address",
 				"name": "LPToken",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "UserClaimedTokens",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -962,10 +950,22 @@ export const IGOAbi = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "withdraw",
-		"outputs": [],
-		"stateMutability": "payable",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "WhitelistMapping",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ];
@@ -1736,7 +1736,7 @@ const goerliRouter = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
 
 export const tokenLocklauncherAdd = {
   43113: "0x5ACfc74319Cc6d738140f684964481aF7865a4b0", //"0xb70F71cdCAd4Db7da3d171c62Abf8382c01b8f32",
-  97: "0xb92bb14765B8033e43cD2BdCcBa20140544A2014", //"0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
+  97: "0x84639037829E0595bfD7F789862F8342832cA2B4", //"0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
   5: "0x67ae17753Ef60c4D0b1d750a25fd76a29fC0A6df",
   80001: "0xf4e9Bb60792d5BdF356F142cD7dF37238A305502",
 };
@@ -1768,7 +1768,7 @@ export const tempAdmin = "0xfef5f69FA76f35638Aa3ed77a0644Fa79d31A554"; //"0xF85e
 
 export const LaunchPadAdd = {
   43113: "0xa522CF9B39CdA62650c060b692684b38286ce3a8",
-  97: "0x2129FA4b47C5938ebe639D8d8f0590cE9E018775",
+  97: "0x20B3acd138653c9aCE9561Cb1e81991dfcc0E72e",
   5: "0x17Ce14dBb65f31c7E3c1Ab1C95f0B8DF22BfB19c",
   80001: "0x4e4cefab704e4579bf28d32230ddecf0117ae9c1",
 };
