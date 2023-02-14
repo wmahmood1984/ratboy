@@ -32,8 +32,10 @@ const ProjectPreview = () => {
   let splittedParams = params.split("=");
   var chain = chainId ? chainId : splittedParams[1];
 
-  const web3 = new Web3(new Web3.providers.HttpProvider(`${rpcObj[`${chain}`]}`))
-  
+  const web3 = new Web3(
+    new Web3.providers.HttpProvider(`${rpcObj[`${chain}`]}`)
+  );
+
   const myContract = new web3.eth.Contract(
     LaunchPadABI,
     LaunchPadAdd[`${chain}`]
@@ -90,7 +92,7 @@ const ProjectPreview = () => {
       if (account) {
         const ent = await PreSaleContract.methods
           .getEntitlement(account)
-          .call({from:account});
+          .call({ from: account });
         setEntitlement(ent / 10 ** tdecimals);
       }
 
@@ -100,9 +102,7 @@ const ProjectPreview = () => {
       setHash(_string[4]);
     };
     abc();
-  }, [toggle, account,chainId]);
-
-
+  }, [toggle, account, chainId]);
 
   const Claim = async () => {
     setOpen(true);
@@ -138,7 +138,6 @@ const ProjectPreview = () => {
               <div className="flex-1">
                 <Swap
                   data={_data && _data}
-                  
                   sub_data={sub_data && sub_data}
                   account={account}
                   toggle={toggle}
@@ -162,8 +161,8 @@ const ProjectPreview = () => {
 
             {_data && _data[2][1] === account ? (
               <Ownerzone
-              toggle={toggle}
-              setToggle={setToggle}
+                toggle={toggle}
+                setToggle={setToggle}
                 data={_data && _data}
                 sub_data={sub_data && sub_data}
               />
@@ -178,7 +177,7 @@ const ProjectPreview = () => {
                 sub_data={sub_data && sub_data}
               />
             ) : null}
-            {sub_data.liquidity != "0" ? (
+            {true ? (
               <Information2
                 Claim={Claim}
                 data={_data && _data}

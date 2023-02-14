@@ -7,12 +7,13 @@ import UserImage from "../../assets/user.png";
 import DailyTimer from "../../components/DailyTimer";
 import Tag from "../../components/tag";
 
-const Launchpad = ({ data, keyA, subData,chain }) => {
+const Launchpad = ({ data, keyA, subData, chain }) => {
   var now = new Date().getTime() / 1000;
- 
 
-  var _progress =  Number(formatEther(subData.investedBUSD)) / Number(formatEther(data[4][16]))*100
-
+  var _progress =
+    (Number(formatEther(subData.investedBUSD)) /
+      Number(formatEther(data[4][16]))) *
+    100;
 
   return (
     <div className="bg-white dark:bg-dark-400 border dark:border-lightDark p-4 sm:p-6 rounded-md shadow">
@@ -91,7 +92,7 @@ const Launchpad = ({ data, keyA, subData,chain }) => {
       <div className="text-sm sm:text-base font-bold flex justify-between items-center mt-4">
         <p>Soft/Hard Cap:</p>
         <p className=" text-primary-400">
-          {data[4][15] &&  formatEther(data[4][15])}{" "}
+          {data[4][15] && formatEther(data[4][15])}{" "}
           {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"} -{" "}
           {data[4][16] && formatEther(data[4][16])}{" "}
           {window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"}
@@ -99,17 +100,13 @@ const Launchpad = ({ data, keyA, subData,chain }) => {
       </div>
       <div className="font-bold flex justify-between items-center mt-4">
         <p>
-          {Number(_progress).toFixed(2)}% || {Number(formatEther(subData.investedBUSD))}{" "}{window.ethereum?.networkVersion == 97 ? "BNB": "ETH"}
+          Progress ({Number(_progress).toFixed(2)}%)
+          {/* || {Number(formatEther(subData.investedBUSD))}{" "}{window.ethereum?.networkVersion == 97 ? "BNB": "ETH"} */}
         </p>
         {/* <p className=" text-primary-400">60 BNB - 100 BNB</p> */}
       </div>
       <div className="mt-2">
-        <ProgressBar
-          complete={
-             _progress 
-          
-          }
-        />
+        <ProgressBar complete={_progress} />
         <div className="font-bold flex justify-between items-center mt-1">
           <p>
             {formatEther(subData?.investedBUSD)}{" "}
@@ -143,6 +140,9 @@ export default Launchpad;
 
 const ProgressBar = ({ complete }) => (
   <div className="progressbar bg-gray-300 dark:bg-dark-600 rounded-md h-3 relative overflow-hidden">
-    <div style={{width:`${complete}%`}} className={` bg-primary-400 h-full rounded-full`}></div>
+    <div
+      style={{ width: `${complete}%` }}
+      className={` bg-primary-400 h-full rounded-full`}
+    ></div>
   </div>
 );

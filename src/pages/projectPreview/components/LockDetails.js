@@ -20,7 +20,7 @@ const LockDetails = () => {
     },
   ];
   return (
-    <div className=" bg-white  md:col-span-7 dark:bg-dark-400 border dark:border-lightDark rounded-md shadow-xl ">
+    <div className=" bg-white  md:col-span-12 dark:bg-dark-400 border dark:border-lightDark rounded-md shadow-xl ">
       <div className=" border-b  border-lightDark px-4 py-4 flex justify-between items-center">
         <p>Lock records</p>
         <a href="/" className="text-primary-400">

@@ -49,7 +49,7 @@ const SocialIcons = [
   },
 ];
 
-const ProjectOverView = ({ data, strings, hash,sub_data,chain }) => {
+const ProjectOverView = ({ data, strings, hash, sub_data, chain }) => {
   const web3 = new Web3(Web3.givenProvider);
   var now = new Date().getTime() / 1000;
   const contract = new web3.eth.Contract(IERC20, data[2][0]);
@@ -57,7 +57,6 @@ const ProjectOverView = ({ data, strings, hash,sub_data,chain }) => {
   const [symbol, setSymbol] = useState();
   const [decimals, setDecimals] = useState();
   const [totalSupply, settotalSupply] = useState();
-
 
   const navigate = useNavigate();
 
@@ -172,7 +171,14 @@ const ProjectOverView = ({ data, strings, hash,sub_data,chain }) => {
         <p className="mt-6 border-b border-lightDark  pb-2 font-semibold">
           Project Overview
         </p>
-        <p className="text-gray-400 text-sm mt-3">{strings[7]}</p>
+        <p className="text-gray-400 text-sm mt-3">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis
+          quae tenetur facere repellat vero alias cum eos delectus, saepe ullam
+          modi, culpa quaerat hic cumque inventore eligendi, esse illo incidunt
+          atque. Asperiores minima omnis corrupti reprehenderit molestias non ex
+          ut ipsum est maxime quas, voluptate consectetur porro mollitia
+          voluptatem natus.
+        </p>
 
         <ul className=" flex justify-between items-center my-6">
           {SocialIcons.map((val, i) => {
@@ -315,18 +321,17 @@ const ProjectOverView = ({ data, strings, hash,sub_data,chain }) => {
             <React.Fragment>
               <ListItem title={"Liquidity Percent"} desc={`${data[4][11]}%`} />
             </React.Fragment>
-            {sub_data.liquidity!=0 ?
-            <React.Fragment>
-            <ListItem
-              color={"primary"}
-              linkable={true}
-              refA={`/token_list/lock_record/${sub_data.LPTokens}=${chain}`}
-              title={"Liquidity Lockup Time"}
-              desc={`${dateFormat(sub_data.liquidity * 1000)}`}
-            />
-          </React.Fragment> : null
-            }
-
+            {sub_data.liquidity != 0 ? (
+              <React.Fragment>
+                <ListItem
+                  color={"primary"}
+                  linkable={true}
+                  refA={`/token_list/lock_record/${sub_data.LPTokens}=${chain}`}
+                  title={"Liquidity Lockup Time"}
+                  desc={`${dateFormat(sub_data.liquidity * 1000)}`}
+                />
+              </React.Fragment>
+            ) : null}
           </div>
         </div>
       </div>
