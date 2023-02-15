@@ -4,7 +4,12 @@ import { BiChevronDown, BiSearch } from "react-icons/bi";
 import Launchpad from "./Launchpad";
 import { Link, useNavigate } from "react-router-dom";
 import { Contract, ethers, providers, utils } from "ethers";
-import { chainIdSelected, LaunchPadABI, LaunchPadAdd, rpcObj } from "../../config";
+import {
+  chainIdSelected,
+  LaunchPadABI,
+  LaunchPadAdd,
+  rpcObj,
+} from "../../config";
 import { useWeb3React } from "@web3-react/core";
 import Web3 from "web3";
 import { ToastContainer, toast } from "react-toastify";
@@ -21,22 +26,18 @@ import CustomSelect from "../../components/CustomSelect";
 
 const Home = () => {
   const { account, library, chainId } = useWeb3React();
-  const chain = chainId ? chainId : chainIdSelected
+  const chain = chainId ? chainId : chainIdSelected;
   const [Data, setData] = useState();
   const [subData, setSubtData] = useState();
-  const web3 =  new Web3(
-    new Web3.providers.HttpProvider(
-      rpcObj[`${chain}`]
-    )
-  ) 
+  const web3 = new Web3(new Web3.providers.HttpProvider(rpcObj[`${chain}`]));
   const navigate = useNavigate();
   const [filter, setFilter] = useState();
   const [sort, setSort] = useState();
 
-
-  
-  const myContract = new web3.eth.Contract(LaunchPadABI, LaunchPadAdd[`${chain}`])
-   
+  const myContract = new web3.eth.Contract(
+    LaunchPadABI,
+    LaunchPadAdd[`${chain}`]
+  );
 
   useEffect(() => {
     const abc = async () => {
@@ -44,14 +45,10 @@ const Home = () => {
 
       setData(data[0]);
       setSubtData(data[1]);
-      console.log("live",data[1]);
+      console.log("live", data[1]);
     };
     abc();
-  }, [account,chainId]);
-
-
-
-
+  }, [account, chainId]);
 
   const filterArray = ["upComing", "InProgress", "Filled", "Cancelled"];
   const sortArray = ["HardCap", "SoftCap", "LPPercent", "Start Time"];
@@ -100,9 +97,7 @@ const Home = () => {
     setData(sortedArray);
   };
 
-
-
-   return (
+  return (
     <Layout>
       <main className="px-4 pb-10 pt-20">
         <h1 className="text-center mt-10 font-medium text-3xl ">
@@ -173,7 +168,12 @@ const Home = () => {
                     now)
             ).map((val, i) => (
               <React.Fragment key={i}>
-                <Launchpad keyA={i} data={val} subData={subData &&  subData[i]} chain={chain}/>
+                <Launchpad
+                  keyA={i}
+                  data={val}
+                  subData={subData && subData[i]}
+                  chain={chain}
+                />
               </React.Fragment>
             ))}
         </div>

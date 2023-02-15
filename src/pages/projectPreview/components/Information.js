@@ -1,9 +1,11 @@
 import { formatEther } from "ethers/lib/utils";
-import React from "react";
+import React, { useState } from "react";
 import ListItem from "../../../components/listItem";
 import { CSVLink } from "react-csv";
+import ContribotrsListModal from "../../../components/ContributorsListModal";
 
 const Information = ({ data }) => {
+  const [showList, setShowList] = useState(false);
   const informationList = [
     {
       title: "Status",
@@ -34,6 +36,7 @@ const Information = ({ data }) => {
       value: 0.02,
     },
   ];
+  const handleList = () => setShowList(false);
   return (
     <div className="bg-white md:col-span-5 dark:bg-dark-400 border dark:border-lightDark rounded-md shadow-xl">
       <div className=" border-b  border-lightDark px-4 py-4">
@@ -55,7 +58,13 @@ const Information = ({ data }) => {
               window.ethereum?.networkVersion == 97 ? "BNB" : "ETH"
             }`}
           />{" "}
-          <ListItem title={"Total Contributors"} desc={`0`} />
+          <ListItem title={"Total Contributors"} desc={`0`} />{" "}
+          <button
+            className=" text-white rounded-lg py-2.5  bg-primary-400 w-full text-sm font-bold"
+            onClick={() => setShowList(true)}
+          >
+            See All Contributors
+          </button>
           <CSVLink data={contributorList} filename="contributor_list">
             <button className=" text-white rounded-lg py-2.5  bg-primary-400 w-full text-sm font-bold">
               Export Contributor List
@@ -63,6 +72,7 @@ const Information = ({ data }) => {
           </CSVLink>
         </div>
       </div>
+      <ContribotrsListModal open={showList} handleClose={handleList} />
     </div>
   );
 };
